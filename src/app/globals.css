@@ -10,6 +10,21 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  
+  /* Al Baraka Design System */
+  --color-earth-dark: #1A1208;
+  --color-earth-deep: #2D1F0E;
+  --color-earth-mid: #5C3D1E;
+  --color-green-forest: #1E4D2B;
+  --color-green-fresh: #2E7D4F;
+  --color-green-bright: #4CAF73;
+  --color-gold: #C9A84C;
+  --color-gold-light: #F0D080;
+  --color-cream: #F7F2E8;
+  --color-white: #FDFAF5;
+  --color-red-pepper: #C0392B;
+  --color-orange-carrot: #E67E22;
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
