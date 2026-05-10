@@ -1,251 +1,296 @@
 "use client";
 
-import { CldImage } from "next-cloudinary";
-import { Leaf, Target, Eye, Handshake, ShieldCheck } from "lucide-react";
-import { useAboutAnimations } from "@/hooks/useAboutAnimations";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Globe2,
+  Leaf,
+  Award,
+  FileCheck2,
+  ScanLine,
+} from "lucide-react";
+import { motion } from "motion/react";
+import FloatingLeaves from "@/components/custom/FloatingLeaves";
+import {
+  clipRevealVariants,
+  scaleRevealVariants,
+  slideInLeftVariants,
+  slideInRightVariants,
+  staggerContainerVariants,
+  staggerItemVariants,
+} from "@/lib/animations";
+import { images, videos } from "@/lib/images";
+import { milestones, values } from "@/constants/aboutdata";
 
 export default function AboutPage() {
-  const { heroRef, storyRef, missionRef, qualityRef, timelineRef } =
-    useAboutAnimations();
-
   return (
-    <div className="pt-24 min-h-screen bg-[var(--color-cream)]">
-      {/* 1. HERO */}
-      <section className="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
-        <CldImage
-          src="about-hero-bg"
-          alt="Al Baraka Farm"
+    <div className="overflow-hidden bg-[var(--color-cream)] pt-24">
+      <section className="relative min-h-[680px] bg-white">
+        <Image
+          src={images.aboutHeroBg}
+          alt=""
           fill
           priority
-          className="object-cover"
+          sizes="100vw"
+          className="object-cover object-right opacity-85"
         />
-        <div className="absolute inset-0 bg-[var(--color-earth-dark)]/70" />
-
-        <div ref={heroRef} className="relative z-10 text-center px-6">
-          <div className="text-[var(--color-gold)] font-bold uppercase tracking-widest text-sm mb-4">
-            Home <span className="mx-2 opacity-50">&gt;</span> About
-          </div>
-          <h1 className="text-5xl md:text-7xl font-playfair font-bold text-white mb-6">
-            About Al Baraka
-          </h1>
-          <p className="text-xl text-white/90 font-dm-sans max-w-2xl mx-auto">
-            Bringing Freshness, Quality, and Trust to Every Table
-          </p>
-        </div>
-      </section>
-
-      {/* 2. OUR STORY */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div
-            ref={storyRef}
-            className="flex flex-col lg:flex-row gap-16 items-center"
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
+        <div className="container relative z-10 mx-auto grid min-h-[680px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={clipRevealVariants}
           >
-            <div className="lg:w-1/2 w-full h-[500px] relative rounded-3xl overflow-hidden shadow-2xl">
-              <CldImage
-                src="our-story"
-                alt="Our agricultural story"
+            <div className="mb-5 text-[var(--color-earth-mid)]">
+              <Link href="/" className="hover:text-[var(--color-green-forest)]">
+                Home
+              </Link>
+              <span className="mx-3">/</span>
+              <span className="text-[var(--color-green-forest)]">About Us</span>
+            </div>
+            <h1 className="font-playfair text-7xl font-semibold leading-none text-[var(--color-earth-dark)] md:text-8xl lg:text-[108px]">
+              About
+              <br />
+              <span className="text-[var(--color-green-forest)]">
+                Al Baraka
+              </span>
+            </h1>
+            <p className="mt-7 max-w-lg text-xl leading-9 text-[var(--color-earth-mid)]">
+              Bringing nature&apos;s finest from Egypt to tables around the
+              world.
+            </p>
+          </motion.div>
+
+          <div className="relative hidden min-h-[460px] lg:block">
+            <div className="absolute right-0 top-8 h-[430px] w-[78%] overflow-hidden rounded-[44%_56%_43%_57%/45%_42%_58%_55%]">
+              <Image
+                src={images.aboutHeroBg}
+                alt="Al Baraka farm fields"
                 fill
                 className="object-cover"
               />
             </div>
-
-            <div className="lg:w-1/2">
-              <div className="flex items-center gap-4 mb-6">
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-[var(--color-earth-dark)]">
-                  Our Story
-                </h2>
-                <Leaf className="w-8 h-8 text-[var(--color-green-fresh)]" />
-              </div>
-
-              <div className="space-y-6 text-[var(--color-earth-mid)] font-dm-sans text-lg leading-relaxed">
-                <p>
-                  Founded on the principles of integrity and excellence, Al
-                  Baraka started as a small vision to connect local farmers with
-                  families who value premium produce. From vibrant bell peppers
-                  and crisp carrots to sweet apples and juicy strawberries, we
-                  bring the farm&apos;s best to your table. We believe every
-                  meal starts with the quality of its ingredients — and
-                  we&apos;re dedicated to ensuring those ingredients are the
-                  finest available.
-                </p>
-                <p>
-                  Through our strategic partnership with Marianna, our sister
-                  company based in Warsaw, Poland, we&apos;re able to source
-                  premium Polish apples directly from Europe&apos;s largest
-                  apple-growing region, offering you unmatched quality and
-                  traceability.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* 3. MISSION & VALUES */}
-      <section className="py-24 bg-[var(--color-cream)]">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="text-[var(--color-gold)] font-bold tracking-widest uppercase text-sm mb-3 block">
-              Guiding Principles
-            </span>
-            <h2 className="text-4xl font-playfair font-bold text-[var(--color-earth-dark)]">
-              Our Mission & Values
-            </h2>
-          </div>
-
-          <div
-            ref={missionRef}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+      <section className="relative bg-white py-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto grid items-center gap-14 px-4 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={slideInLeftVariants}
           >
-            <div className="bg-white p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-transform duration-300">
-              <Target className="w-12 h-12 text-[var(--color-gold)] mb-6" />
-              <h3 className="text-2xl font-playfair font-bold text-[var(--color-earth-dark)] mb-4">
-                Our Mission
-              </h3>
-              <p className="text-[var(--color-earth-mid)] leading-relaxed">
-                Lead the way in premium food distribution through sustainable
-                practices and respect for nature&apos;s bounty.
-              </p>
-            </div>
-
-            <div className="bg-[var(--color-earth-dark)] p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-transform duration-300 text-white">
-              <Handshake className="w-12 h-12 text-[var(--color-gold)] mb-6" />
-              <h3 className="text-2xl font-playfair font-bold text-white mb-4">
-                Our Values
-              </h3>
-              <p className="text-white/80 leading-relaxed">
-                Honesty and integrity are the pillars we build upon. Every
-                relationship is built on trust and transparency.
-              </p>
-            </div>
-
-            <div className="bg-white p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-transform duration-300">
-              <Eye className="w-12 h-12 text-[var(--color-gold)] mb-6" />
-              <h3 className="text-2xl font-playfair font-bold text-[var(--color-earth-dark)] mb-4">
-                Our Vision
-              </h3>
-              <p className="text-[var(--color-earth-mid)] leading-relaxed">
-                To be the trusted bridge between the world&apos;s finest farms
-                and tables across the Middle East and beyond.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. QUALITY PROMISE */}
-      <section className="py-24 bg-[var(--color-green-forest)] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div ref={qualityRef} className="max-w-4xl mx-auto text-center">
-            <ShieldCheck className="w-16 h-16 text-[var(--color-gold)] mx-auto mb-8" />
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-8">
-              Our Quality Promise
+            <div className="section-label mb-5">Our Story</div>
+            <h2 className="font-playfair text-5xl font-semibold leading-tight text-[var(--color-earth-dark)] md:text-6xl">
+              Rooted in Egypt,
+              <br />
+              Growing Together
+              <br />
+              with Poland
             </h2>
-            <p className="text-xl text-white/90 leading-relaxed font-dm-sans mb-12">
-              We stand behind every piece of fruit and every vegetable we sell.
-              If it&apos;s not at its absolute peak of freshness and flavor, it
-              doesn&apos;t leave our distribution center. We utilize
-              state-of-the-art cold chain technology to preserve nutrients and
-              taste from farm to fork.
-            </p>
-
-            <div className="flex justify-center gap-6">
-              <div className="px-6 py-3 border-2 border-[var(--color-gold)] rounded-full text-[var(--color-gold)] font-bold tracking-widest uppercase">
-                ISO Certified
-              </div>
-              <div className="px-6 py-3 border-2 border-[var(--color-gold)] rounded-full text-[var(--color-gold)] font-bold tracking-widest uppercase">
-                HACCP Certified
-              </div>
+            <div className="mt-7 space-y-5 text-lg leading-8 text-[var(--color-earth-mid)]">
+              <p>
+                Al Baraka was founded on the belief that great produce starts
+                with great partnerships. From the fertile lands of Egypt to the
+                heart of Europe, our journey is built on trust, quality, and a
+                shared vision for healthier lives.
+              </p>
+              <p>
+                Through Marianna, our sister company in Warsaw, we source
+                premium Polish apples while maintaining the same strict
+                standards that guide our Egyptian fresh and frozen product
+                lines.
+              </p>
             </div>
-          </div>
-        </div>
-      </section>
+            <Link
+              href="/contact"
+              className="mt-8 inline-flex items-center gap-3 rounded-[10px] border border-[var(--color-green-forest)] px-7 py-4 font-semibold text-[var(--color-green-forest)] hover:bg-[var(--color-leaf-soft)]"
+            >
+              Our Partnership <ArrowRight className="h-5 w-5" />
+            </Link>
+          </motion.div>
 
-      {/* 5. TIMELINE */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-playfair font-bold text-[var(--color-earth-dark)]">
-              Our Journey
-            </h2>
-          </div>
-
-          <div
-            ref={timelineRef}
-            className="max-w-4xl mx-auto space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent"
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={slideInRightVariants}
+            className="relative"
           >
-            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-[var(--color-gold)] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10" />
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[var(--color-cream)] rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-playfair font-bold text-2xl text-[var(--color-earth-dark)]">
-                    Founded
-                  </h3>
-                  <span className="font-space-mono text-[var(--color-gold)] font-bold">
-                    1995
-                  </span>
-                </div>
-                <p className="text-[var(--color-earth-mid)]">
-                  Established in Cairo, Egypt with a vision for premium quality.
-                </p>
-              </div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={scaleRevealVariants}
+              className="relative h-[540px] overflow-hidden rounded-[28px] bg-[var(--color-leaf-soft)]"
+            >
+              <video
+                src={videos.aboutHeritage}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-label="Al Baraka partnership video"
+              />
+            </motion.div>
+            <div className="soft-card absolute left-6 top-10 rounded-[24px] px-8 py-7 text-center">
+              <span className="block text-3xl">EG</span>
+              <span className="mt-2 block font-semibold text-[var(--color-earth-dark)]">
+                Egypt
+              </span>
+              <span className="my-5 block h-px bg-black/10" />
+              <span className="block text-3xl">PL</span>
+              <span className="mt-2 block font-semibold text-[var(--color-earth-dark)]">
+                Poland
+              </span>
             </div>
+          </motion.div>
+        </div>
+      </section>
 
-            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-[var(--color-gold)] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10" />
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[var(--color-cream)] rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-playfair font-bold text-2xl text-[var(--color-earth-dark)]">
-                    Regional Expansion
-                  </h3>
-                  <span className="font-space-mono text-[var(--color-gold)] font-bold">
-                    2000s
-                  </span>
+      <section className="relative bg-white py-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={clipRevealVariants}
+            className="mx-auto mb-14 max-w-3xl text-center"
+          >
+            <div className="section-label mb-3">Our Values</div>
+            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)] md:text-6xl">
+              The Principles That Define Us
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainerVariants}
+            className="grid gap-7 md:grid-cols-3"
+          >
+            {values.map((value) => (
+              <motion.div
+                key={value.title}
+                variants={staggerItemVariants}
+                className="soft-card rounded-[24px] p-9"
+              >
+                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                  <value.icon className="h-9 w-9" />
                 </div>
-                <p className="text-[var(--color-earth-mid)]">
-                  Expanded distribution networks across the Middle East.
+                <h3 className="font-playfair text-4xl text-[var(--color-earth-dark)]">
+                  {value.title}
+                </h3>
+                <p className="mt-5 text-[var(--color-earth-mid)] leading-7">
+                  {value.copy}
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-[var(--color-gold)] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10" />
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[var(--color-cream)] rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-playfair font-bold text-2xl text-[var(--color-earth-dark)]">
-                    Global Partnership
-                  </h3>
-                  <span className="font-space-mono text-[var(--color-gold)] font-bold">
-                    2019
-                  </span>
+      <section className="relative bg-white py-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={clipRevealVariants}
+            className="mx-auto mb-12 max-w-3xl text-center"
+          >
+            <div className="section-label mb-3">Our Journey</div>
+            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)]">
+              Milestones of Growth
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainerVariants}
+            className="relative grid gap-8 md:grid-cols-4"
+          >
+            {milestones.map(([year, title, copy]) => (
+              <motion.div
+                key={year}
+                variants={staggerItemVariants}
+                className="relative text-center"
+              >
+                <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-[var(--color-green-forest)] bg-white text-[var(--color-green-forest)]">
+                  <Globe2 className="h-8 w-8" />
                 </div>
-                <p className="text-[var(--color-earth-mid)]">
-                  Strategic partnership with Marianna (Warsaw, Poland)
-                  established.
+                <div className="font-space-mono text-sm font-bold text-[var(--color-green-forest)]">
+                  {year}
+                </div>
+                <h3 className="mt-3 font-playfair text-2xl text-[var(--color-earth-dark)]">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--color-earth-mid)]">
+                  {copy}
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-[var(--color-green-fresh)] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10" />
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[var(--color-earth-dark)] text-white rounded-2xl shadow-lg">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-playfair font-bold text-2xl">
-                    Modern Excellence
-                  </h3>
-                  <span className="font-space-mono text-[var(--color-gold)] font-bold">
-                    Today
+      <section id="quality" className="relative bg-white pb-20 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={scaleRevealVariants}
+            className="botanical-shell grid items-center gap-10 rounded-[32px] border border-black/10 p-8 md:p-12 lg:grid-cols-[0.9fr_1.1fr]"
+          >
+            <div>
+              <div className="section-label mb-4">Our Commitment</div>
+              <h2 className="font-playfair text-5xl font-semibold leading-tight text-[var(--color-earth-dark)]">
+                Certified Quality,
+                <br />
+                You Can Trust
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[var(--color-earth-mid)]">
+                We adhere to international standards and continuously invest in
+                quality, food safety, traceability, and sustainable handling.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-8 inline-flex items-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white"
+              >
+                Our Quality Standards <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { name: "GLOBALG.A.P", icon: Leaf },
+                { name: "GRASP", icon: ScanLine },
+                { name: "ISO 22000", icon: FileCheck2 },
+                { name: "HACCP", icon: Award },
+              ].map((cert) => (
+                <div
+                  key={cert.name}
+                  className="rounded-full bg-white p-6 text-center shadow-sm"
+                >
+                  <cert.icon className="mx-auto mb-4 h-9 w-9 text-[var(--color-green-forest)]" />
+                  <span className="font-semibold text-[var(--color-earth-dark)]">
+                    {cert.name}
+                  </span>
+                  <span className="mt-2 block text-xs text-[var(--color-earth-mid)]">
+                    Certified
                   </span>
                 </div>
-                <p className="text-white/80">
-                  Serving clients globally with 6+ premium fresh and frozen
-                  product lines.
-                </p>
-              </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

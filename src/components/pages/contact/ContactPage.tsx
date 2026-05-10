@@ -1,320 +1,398 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
+  ArrowRight,
   CheckCircle2,
   ChevronDown,
+  Leaf,
+  PackageCheck,
+  Send,
 } from "lucide-react";
-import { useContactAnimations } from "@/hooks/useContactAnimations";
-
-const formSchema = z.object({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(8, "Please enter a valid phone number"),
-  subject: z.string().min(1, "Please select a subject"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type FormData = z.infer<typeof formSchema>;
+import { AnimatePresence, motion } from "motion/react";
+import FloatingLeaves from "@/components/custom/FloatingLeaves";
+import {
+  clipRevealVariants,
+  scaleRevealVariants,
+  slideInLeftVariants,
+  slideInRightVariants,
+} from "@/lib/animations";
+import { images, videos } from "@/lib/images";
+import { FormData, formSchema } from "@/lib/validations/contactSchema";
+import {
+  contactCards,
+  faqs,
+  heroBenefits,
+  partnershipBenefits,
+} from "@/constants/contactdata";
+import Field from "@/components/custom/FieldForm";
+import { useContactForm } from "@/hooks/useContactForm";
 
 export default function ContactPage() {
   const [isSuccess, setIsSuccess] = useState(false);
-  const { heroRef, infoRef, formRef, mapRef, faqRef } = useContactAnimations();
+  const [openFaq, setOpenFaq] = useState(0);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
+  } = useContactForm();
 
-  const onSubmit = async (data: FormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log(data);
+  const onSubmit = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 900));
     setIsSuccess(true);
     reset();
     setTimeout(() => setIsSuccess(false), 5000);
   };
 
-  const faqs = [
-    {
-      q: "Do you offer bulk ordering?",
-      a: "Yes, we specialize in wholesale and bulk ordering for businesses. Contact our sales team for custom pricing and terms.",
-    },
-    {
-      q: "Do you ship internationally?",
-      a: "Absolutely. We export across the Middle East, Europe, and beyond using state-of-the-art cold chain logistics.",
-    },
-    {
-      q: "Are your products certified?",
-      a: "All our products and facilities are ISO and HACCP certified, ensuring the highest standards of safety and quality.",
-    },
-    {
-      q: "Can you do private labeling?",
-      a: "Yes, we offer private labeling opportunities for our premium fresh and frozen produce lines. Let's discuss your brand's needs.",
-    },
-  ];
-
   return (
-    <div className="pt-24 min-h-screen bg-[var(--color-cream)]">
-      <section className="bg-[var(--color-earth-dark)] py-20 text-center">
-        <div ref={heroRef} className="container mx-auto px-6">
-          <h1 className="text-5xl md:text-6xl font-playfair font-bold text-[var(--color-gold)] mb-6">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-white/80 font-dm-sans max-w-2xl mx-auto">
-            We&apos;re here to answer your questions and help you connect with
-            Al Baraka. Whether it&apos;s a general inquiry or a bulk order
-            request, our team is ready to assist.
-          </p>
+    <div className="overflow-hidden bg-[var(--color-cream)] pt-24">
+      <section className="relative min-h-[690px] bg-white">
+        <Image
+          src={images.contactHeroBg}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-right opacity-[0.82]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
+        <div className="container relative z-10 mx-auto grid min-h-[690px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={clipRevealVariants}
+          >
+            <h1 className="font-playfair text-6xl font-semibold leading-none text-[var(--color-earth-dark)] md:text-8xl lg:text-[98px]">
+              Let&apos;s Grow
+              <br />
+              Something Great
+              <br />
+              <span className="text-[var(--color-green-forest)]">Together</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
+              We are here to answer your questions, listen to your needs, and
+              provide the best solutions for your business.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-5">
+              {heroBenefits.map((benefit) => (
+                <span key={benefit.title} className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                    <benefit.icon className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-[var(--color-earth-dark)]">
+                      {benefit.title}
+                    </span>
+                    <span className="text-xs text-[var(--color-earth-mid)]">
+                      {benefit.detail}
+                    </span>
+                  </span>
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="relative hidden min-h-[450px] lg:flex items-center justify-center">
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full h-full min-h-[400px]"
+            >
+              <Image
+                src={images.pepperPng2}
+                alt="Contact Al Baraka"
+                fill
+                priority
+                className="object-contain drop-shadow-[0_32px_40px_rgba(16,38,26,0.18)]"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row gap-16">
-            <div ref={infoRef} className="lg:w-1/3 flex flex-col gap-6">
-              <h2 className="text-3xl font-playfair font-bold text-[var(--color-earth-dark)] mb-4">
-                Contact Information
-              </h2>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-transparent hover:border-[var(--color-gold)] transition-colors flex items-start gap-4 group">
-                <div className="bg-[var(--color-cream)] p-3 rounded-full group-hover:bg-[var(--color-gold)] transition-colors">
-                  <MapPin className="w-6 h-6 text-[var(--color-earth-dark)]" />
+      <section className="relative bg-white pb-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto grid gap-10 px-4 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-14">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={slideInLeftVariants}
+            className="soft-card rounded-[28px] p-8 md:p-10"
+          >
+            <h2 className="font-playfair text-3xl text-[var(--color-earth-dark)]">
+              Contact Information
+            </h2>
+            <div className="mt-7 grid gap-5">
+              {contactCards.map((item) => (
+                <div key={item.label} className="flex gap-4">
+                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[18px] bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                    <item.icon className="h-7 w-7" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-[var(--color-earth-dark)]">
+                      {item.label}
+                    </span>
+                    <span className="whitespace-pre-line text-sm leading-6 text-[var(--color-earth-mid)]">
+                      {item.value}
+                    </span>
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-bold font-dm-sans text-[var(--color-earth-dark)] mb-1">
-                    Our Headquarters
-                  </h3>
-                  <p className="text-[var(--color-earth-mid)] text-sm">
-                    Al Azbakiyah, Cairo, Egypt
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-transparent hover:border-[var(--color-gold)] transition-colors flex items-start gap-4 group">
-                <div className="bg-[var(--color-cream)] p-3 rounded-full group-hover:bg-[var(--color-gold)] transition-colors">
-                  <Phone className="w-6 h-6 text-[var(--color-earth-dark)]" />
-                </div>
-                <div>
-                  <h3 className="font-bold font-dm-sans text-[var(--color-earth-dark)] mb-1">
-                    Phone Number
-                  </h3>
-                  <p className="text-[var(--color-earth-mid)] text-sm">
-                    +20 123 456 7890
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-transparent hover:border-[var(--color-gold)] transition-colors flex items-start gap-4 group">
-                <div className="bg-[var(--color-cream)] p-3 rounded-full group-hover:bg-[var(--color-gold)] transition-colors">
-                  <Mail className="w-6 h-6 text-[var(--color-earth-dark)]" />
-                </div>
-                <div>
-                  <h3 className="font-bold font-dm-sans text-[var(--color-earth-dark)] mb-1">
-                    Email Address
-                  </h3>
-                  <p className="text-[var(--color-earth-mid)] text-sm">
-                    info@albarakafruits.com
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-transparent hover:border-[var(--color-gold)] transition-colors flex items-start gap-4 group">
-                <div className="bg-[var(--color-cream)] p-3 rounded-full group-hover:bg-[var(--color-gold)] transition-colors">
-                  <Clock className="w-6 h-6 text-[var(--color-earth-dark)]" />
-                </div>
-                <div>
-                  <h3 className="font-bold font-dm-sans text-[var(--color-earth-dark)] mb-1">
-                    Working Hours
-                  </h3>
-                  <p className="text-[var(--color-earth-mid)] text-sm">
-                    Sun–Thu: 9:00 AM – 5:00 PM
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
+            <div className="mt-8 rounded-[18px] bg-[var(--color-leaf-soft)] p-5 text-sm text-[var(--color-earth-mid)]">
+              <PackageCheck className="mb-3 h-5 w-5 text-[var(--color-green-forest)]" />
+              We export premium fruits and vegetables to partners across
+              multiple markets.
+            </div>
+          </motion.div>
 
-            <div
-              ref={formRef}
-              className="lg:w-2/3 bg-white p-8 md:p-12 rounded-3xl shadow-xl"
-            >
-              <h2 className="text-3xl font-playfair font-bold text-[var(--color-earth-dark)] mb-8">
-                Send Us a Message
-              </h2>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={slideInRightVariants}
+            className="soft-card rounded-[28px] p-8 md:p-10"
+          >
+            <h2 className="font-playfair text-3xl text-[var(--color-earth-dark)]">
+              Send Us a Message
+            </h2>
+            <AnimatePresence mode="wait">
               {isSuccess ? (
-                <div className="bg-[var(--color-green-fresh)]/10 text-[var(--color-green-forest)] p-8 rounded-2xl flex flex-col items-center justify-center text-center h-64 animate-in fade-in zoom-in">
-                  <CheckCircle2 className="w-16 h-16 mb-4" />
-                  <h3 className="text-2xl font-bold font-playfair mb-2">
-                    Message Sent Successfully!
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  className="mt-8 flex min-h-[360px] flex-col items-center justify-center rounded-[22px] bg-[var(--color-leaf-soft)] text-center"
+                >
+                  <CheckCircle2 className="mb-5 h-16 w-16 text-[var(--color-green-forest)]" />
+                  <h3 className="font-playfair text-4xl text-[var(--color-earth-dark)]">
+                    Message Sent
                   </h3>
-                  <p className="font-dm-sans">
-                    Thank you for reaching out. We will get back to you within
-                    24 hours.
+                  <p className="mt-3 text-[var(--color-earth-mid)]">
+                    Thank you. We will get back to you within 24 hours.
                   </p>
-                </div>
+                </motion.div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-[var(--color-earth-dark)]">
-                        Full Name
-                      </label>
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="mt-8 grid gap-5"
+                >
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Field label="Your Name" error={errors.fullName?.message}>
                       <input
                         {...register("fullName")}
-                        className="w-full bg-[var(--color-cream)] border border-transparent focus:border-[var(--color-gold)] focus:ring-1 focus:ring-[var(--color-gold)] rounded-xl px-4 py-3 outline-none transition-all"
-                        placeholder="John Doe"
+                        placeholder="Your Name *"
+                        className="form-input"
                       />
-                      {errors.fullName && (
-                        <p className="text-red-500 text-xs">
-                          {errors.fullName.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-[var(--color-earth-dark)]">
-                        Email Address
-                      </label>
+                    </Field>
+                    <Field label="Company Name">
                       <input
-                        {...register("email")}
-                        className="w-full bg-[var(--color-cream)] border border-transparent focus:border-[var(--color-gold)] focus:ring-1 focus:ring-[var(--color-gold)] rounded-xl px-4 py-3 outline-none transition-all"
-                        placeholder="john@example.com"
+                        {...register("company")}
+                        placeholder="Company Name"
+                        className="form-input"
                       />
-                      {errors.email && (
-                        <p className="text-red-500 text-xs">
-                          {errors.email.message}
-                        </p>
-                      )}
-                    </div>
+                    </Field>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-[var(--color-earth-dark)]">
-                        Phone Number
-                      </label>
-                      <input
-                        {...register("phone")}
-                        className="w-full bg-[var(--color-cream)] border border-transparent focus:border-[var(--color-gold)] focus:ring-1 focus:ring-[var(--color-gold)] rounded-xl px-4 py-3 outline-none transition-all"
-                        placeholder="+20 123 456 7890"
-                      />
-                      {errors.phone && (
-                        <p className="text-red-500 text-xs">
-                          {errors.phone.message}
-                        </p>
-                      )}
+                  <Field label="Email Address" error={errors.email?.message}>
+                    <input
+                      {...register("email")}
+                      placeholder="Email Address *"
+                      className="form-input"
+                    />
+                  </Field>
+                  <Field label="Phone Number" error={errors.phone?.message}>
+                    <input
+                      {...register("phone")}
+                      placeholder="Phone Number"
+                      className="form-input"
+                    />
+                  </Field>
+                  <Field label="Subject" error={errors.subject?.message}>
+                    <div className="relative">
+                      <select
+                        {...register("subject")}
+                        className="form-input appearance-none"
+                      >
+                        <option value="">Subject *</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Bulk Order">Bulk Order</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Private Label">Private Label</option>
+                      </select>
+                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--color-earth-mid)]" />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-[var(--color-earth-dark)]">
-                        Subject
-                      </label>
-                      <div className="relative">
-                        <select
-                          {...register("subject")}
-                          className="w-full bg-[var(--color-cream)] border border-transparent focus:border-[var(--color-gold)] focus:ring-1 focus:ring-[var(--color-gold)] rounded-xl px-4 py-3 outline-none transition-all appearance-none"
-                        >
-                          <option value="">Select a subject...</option>
-                          <option value="General Inquiry">
-                            General Inquiry
-                          </option>
-                          <option value="Bulk Order">Bulk Order</option>
-                          <option value="Partnership">
-                            Partnership / Private Label
-                          </option>
-                          <option value="Other">Other</option>
-                        </select>
-                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-earth-mid)] pointer-events-none" />
-                      </div>
-                      {errors.subject && (
-                        <p className="text-red-500 text-xs">
-                          {errors.subject.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-[var(--color-earth-dark)]">
-                      Your Message
-                    </label>
+                  </Field>
+                  <Field label="Your Message" error={errors.message?.message}>
                     <textarea
                       {...register("message")}
-                      rows={5}
-                      className="w-full bg-[var(--color-cream)] border border-transparent focus:border-[var(--color-gold)] focus:ring-1 focus:ring-[var(--color-gold)] rounded-xl px-4 py-3 outline-none transition-all resize-none"
-                      placeholder="How can we help you today?"
+                      placeholder="Your Message *"
+                      rows={6}
+                      className="form-input resize-none"
                     />
-                    {errors.message && (
-                      <p className="text-red-500 text-xs">
-                        {errors.message.message}
-                      </p>
-                    )}
-                  </div>
+                  </Field>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[var(--color-gold)] hover:bg-[var(--color-gold-light)] text-[var(--color-earth-dark)] font-bold uppercase tracking-wider py-4 rounded-xl transition-all disabled:opacity-70"
+                    className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white shadow-[0_18px_34px_rgba(15,107,58,0.22)] disabled:opacity-60"
                   >
-                    {isSubmitting ? "Sending..." : "Send Message →"}
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                    <Send className="h-5 w-5" />
                   </button>
-                </form>
+                </motion.form>
               )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative bg-white py-16 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={scaleRevealVariants}
+            className="soft-card overflow-hidden rounded-[28px]"
+          >
+            <div className="p-8 text-center">
+              <h2 className="font-playfair text-4xl text-[var(--color-earth-dark)]">
+                Find Us
+              </h2>
+              <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
+                Visit our office or reach out anytime.
+              </p>
             </div>
-          </div>
+            <div className="relative h-[430px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.61185012588!2d31.258464350000003!3d30.05961135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "saturate(0.8) contrast(1.04)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <div className="soft-card absolute left-8 top-8 rounded-[18px] p-5">
+                <h3 className="font-semibold text-[var(--color-earth-dark)]">
+                  Al Baraka Head Office
+                </h3>
+                <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
+                  Al Azbakiyah, Cairo, Egypt 11511
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section ref={mapRef} className="py-24 bg-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-playfair font-bold text-[var(--color-earth-dark)]">
-              Find Us Here
-            </h2>
-          </div>
-          <div className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-lg bg-gray-200">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.61185012588!2d31.258464350000003!3d30.05961135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
-              width="100%"
-              height="100%"
-              style={{
-                border: 0,
-                filter: "grayscale(100%) contrast(1.2) opacity(0.8)",
-              }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-[var(--color-cream)]">
-        <div className="container mx-auto px-6 lg:px-12 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-[var(--color-earth-dark)]">
+      <section className="relative bg-white py-16">
+        <div className="container mx-auto max-w-5xl px-4 md:px-8">
+          <div className="mb-10 text-center">
+            <h2 className="font-playfair text-4xl text-[var(--color-earth-dark)]">
               Frequently Asked Questions
             </h2>
+            <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
+              Quick answers to common questions.
+            </p>
           </div>
-          <div ref={faqRef} className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <details
-                key={idx}
-                className="group bg-white rounded-2xl shadow-sm border border-transparent open:border-[var(--color-gold)]/30 transition-all duration-300"
+          <div className="grid gap-3">
+            {faqs.map((faq, index) => (
+              <div
+                key={faq.q}
+                className="rounded-[18px] border border-black/10 bg-white"
               >
-                <summary className="flex items-center justify-between cursor-pointer p-6 font-bold font-dm-sans text-[var(--color-earth-dark)] list-none">
-                  {faq.q}
-                  <span className="transition group-open:rotate-180">
-                    <ChevronDown className="w-5 h-5 text-[var(--color-gold)]" />
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left font-semibold text-[var(--color-earth-dark)]"
+                >
+                  <span className="flex items-center gap-3">
+                    <Leaf className="h-4 w-4 text-[var(--color-green-forest)]" />
+                    {faq.q}
                   </span>
-                </summary>
-                <div className="px-6 pb-6 text-[var(--color-earth-mid)] font-dm-sans leading-relaxed">
-                  <p>{faq.a}</p>
-                </div>
-              </details>
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform ${openFaq === index ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-12 pb-5 text-sm leading-7 text-[var(--color-earth-mid)]">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative bg-white pb-20 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={scaleRevealVariants}
+            className="botanical-shell relative overflow-hidden rounded-[28px] border border-black/10 p-8 md:p-10"
+          >
+            <video
+              src={videos.contactClosing}
+              className="absolute inset-y-0 left-0 hidden h-full w-1/3 object-cover opacity-[0.45] md:block"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+            />
+            <div className="relative z-10 grid items-center gap-8 md:grid-cols-[1fr_auto_auto_auto] md:pl-[32%]">
+              <div>
+                <h2 className="font-playfair text-4xl text-[var(--color-green-forest)]">
+                  Ready to Start a Partnership?
+                </h2>
+                <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
+                  We are ready to supply the best quality products for your
+                  business.
+                </p>
+              </div>
+              {partnershipBenefits.map((benefit) => (
+                <span
+                  key={benefit.label}
+                  className="text-center text-xs font-semibold text-[var(--color-earth-dark)]"
+                >
+                  <span className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white text-[var(--color-green-forest)]">
+                    <benefit.icon className="h-5 w-5" />
+                  </span>
+                  {benefit.label}
+                </span>
+              ))}
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-6 py-3 font-semibold text-white"
+              >
+                View Products <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

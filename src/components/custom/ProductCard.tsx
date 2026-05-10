@@ -1,65 +1,87 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { CldImage } from "next-cloudinary";
-
+import Image from "next/image";
+import { ArrowRight, Leaf } from "lucide-react";
+import { motion } from "motion/react";
 import { ProductsType } from "@/types/ProductsTypes";
+import { getProductImage } from "@/lib/images";
 
 interface ProductCardProps {
   product: ProductsType;
   featured?: boolean;
 }
 
-export default function ProductCard({ product, featured = false }: ProductCardProps) {
+const MotionLink = motion.create(Link);
+
+export default function ProductCard({
+  product,
+  featured = false,
+}: ProductCardProps) {
   return (
-    <Link
+    <MotionLink
       href={`/products/${product.slug}`}
-      className={`group relative block overflow-hidden rounded-2xl bg-[var(--color-earth-dark)] ${
-        featured ? "md:col-span-2 md:row-span-2 h-[400px] md:h-full" : "h-[400px]"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.45 }}
+      className={`group relative flex min-h-[430px] flex-col overflow-hidden rounded-[28px] border border-black/10 bg-white p-5 shadow-[0_18px_50px_rgba(16,38,26,0.07)] ${
+        featured ? "lg:col-span-2" : ""
       }`}
     >
-      {/* Background Image using Cloudinary */}
-      <CldImage
-        src={product.slug} // Use slug as public ID for now
-        alt={product.name}
-        fill
-        sizes={featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        // Fallback or placeholder configuration if not found in Cloudinary
-        preserveTransformations
-        crop="fill"
-        gravity="auto"
-      />
-      
-      {/* Permanent Overlay for Readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
-
-      {/* Content */}
-      <div className="absolute inset-0 p-8 flex flex-col justify-end">
-        <div className="mb-4">
-          <span
-            className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 text-white"
-            style={{ backgroundColor: product.color }}
-          >
-            {product.category}
-          </span>
-          <h3 className="font-playfair text-3xl font-bold text-white mb-2 leading-tight">
-            {product.name}
-          </h3>
-        </div>
-
-        {/* Hover Reveal Content */}
-        <div className="overflow-hidden h-0 group-hover:h-auto opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-4 group-hover:translate-y-0">
-          <p className="text-white/80 font-dm-sans text-sm line-clamp-2 mb-4">
-            {product.description}
-          </p>
-          <div className="flex items-center gap-2 text-[var(--color-gold)] font-medium text-sm group/btn">
-            <span>Learn More</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-          </div>
-        </div>
+      <div
+        className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[22px]"
+      >
+        <Image
+          src={getProductImage(product.slug)}
+          alt={product.name}
+          fill
+          sizes={
+            featured
+              ? "(max-width: 1024px) 100vw, 55vw"
+              : "(max-width: 1024px) 100vw, 33vw"
+          }
+          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+        />
+        <span
+          className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 shadow-sm"
+          style={{ backgroundColor: product.color, color: "#fff" }}
+        >
+          <Leaf className="h-5 w-5" />
+        </span>
+        <span
+          className="absolute bottom-0 left-0 h-1 w-full"
+          style={{ backgroundColor: product.color }}
+        />
       </div>
-    </Link>
+
+      <div className="pt-6">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <span
+            className="rounded-full px-4 py-2 text-xs font-semibold capitalize"
+            style={{
+              backgroundColor: `${product.color}14`,
+              color: product.color,
+            }}
+          >
+            {product.category} / {product.type}
+          </span>
+          <span className="text-xs text-[var(--color-earth-mid)]">
+            {product.origin}
+          </span>
+        </div>
+        <h3 className="font-playfair text-3xl font-semibold leading-tight text-[var(--color-earth-dark)]">
+          {product.name}
+        </h3>
+        <p className="mt-3 min-h-[48px] text-sm leading-6 text-[var(--color-earth-mid)]">
+          {product.shortDescription}
+        </p>
+        <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-green-forest)]">
+          Explore product
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </MotionLink>
   );
 }

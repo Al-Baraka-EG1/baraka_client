@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
 import { products, getProductBySlug } from "@/lib/products";
 import ProductDetailPage from "@/components/pages/products/ProductDetailPage";
-import { ProductsType } from "@/types/ProductsTypes";
 import { Metadata } from "next";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -15,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) return {};
 
   return {
@@ -24,8 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Page({ params }: Props) {
-  const product = getProductBySlug(params.slug);
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) notFound();
 
   const relatedProducts = products

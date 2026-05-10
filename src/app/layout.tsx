@@ -8,7 +8,8 @@ import {
 import "./globals.css";
 import Navbar from "@/components/global/Navbar";
 import Footer from "@/components/global/Footer";
-import { LenisScrollProvider } from "@/components/providers/LenisProvider";
+import { LenisScrollProvider } from "@/providers/LenisProvider";
+import { MotionProvider } from "@/providers/MotionProvider";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -71,9 +72,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <LenisScrollProvider>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <MotionProvider>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </MotionProvider>
         </LenisScrollProvider>
       </body>
     </html>

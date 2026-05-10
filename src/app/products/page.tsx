@@ -1,6 +1,5 @@
 import ProductsPage from "@/components/pages/products/ProductsPage";
 import { products } from "@/lib/products";
-import { ProductsType } from "@/types/ProductsTypes";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

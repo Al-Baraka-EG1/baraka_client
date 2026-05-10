@@ -7,23 +7,25 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-heading: "Playfair Display", Georgia, serif;
+
   /* Al Baraka Design System */
-  --color-earth-dark: #1A1208;
-  --color-earth-deep: #2D1F0E;
-  --color-earth-mid: #5C3D1E;
-  --color-green-forest: #1E4D2B;
-  --color-green-fresh: #2E7D4F;
-  --color-green-bright: #4CAF73;
-  --color-gold: #C9A84C;
-  --color-gold-light: #F0D080;
-  --color-cream: #F7F2E8;
-  --color-white: #FDFAF5;
-  --color-red-pepper: #C0392B;
-  --color-orange-carrot: #E67E22;
+  --color-earth-dark: #10261a;
+  --color-earth-deep: #173922;
+  --color-earth-mid: #53605a;
+  --color-green-forest: #0f6b3a;
+  --color-green-fresh: #168246;
+  --color-green-bright: #55a56f;
+  --color-leaf-soft: #edf7ea;
+  --color-leaf-mist: #f5fbf3;
+  --color-gold: #b47736;
+  --color-gold-light: #e1b56f;
+  --color-cream: #fbfaf5;
+  --color-white: #ffffff;
+  --color-red-pepper: #c0392b;
+  --color-orange-carrot: #e67e22;
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -64,24 +66,24 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #fbfaf5;
+  --foreground: #10261a;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #10261a;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: #10261a;
+  --primary: #0f6b3a;
+  --primary-foreground: #ffffff;
+  --secondary: #edf7ea;
+  --secondary-foreground: #10261a;
+  --muted: #f3f1e9;
+  --muted-foreground: #69746d;
+  --accent: #edf7ea;
+  --accent-foreground: #10261a;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #e7e5dc;
+  --input: #e7e5dc;
+  --ring: #168246;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -136,10 +138,212 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+  }
   body {
     @apply bg-background text-foreground;
+    min-width: 320px;
+    text-rendering: geometricPrecision;
   }
+  ::selection {
+    background: rgba(22, 130, 70, 0.16);
+    color: var(--color-earth-dark);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-green-forest);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-green-fresh);
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-green-forest) var(--color-cream);
+  }
+}
+
+/* Font family utility classes */
+.font-playfair {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+.font-dm-sans {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+.font-cormorant {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+.font-space-mono {
+  font-family: var(--font-space-mono), monospace;
+}
+
+.container {
+  width: min(100% - 2rem, 1440px);
+}
+
+.section-label {
+  color: var(--color-gold);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.botanical-shell {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(237, 247, 234, 0.9),
+      rgba(255, 255, 255, 0.95)
+    ),
+    var(--color-cream);
+}
+
+.soft-card {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(16, 38, 26, 0.08);
+  box-shadow: 0 18px 60px rgba(16, 38, 26, 0.08);
+}
+
+.leaf-drift {
+  animation: leaf-drift 9s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.leaf-drift-slow {
+  animation: leaf-drift 13s ease-in-out infinite reverse;
+  transform-origin: center;
+}
+
+.video-surface {
+  background: #10261a;
+}
+
+.form-input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 38, 26, 0.1);
+  background: white;
+  padding: 1rem 1.1rem;
+  color: var(--color-earth-dark);
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.form-input::placeholder {
+  color: rgba(83, 96, 90, 0.72);
+}
+
+.form-input:focus {
+  border-color: var(--color-green-forest);
+  box-shadow: 0 0 0 4px rgba(15, 107, 58, 0.1);
+}
+
+@keyframes leaf-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+  50% {
+    transform: translate3d(14px, -18px, 0) rotate(7deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.14;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.float-gentle-delayed {
+  animation: float-gentle 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.pulse-soft {
+  animation: pulse-soft 4s ease-in-out infinite;
+}
+
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    @apply font-sans;
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

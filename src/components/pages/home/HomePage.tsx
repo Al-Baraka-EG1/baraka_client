@@ -1,324 +1,371 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowDown,
-  CheckCircle2,
-  ShieldCheck,
-  Leaf,
-  Globe,
-  HeartHandshake,
-} from "lucide-react";
-import { CldImage } from "next-cloudinary";
-import { products } from "@/lib/products";
+
+import { motion } from "motion/react";
 import ProductCard from "@/components/custom/ProductCard";
 import AnimatedCounter from "@/components/custom/AnimatedCounter";
-import useHomeAnimations from "@/hooks/useHomeAnimations";
+import FloatingLeaves from "@/components/custom/FloatingLeaves";
+import {
+  clipRevealVariants,
+  scaleRevealVariants,
+  slideInLeftVariants,
+  slideInRightVariants,
+  staggerContainerVariants,
+  staggerItemVariants,
+} from "@/lib/animations";
+import { images, videos } from "@/lib/images";
+import { products } from "@/lib/products";
+import { ArrowRight, CheckCircle2, Globe2, Leaf } from "lucide-react";
+import { qualityItems, trustItems } from "@/constants/homedata";
 
 export default function HomePage() {
-  const {
-    heroRef,
-    heroContentRef,
-    bgRef,
-    showcaseRef,
-    aboutRef,
-    qualityRef,
-    statsRef,
-  } = useHomeAnimations();
-
   return (
-    <>
-      {/* 1. HERO SECTION */}
-      <section
-        ref={heroRef}
-        className="relative h-screen min-h-[600px] w-full overflow-hidden flex items-center justify-center pt-20"
-      >
-        <div
-          ref={bgRef}
-          className="absolute inset-0 w-full h-[120%] -top-[10%] z-0"
-        >
-          <CldImage
-            src="hero-bg" // Assumes an asset named hero-bg in Cloudinary
-            alt="Farm fresh produce"
+    <div className="overflow-hidden bg-[var(--color-cream)]">
+      <section className="relative min-h-[860px] bg-white pt-28 md:pt-32">
+        <picture className="absolute inset-y-0 right-0 hidden w-3/5 opacity-90 md:block">
+          <source media="(min-width: 768px)" srcSet={images.heroBgAlt} />
+          <Image
+            src={images.heroBgAlt}
+            alt=""
             fill
             priority
-            className="object-cover"
-            sizes="100vw"
+            sizes="60vw"
+            className="object-cover object-right"
           />
-          {/* Dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-earth-dark)]/80 via-[var(--color-earth-dark)]/60 to-[var(--color-earth-dark)]/90" />
-          {/* Subtle noise texture */}
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-        </div>
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent md:bg-gradient-to-r" />
 
-        <div className="container relative z-10 mx-auto px-6 lg:px-12 flex flex-col items-center text-center">
-          <div
-            ref={heroContentRef}
-            className="max-w-4xl flex flex-col items-center"
+        {/* Floating Pepper Elements */}
+        <motion.div
+          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute right-[5%] top-24 w-32 h-32 md:w-48 md:h-48 z-20"
+        >
+          <Image
+            src={images.pepperPng1}
+            alt=""
+            fill
+            className="object-contain opacity-90 drop-shadow-2xl"
+          />
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, 15, 0], rotate: [0, -8, 0] }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="pointer-events-none absolute left-[8%] bottom-40 w-24 h-24 md:w-36 md:h-36 z-20"
+        >
+          <Image
+            src={images.pepperPng2}
+            alt=""
+            fill
+            className="object-contain opacity-85 drop-shadow-xl"
+          />
+        </motion.div>
+
+        <div className="container relative z-10 mx-auto grid min-h-[720px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.88fr_1.12fr]">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={clipRevealVariants}
+            className="max-w-3xl"
           >
-            <span className="inline-block text-[var(--color-gold)] font-dm-sans font-bold tracking-[0.2em] uppercase text-sm mb-6">
-              Premium Egyptian Produce
-            </span>
-            <h1 className="text-5xl md:text-6xl lg:text-8xl font-playfair font-bold text-white leading-tight mb-8 drop-shadow-lg">
-              Nature&apos;s Finest,
+            <div className="section-label mb-5">Premium Egyptian Produce</div>
+            <h1 className="font-playfair text-6xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] md:text-8xl lg:text-[112px]">
+              Fresh From{" "}
+              <span className="text-[var(--color-green-forest)]">Nature,</span>
               <br />
-              Delivered with Integrity
+              Delivered With Care
             </h1>
-            <p className="text-lg md:text-xl text-white/90 font-dm-sans max-w-2xl mb-12 leading-relaxed">
-              Al Baraka brings farm-fresh fruits and vegetables from the
-              world&apos;s best growing regions directly to your table. ISO &
-              HACCP certified. Trusted since 1995.
+            <p className="mt-8 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
+              Premium fruits and vegetables sourced from trusted farms in Egypt
+              and Poland, delivered with cold-chain precision and unmatched
+              quality.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto">
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/products"
-                className="bg-[var(--color-green-fresh)] hover:bg-[var(--color-green-bright)] text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 text-center"
+                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white shadow-[0_18px_34px_rgba(15,107,58,0.22)] transition-transform hover:-translate-y-0.5"
               >
-                Explore Our Products
+                Explore Products <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 href="/contact"
-                className="bg-transparent border-2 border-white/30 hover:border-white text-white px-8 py-4 rounded-full font-semibold transition-all hover:bg-white/5 text-center"
+                className="inline-flex items-center justify-center gap-3 rounded-[10px] border border-[var(--color-green-forest)] px-7 py-4 font-semibold text-[var(--color-green-forest)] transition-colors hover:bg-[var(--color-leaf-soft)]"
               >
-                Contact Us
+                Contact Us <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
+          </motion.div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-white/70 font-space-mono text-xs md:text-sm uppercase tracking-wider">
-              <span className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[var(--color-gold)]" /> ISO
-                Certified
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="relative min-h-[420px] md:min-h-[590px] overflow-hidden rounded-[32px] shadow-[0_30px_60px_rgba(16,38,26,0.15)]"
+          >
+            <video
+              src={videos.hero}
+              className="absolute inset-0 h-full w-full object-cover opacity-[0.85]"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+            />
+          </motion.div>
+        </div>
+
+        <div className="relative z-10 border-y border-black/10 bg-white/90">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainerVariants}
+            className="container mx-auto grid gap-0 px-4 py-7 md:grid-cols-4 md:px-8"
+          >
+            {trustItems.map((item) => (
+              <motion.div
+                key={item.value}
+                variants={staggerItemVariants}
+                className="flex items-center gap-4 border-black/10 py-4 md:border-r md:px-8 md:last:border-r-0"
+              >
+                <item.icon className="h-10 w-10 shrink-0 text-[var(--color-green-forest)]" />
+                <span>
+                  <span className="block font-semibold text-[var(--color-earth-dark)]">
+                    {item.value}
+                  </span>
+                  <span className="text-sm text-[var(--color-earth-mid)]">
+                    {item.detail}
+                  </span>
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative bg-white py-24 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={clipRevealVariants}
+            className="mx-auto mb-14 max-w-3xl text-center"
+          >
+            <div className="section-label mb-3">Our Products</div>
+            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)] md:text-6xl">
+              Our Fresh Selection
+            </h2>
+            <p className="mt-4 text-[var(--color-earth-mid)]">
+              Handpicked freshness, naturally delivered to you.
+            </p>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainerVariants}
+            className="grid gap-7 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {products.slice(0, 5).map((product, index) => (
+              <motion.div key={product.slug} variants={staggerItemVariants}>
+                <ProductCard product={product} featured={index === 0} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative bg-white py-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto grid items-center gap-14 px-4 md:px-8 lg:grid-cols-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={slideInLeftVariants}
+            className="relative"
+          >
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={scaleRevealVariants}
+              className="relative h-[460px] overflow-hidden rounded-[42%_58%_40%_60%/45%_42%_58%_55%]"
+            >
+              <Image
+                src={images.aboutPreview}
+                alt="Fresh produce heritage at Al Baraka"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </motion.div>
+            <div className="soft-card absolute -bottom-8 left-4 rounded-[22px] px-7 py-5">
+              <span className="text-sm text-[var(--color-green-forest)]">
+                Since
               </span>
-              <span className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[var(--color-gold)]" />{" "}
-                HACCP Certified
-              </span>
-              <span className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-[var(--color-gold)]" /> Since
+              <span className="block font-playfair text-5xl text-[var(--color-earth-dark)]">
                 1995
               </span>
-              <span className="flex items-center gap-2">
-                <Leaf className="w-4 h-4 text-[var(--color-gold)]" /> 100%
-                Natural
-              </span>
             </div>
-          </div>
-        </div>
+          </motion.div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce text-white/50">
-          <ArrowDown className="w-6 h-6" />
-        </div>
-      </section>
-
-      {/* 2. PRODUCTS SHOWCASE */}
-      <section className="py-24 bg-[var(--color-cream)]">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <span className="text-[var(--color-gold)] font-bold tracking-widest uppercase text-sm mb-3 block">
-                Fresh Selection
-              </span>
-              <h2 className="text-4xl md:text-5xl font-playfair font-bold text-[var(--color-earth-dark)]">
-                From Farm to Your Table
-              </h2>
-            </div>
-            <p className="text-[var(--color-earth-mid)] font-dm-sans max-w-sm">
-              Six premium products. Zero compromises on quality.
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={slideInRightVariants}
+          >
+            <div className="section-label mb-4">About Al Baraka</div>
+            <h2 className="font-playfair text-5xl font-semibold leading-tight text-[var(--color-earth-dark)] md:text-6xl">
+              Built on Trust,
+              <br />
+              <span className="text-[var(--color-green-forest)]">
+                Grown
+              </span>{" "}
+              with Integrity
+            </h2>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
+              For over 30 years, Al Baraka has been a symbol of quality,
+              reliability, and excellence in fruits and vegetables. From our
+              farms to your table, we ensure freshness, safety, and satisfaction
+              in every delivery.
             </p>
-          </div>
-
-          <div
-            ref={showcaseRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[400px]"
-          >
-            {products.map((product, idx) => (
-              <ProductCard
-                key={product.slug}
-                product={product}
-                featured={idx === 0}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. ABOUT PREVIEW & STATS */}
-      <section className="bg-white py-24">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div
-            ref={aboutRef}
-            className="flex flex-col lg:flex-row gap-16 items-center mb-24"
-          >
-            <div className="lg:w-1/2 relative">
-              <div className="relative h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl">
-                <CldImage
-                  src="about-preview" // Assuming about-preview asset exists
-                  alt="Harvesting fresh produce"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-2xl shadow-xl hidden md:block">
-                <p className="font-playfair text-2xl font-bold text-[var(--color-earth-dark)] mb-1">
-                  Trusted Since
-                </p>
-                <p className="font-space-mono text-4xl text-[var(--color-gold)]">
-                  1995
-                </p>
-              </div>
+            <div className="mt-8 grid gap-3">
+              {[
+                "Direct farmer partnerships",
+                "ISO and HACCP certified",
+                "Egypt and Poland supply network",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="flex items-center gap-3 text-[var(--color-earth-dark)]"
+                >
+                  <CheckCircle2 className="h-5 w-5 text-[var(--color-green-forest)]" />
+                  {item}
+                </span>
+              ))}
             </div>
-
-            <div className="lg:w-1/2 flex flex-col items-start">
-              <span className="text-[var(--color-gold)] font-bold tracking-widest uppercase text-sm mb-4">
-                Our Heritage
-              </span>
-              <h2 className="text-4xl md:text-5xl font-playfair font-bold text-[var(--color-earth-dark)] mb-6 leading-tight">
-                Built on Trust,
-                <br />
-                Grown with Integrity
-              </h2>
-              <p className="text-[var(--color-earth-mid)] font-dm-sans text-lg mb-8 leading-relaxed">
-                Founded on the principles of integrity and excellence, Al Baraka
-                started as a small vision to connect local farmers with families
-                who value premium produce. Today we serve clients across the
-                Middle East and beyond, partnering with certified growers in
-                Egypt and importing premium Polish produce through our sister
-                company Marianna in Warsaw, Poland.
-              </p>
-
-              <ul className="flex flex-col gap-4 mb-10">
-                {[
-                  "Direct farmer partnerships",
-                  "Cold chain technology",
-                  "ISO & HACCP certified",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-[var(--color-earth-dark)] font-medium"
-                  >
-                    <CheckCircle2 className="w-6 h-6 text-[var(--color-green-fresh)]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/about"
-                className="text-[var(--color-gold)] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:text-[var(--color-gold-light)] transition-colors"
-              >
-                Read Our Full Story <ArrowDown className="w-4 h-4 -rotate-90" />
-              </Link>
-            </div>
-          </div>
+            <Link
+              href="/about"
+              className="mt-8 inline-flex items-center gap-3 rounded-[10px] border border-[var(--color-green-forest)] px-7 py-4 font-semibold text-[var(--color-green-forest)] hover:bg-[var(--color-leaf-soft)]"
+            >
+              Learn More About Us <ArrowRight className="h-5 w-5" />
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Stats Row */}
-        <div ref={statsRef} className="bg-[var(--color-earth-dark)]">
-          <div className="container mx-auto px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10 border-y border-white/10">
+        <div className="container mx-auto mt-20 px-4 md:px-8">
+          <div className="botanical-shell grid overflow-hidden rounded-[32px] border border-black/10 md:grid-cols-4">
             <AnimatedCounter
               value={30}
               suffix="+"
-              label="Years of Excellence"
+              label="Years of Experience"
             />
-            <AnimatedCounter value={6} suffix="+" label="Premium Products" />
-            <AnimatedCounter value={100} suffix="%" label="Natural" />
-            <AnimatedCounter value={2} label="Countries" />
+            <AnimatedCounter value={6} label="Product Lines" />
+            <AnimatedCounter value={100} suffix="%" label="Natural and Safe" />
+            <AnimatedCounter value={2} label="Countries Served" />
           </div>
         </div>
       </section>
 
-      {/* 4. QUALITY PROMISE & CTA */}
-      <section className="bg-[var(--color-green-forest)] py-24 text-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4">
-              The Al Baraka Standard
-            </h2>
-            <p className="text-white/80 font-dm-sans max-w-2xl mx-auto">
-              Our commitment to excellence ensures that every product meets the
-              highest global standards.
-            </p>
-          </div>
-
-          <div
-            ref={qualityRef}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24"
+      <section className="relative bg-white py-20 overflow-hidden">
+        <FloatingLeaves />
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={clipRevealVariants}
+            className="mx-auto mb-14 max-w-3xl text-center"
           >
-            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-[var(--color-gold)] transition-all duration-300 group">
-              <Leaf className="w-10 h-10 text-[var(--color-gold)] mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-playfair font-bold mb-3">
-                Freshness First
-              </h3>
-              <p className="text-white/70 font-dm-sans leading-relaxed">
-                Harvested at peak ripeness and delivered with speed and care
-                using state-of-the-art cold chain logistics.
-              </p>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-[var(--color-gold)] transition-all duration-300 group">
-              <ShieldCheck className="w-10 h-10 text-[var(--color-gold)] mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-playfair font-bold mb-3">
-                Quality Standards
-              </h3>
-              <p className="text-white/70 font-dm-sans leading-relaxed">
-                Rigorous inspection at every stage before anything leaves our
-                facility. Zero compromises on safety.
-              </p>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-[var(--color-gold)] transition-all duration-300 group">
-              <Globe className="w-10 h-10 text-[var(--color-gold)] mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-playfair font-bold mb-3">
-                Trusted Partnerships
-              </h3>
-              <p className="text-white/70 font-dm-sans leading-relaxed">
-                Working directly with certified farmers in Egypt and Poland who
-                share our values and commitment to nature.
-              </p>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-[var(--color-gold)] transition-all duration-300 group">
-              <HeartHandshake className="w-10 h-10 text-[var(--color-gold)] mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-playfair font-bold mb-3">
-                Customer Commitment
-              </h3>
-              <p className="text-white/70 font-dm-sans leading-relaxed">
-                Your satisfaction and health are our ultimate measure of
-                success. We build long-term relationships based on trust.
-              </p>
-            </div>
-          </div>
+            <div className="section-label mb-3">Our Promise</div>
+            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)] md:text-6xl">
+              Quality in Every Step
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainerVariants}
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          >
+            {qualityItems.map((item) => (
+              <motion.div
+                key={item.title}
+                variants={staggerItemVariants}
+                className="soft-card rounded-[24px] p-8 text-center"
+              >
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                  <item.icon className="h-9 w-9" />
+                </div>
+                <h3 className="font-playfair text-3xl text-[var(--color-earth-dark)]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--color-earth-mid)]">
+                  {item.copy}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Final CTA Banner */}
-      <section className="bg-[var(--color-earth-dark)] py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[var(--color-green-forest)]/20 animate-pulse" />
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-white mb-6">
-            Ready to Elevate Your Supply Chain?
-          </h2>
-          <p className="text-xl text-white/80 font-dm-sans max-w-2xl mx-auto mb-12">
-            Partner with Al Baraka for bulk orders, private labeling, or
-            distribution across the Middle East.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link
-              href="/contact"
-              className="bg-[var(--color-gold)] hover:bg-[var(--color-gold-light)] text-[var(--color-earth-dark)] px-10 py-4 rounded-full font-bold transition-transform hover:scale-105"
-            >
-              Contact Us Today
-            </Link>
-            <Link
-              href="/products"
-              className="bg-transparent border-2 border-white/30 hover:border-white text-white px-10 py-4 rounded-full font-bold transition-colors hover:bg-white/5"
-            >
-              View All Products
-            </Link>
-          </div>
+      <section className="relative bg-white pb-20 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={scaleRevealVariants}
+            className="relative overflow-hidden rounded-[28px] bg-[var(--color-green-forest)] p-8 text-white md:p-12"
+          >
+            <video
+              src={videos.qualityProcess}
+              className="absolute inset-0 h-full w-full object-cover opacity-[0.18]"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+            />
+            <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[1fr_auto_auto]">
+              <div>
+                <h2 className="font-playfair text-4xl md:text-5xl">
+                  Ready to Work With Us?
+                </h2>
+                <p className="mt-3 text-white/80">
+                  Let us build a fresh and fruitful partnership.
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-white px-7 py-4 font-semibold text-[var(--color-green-forest)]"
+              >
+                Contact Us <ArrowRight className="h-5 w-5" />
+              </Link>
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center gap-3 rounded-[10px] border border-white/50 px-7 py-4 font-semibold text-white"
+              >
+                View Products <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+            <Globe2 className="absolute right-10 top-8 h-20 w-20 text-white/10" />
+            <Leaf className="absolute -left-4 -bottom-4 h-32 w-32 text-white/[0.06] rotate-45" />
+          </motion.div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

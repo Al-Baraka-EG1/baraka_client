@@ -41,12 +41,12 @@ export default function AnimatedCounter({ value, suffix = "", label }: AnimatedC
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center justify-center text-center p-6">
-      <div className="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--color-gold)] mb-3">
+    <div ref={containerRef} className="flex flex-col items-center justify-center border-black/10 p-8 text-center md:border-r md:last:border-r-0">
+      <div className="mb-3 font-playfair text-5xl font-semibold text-[var(--color-green-forest)] md:text-6xl lg:text-7xl">
         {count}
         {suffix}
       </div>
-      <div className="font-dm-sans text-white text-sm md:text-base font-medium uppercase tracking-widest">
+      <div className="max-w-[11rem] text-sm font-medium text-[var(--color-earth-mid)] md:text-base">
         {label}
       </div>
     </div>
