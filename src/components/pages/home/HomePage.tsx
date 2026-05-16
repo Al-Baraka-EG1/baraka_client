@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
-import { motion } from "motion/react";
 import ProductCard from "@/components/custom/ProductCard";
 import AnimatedCounter from "@/components/custom/AnimatedCounter";
-import FloatingLeaves from "@/components/custom/FloatingLeaves";
 import {
   clipRevealVariants,
   scaleRevealVariants,
@@ -15,304 +15,554 @@ import {
   staggerContainerVariants,
   staggerItemVariants,
 } from "@/lib/animations";
-import { images, videos } from "@/lib/images";
+import { images } from "@/lib/images";
 import { products } from "@/lib/products";
-import { ArrowRight, CheckCircle2, Globe2, Leaf } from "lucide-react";
-import { qualityItems, trustItems } from "@/constants/homedata";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Globe2,
+  Leaf,
+  ShieldCheck,
+  Snowflake,
+  Truck,
+  Award,
+  Sprout,
+  HeartHandshake,
+  PackageCheck,
+} from "lucide-react";
+import { qualityItems } from "@/constants/homedata";
+
+const trustBadges = [
+  { icon: Sprout, label: "100% Natural", desc: "Farm-fresh quality" },
+  { icon: Award, label: "ISO Certified", desc: "Global standards" },
+  { icon: ShieldCheck, label: "Since 1995", desc: "30+ years trusted" },
+  { icon: Snowflake, label: "Cold Chain", desc: "End-to-end freshness" },
+];
 
 export default function HomePage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
   return (
-    <div className="overflow-hidden bg-[var(--color-cream)]">
-      <section className="relative min-h-[860px] bg-white pt-28 md:pt-32">
-        <picture className="absolute inset-y-0 right-0 hidden w-3/5 opacity-90 md:block">
-          <source media="(min-width: 768px)" srcSet={images.heroBgAlt} />
-          <Image
-            src={images.heroBgAlt}
-            alt=""
-            fill
-            priority
-            sizes="60vw"
-            className="object-cover object-right"
+    <div className="overflow-hidden bg-[var(--color-cream)]" ref={containerRef}>
+      {/* ============================================
+          HERO SECTION — Light, Airy, Editorial Premium
+          ============================================ */}
+      <section className="relative min-h-[100dvh] bg-[var(--color-cream)] overflow-hidden">
+        {/* Organic Blob Shapes — Soft decorative background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Blob 1: Behind crate, right side */}
+          <div
+            className="absolute top-[10%] right-[5%] w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full opacity-60"
+            style={{
+              background: "radial-gradient(circle, rgba(78,157,111,0.15) 0%, rgba(78,157,111,0) 70%)",
+              filter: "blur(40px)",
+            }}
           />
-        </picture>
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent md:bg-gradient-to-r" />
+          {/* Blob 2: Upper left accent */}
+          <div
+            className="absolute top-[5%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-40"
+            style={{
+              background: "radial-gradient(circle, rgba(180,119,54,0.12) 0%, rgba(180,119,54,0) 70%)",
+              filter: "blur(50px)",
+            }}
+          />
+          {/* Blob 3: Lower right soft green */}
+          <div
+            className="absolute bottom-[10%] right-[15%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full opacity-50"
+            style={{
+              background: "radial-gradient(circle, rgba(15,107,58,0.1) 0%, rgba(15,107,58,0) 70%)",
+              filter: "blur(60px)",
+            }}
+          />
+        </div>
 
-        {/* Floating Pepper Elements */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute right-[5%] top-24 w-32 h-32 md:w-48 md:h-48 z-20"
-        >
-          <Image
-            src={images.pepperPng1}
-            alt=""
-            fill
-            className="object-contain opacity-90 drop-shadow-2xl"
-          />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 15, 0], rotate: [0, -8, 0] }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="pointer-events-none absolute left-[8%] bottom-40 w-24 h-24 md:w-36 md:h-36 z-20"
-        >
-          <Image
-            src={images.pepperPng2}
-            alt=""
-            fill
-            className="object-contain opacity-85 drop-shadow-xl"
-          />
-        </motion.div>
-
-        <div className="container relative z-10 mx-auto grid min-h-[720px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.88fr_1.12fr]">
+        {/* Scattered Floating Leaves — Organic decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+          {/* Leaf 1 — Top left */}
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={clipRevealVariants}
-            className="max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.8, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="absolute top-[12%] left-[8%] w-12 h-12 md:w-16 md:h-16"
           >
-            <div className="section-label mb-5">Premium Egyptian Produce</div>
-            <h1 className="font-playfair text-6xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] md:text-8xl lg:text-[112px]">
-              Fresh From{" "}
-              <span className="text-[var(--color-green-forest)]">Nature,</span>
-              <br />
-              Delivered With Care
-            </h1>
-            <p className="mt-8 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
-              Premium fruits and vegetables sourced from trusted farms in Egypt
-              and Poland, delivered with cold-chain precision and unmatched
-              quality.
-            </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/products"
-                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white shadow-[0_18px_34px_rgba(15,107,58,0.22)] transition-transform hover:-translate-y-0.5"
-              >
-                Explore Products <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-3 rounded-[10px] border border-[var(--color-green-forest)] px-7 py-4 font-semibold text-[var(--color-green-forest)] transition-colors hover:bg-[var(--color-leaf-soft)]"
-              >
-                Contact Us <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
+            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[-25deg]" aria-hidden="true" />
           </motion.div>
-
+          {/* Leaf 2 — Near headline */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="relative min-h-[420px] md:min-h-[590px] overflow-hidden rounded-[32px] shadow-[0_30px_60px_rgba(16,38,26,0.15)]"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 0.7, x: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="absolute top-[28%] left-[3%] w-10 h-10 md:w-14 md:h-14"
           >
-            <video
-              src={videos.hero}
-              className="absolute inset-0 h-full w-full object-cover opacity-[0.85]"
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-            />
+            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[15deg]" aria-hidden="true" />
+          </motion.div>
+          {/* Leaf 3 — Right side, mid */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 0.6, y: 0 }}
+            transition={{ delay: 1.2, duration: 1 }}
+            className="absolute top-[35%] right-[8%] w-14 h-14 md:w-20 md:h-20"
+          >
+            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[35deg]" aria-hidden="true" />
+          </motion.div>
+          {/* Leaf 4 — Bottom left */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 0.5, x: 0 }}
+            transition={{ delay: 1.4, duration: 0.9 }}
+            className="absolute bottom-[25%] left-[12%] w-10 h-10 md:w-12 md:h-12"
+          >
+            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[-40deg]" aria-hidden="true" />
+          </motion.div>
+          {/* Leaf 5 — Bottom right */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 0.7, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.8 }}
+            className="absolute bottom-[15%] right-[5%] w-12 h-12 md:w-16 md:h-16"
+          >
+            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[60deg]" aria-hidden="true" />
+          </motion.div>
+          {/* Leaf 6 — Top right, small */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 1.3, duration: 1 }}
+            className="absolute top-[8%] right-[35%] w-8 h-8 md:w-10 md:h-10"
+          >
+            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[-10deg]" aria-hidden="true" />
           </motion.div>
         </div>
 
-        <div className="relative z-10 border-y border-black/10 bg-white/90">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainerVariants}
-            className="container mx-auto grid gap-0 px-4 py-7 md:grid-cols-4 md:px-8"
-          >
-            {trustItems.map((item) => (
-              <motion.div
-                key={item.value}
-                variants={staggerItemVariants}
-                className="flex items-center gap-4 border-black/10 py-4 md:border-r md:px-8 md:last:border-r-0"
-              >
-                <item.icon className="h-10 w-10 shrink-0 text-[var(--color-green-forest)]" />
-                <span>
-                  <span className="block font-semibold text-[var(--color-earth-dark)]">
-                    {item.value}
-                  </span>
-                  <span className="text-sm text-[var(--color-earth-mid)]">
-                    {item.detail}
-                  </span>
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="relative bg-white py-24 overflow-hidden">
-        <FloatingLeaves />
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-120px" }}
-            variants={clipRevealVariants}
-            className="mx-auto mb-14 max-w-3xl text-center"
-          >
-            <div className="section-label mb-3">Our Products</div>
-            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)] md:text-6xl">
-              Our Fresh Selection
-            </h2>
-            <p className="mt-4 text-[var(--color-earth-mid)]">
-              Handpicked freshness, naturally delivered to you.
-            </p>
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={staggerContainerVariants}
-            className="grid gap-7 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {products.slice(0, 5).map((product, index) => (
-              <motion.div key={product.slug} variants={staggerItemVariants}>
-                <ProductCard product={product} featured={index === 0} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="relative bg-white py-20 overflow-hidden">
-        <FloatingLeaves />
-        <div className="container mx-auto grid items-center gap-14 px-4 md:px-8 lg:grid-cols-2">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-120px" }}
-            variants={slideInLeftVariants}
-            className="relative"
-          >
+        {/* Hero Content Grid */}
+        <div className="container relative z-20 mx-auto px-5 md:px-8 lg:px-12 pt-32 pb-20 lg:pt-36 lg:pb-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[70vh]">
+            {/* Left: Text Content */}
             <motion.div
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={scaleRevealVariants}
-              className="relative h-[460px] overflow-hidden rounded-[42%_58%_40%_60%/45%_42%_58%_55%]"
+              animate="visible"
+              variants={staggerContainerVariants}
+              className="flex flex-col items-start max-w-xl lg:max-w-none"
             >
-              <Image
-                src={images.aboutPreview}
-                alt="Fresh produce heritage at Al Baraka"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </motion.div>
-            <div className="soft-card absolute -bottom-8 left-4 rounded-[22px] px-7 py-5">
-              <span className="text-sm text-[var(--color-green-forest)]">
-                Since
-              </span>
-              <span className="block font-playfair text-5xl text-[var(--color-earth-dark)]">
-                1995
-              </span>
-            </div>
-          </motion.div>
+              {/* Small Label */}
+              <motion.div
+                variants={staggerItemVariants}
+                className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-[var(--color-green-forest)]/8 px-5 py-2.5 text-xs font-bold tracking-[0.2em] text-[var(--color-green-forest)] uppercase border border-[var(--color-green-forest)]/10"
+              >
+                <Leaf className="h-3.5 w-3.5" />
+                Premium Egyptian Produce
+              </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-120px" }}
-            variants={slideInRightVariants}
-          >
-            <div className="section-label mb-4">About Al Baraka</div>
-            <h2 className="font-playfair text-5xl font-semibold leading-tight text-[var(--color-earth-dark)] md:text-6xl">
-              Built on Trust,
-              <br />
-              <span className="text-[var(--color-green-forest)]">
-                Grown
-              </span>{" "}
-              with Integrity
-            </h2>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
-              For over 30 years, Al Baraka has been a symbol of quality,
-              reliability, and excellence in fruits and vegetables. From our
-              farms to your table, we ensure freshness, safety, and satisfaction
-              in every delivery.
-            </p>
-            <div className="mt-8 grid gap-3">
-              {[
-                "Direct farmer partnerships",
-                "ISO and HACCP certified",
-                "Egypt and Poland supply network",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="flex items-center gap-3 text-[var(--color-earth-dark)]"
+              {/* Headline */}
+              <motion.h1
+                variants={staggerItemVariants}
+                className="font-playfair text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] text-[var(--color-earth-dark)] tracking-tight"
+              >
+                Fresh From{" "}
+                <span className="text-[var(--color-green-forest)] italic">Nature,</span>
+                <br />
+                Delivered With Care
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                variants={staggerItemVariants}
+                className="mt-6 max-w-lg text-base md:text-lg leading-relaxed text-[var(--color-earth-mid)] font-medium"
+              >
+                Premium fruits and vegetables sourced from trusted farms in Egypt
+                and Poland, delivered with cold-chain precision and unmatched
+                quality directly to you.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                variants={staggerItemVariants}
+                className="mt-10 flex flex-col sm:flex-row gap-4"
+              >
+                <Link
+                  href="/products"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-8 py-4 font-bold text-white text-sm shadow-[0_12px_28px_rgba(15,107,58,0.25)] transition-all hover:shadow-[0_16px_36px_rgba(15,107,58,0.35)] hover:-translate-y-0.5"
                 >
-                  <CheckCircle2 className="h-5 w-5 text-[var(--color-green-forest)]" />
-                  {item}
-                </span>
-              ))}
-            </div>
-            <Link
-              href="/about"
-              className="mt-8 inline-flex items-center gap-3 rounded-[10px] border border-[var(--color-green-forest)] px-7 py-4 font-semibold text-[var(--color-green-forest)] hover:bg-[var(--color-leaf-soft)]"
-            >
-              Learn More About Us <ArrowRight className="h-5 w-5" />
-            </Link>
-          </motion.div>
-        </div>
+                  Explore Products
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[var(--color-earth-dark)]/15 px-8 py-4 font-bold text-[var(--color-earth-dark)] text-sm transition-all hover:bg-[var(--color-earth-dark)] hover:text-white hover:border-[var(--color-earth-dark)]"
+                >
+                  Contact Us
+                </Link>
+              </motion.div>
+            </motion.div>
 
-        <div className="container mx-auto mt-20 px-4 md:px-8">
-          <div className="botanical-shell grid overflow-hidden rounded-[32px] border border-black/10 md:grid-cols-4">
-            <AnimatedCounter
-              value={30}
-              suffix="+"
-              label="Years of Experience"
-            />
-            <AnimatedCounter value={6} label="Product Lines" />
-            <AnimatedCounter value={100} suffix="%" label="Natural and Safe" />
-            <AnimatedCounter value={2} label="Countries Served" />
+            {/* Right: Hero Crate Image with Organic Blob Background */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, x: 40 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+              className="relative flex items-center justify-center"
+            >
+              {/* Organic Blob Behind Crate */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div
+                  className="w-[90%] h-[90%] rounded-[60%_40%_50%_50%/50%_55%_45%_50%] opacity-70"
+                  style={{
+                    background: "radial-gradient(ellipse at center, rgba(78,157,111,0.18) 0%, rgba(78,157,111,0.05) 60%, transparent 100%)",
+                    filter: "blur(20px)",
+                  }}
+                />
+              </div>
+
+              {/* Crate Image */}
+              <div className="relative w-full max-w-[550px] aspect-square">
+                <Image
+                  src={images.heroCrate}
+                  alt="Premium wooden crate filled with fresh bell peppers, strawberries, and produce from Al Baraka"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 90vw, 550px"
+                  className="object-contain drop-shadow-[0_30px_60px_rgba(16,38,26,0.15)]"
+                />
+              </div>
+
+              {/* Floating "Since 1995" Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, duration: 0.6 }}
+                className="absolute bottom-[5%] left-[-5%] md:left-[5%] rounded-2xl bg-white px-5 py-3 shadow-[0_12px_30px_rgba(16,38,26,0.1)] border border-black/5"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-[var(--color-leaf-soft)] flex items-center justify-center text-[var(--color-green-forest)]">
+                    <CheckCircle2 className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="font-playfair text-xl font-bold text-[var(--color-earth-dark)]">1995</div>
+                    <div className="text-[10px] font-bold text-[var(--color-earth-mid)] uppercase tracking-wider">Established</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating Leaf near crate */}
+              <motion.div
+                animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="absolute top-[10%] right-[0%] w-16 h-16 md:w-20 md:h-20 opacity-70"
+              >
+                <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[25deg]" aria-hidden="true" />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Scroll Indicator — Minimal, elegant */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="w-5 h-8 rounded-full border-2 border-[var(--color-earth-dark)]/20 flex items-start justify-center p-1"
+          >
+            <div className="w-1 h-2 rounded-full bg-[var(--color-green-forest)]" />
+          </motion.div>
+        </motion.div>
       </section>
 
-      <section className="relative bg-white py-20 overflow-hidden">
-        <FloatingLeaves />
-        <div className="container mx-auto px-4 md:px-8">
+      {/* ============================================
+          TRUST BADGES — Minimal 4-Column Row
+          ============================================ */}
+      <section className="relative z-30 px-5 md:px-8 bg-[var(--color-cream)] pb-16 md:pb-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={staggerContainerVariants}
+          className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+        >
+          {trustBadges.map((item) => (
+            <motion.div
+              key={item.label}
+              variants={staggerItemVariants}
+              className="flex items-center gap-3 md:gap-4"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--color-green-forest)]/8 text-[var(--color-green-forest)]">
+                <item.icon className="h-5 w-5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-sm text-[var(--color-earth-dark)]">{item.label}</span>
+                <span className="text-xs text-[var(--color-earth-mid)]">{item.desc}</span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* ============================================
+          PRODUCTS SECTION
+          ============================================ */}
+      <section className="relative bg-[var(--color-cream)] py-20 md:py-28 overflow-hidden">
+        {/* Decorative leaf */}
+        <div className="absolute top-20 right-10 w-24 h-24 opacity-20 pointer-events-none rotate-12">
+          <Image src={images.floatingLeaf} alt="" fill className="object-contain" aria-hidden="true" />
+        </div>
+
+        <div className="container mx-auto px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={clipRevealVariants}
-            className="mx-auto mb-14 max-w-3xl text-center"
+            className="flex flex-col items-center mx-auto mb-14 md:mb-20 max-w-2xl text-center"
           >
-            <div className="section-label mb-3">Our Promise</div>
-            <h2 className="font-playfair text-5xl font-semibold text-[var(--color-earth-dark)] md:text-6xl">
-              Quality in Every Step
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-green-forest)] uppercase mb-4">
+              Our Products
+            </span>
+            <h2 className="font-playfair text-[clamp(2.5rem,5vw,4rem)] font-bold text-[var(--color-earth-dark)] leading-[1.1]">
+              Our Fresh <span className="italic text-[var(--color-green-forest)]">Selection</span>
             </h2>
+            <p className="mt-5 text-base md:text-lg text-[var(--color-earth-mid)] leading-relaxed max-w-lg">
+              Handpicked freshness, naturally cultivated and delivered directly to your business.
+            </p>
           </motion.div>
+
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true, margin: "-60px" }}
             variants={staggerContainerVariants}
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+            className="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {products.slice(0, 6).map((product, index) => (
+              <motion.div key={product.slug} variants={staggerItemVariants}>
+                <ProductCard product={product} featured={index === 0} />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 flex justify-center"
+          >
+            <Link
+              href="/products"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-green-forest)] px-8 py-3.5 font-bold text-[var(--color-green-forest)] text-sm transition-all hover:bg-[var(--color-green-forest)] hover:text-white"
+            >
+              View Full Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================
+          ABOUT PREVIEW SECTION
+          ============================================ */}
+      <section className="relative bg-white py-20 md:py-28 overflow-hidden">
+        <div className="container mx-auto grid items-center gap-12 md:gap-16 px-5 md:px-8 lg:grid-cols-2">
+          {/* Left: Image with organic shape */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={slideInLeftVariants}
+            className="relative"
+          >
+            <div className="relative aspect-[4/5] max-w-[500px] mx-auto lg:mx-0">
+              {/* Organic rounded mask */}
+              <div
+                className="absolute inset-0 overflow-hidden"
+                style={{ borderRadius: "40% 60% 55% 45% / 55% 45% 55% 45%" }}
+              >
+                <Image
+                  src={images.aboutPreview}
+                  alt="Fresh produce heritage at Al Baraka"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              {/* Soft shadow behind */}
+              <div
+                className="absolute inset-4 bg-[var(--color-green-forest)]/10 -z-10"
+                style={{ borderRadius: "45% 55% 50% 50% / 50% 50% 50% 50%", filter: "blur(30px)" }}
+              />
+            </div>
+
+            {/* Floating badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="absolute -bottom-4 -right-4 md:right-8 rounded-2xl bg-white px-6 py-4 shadow-[0_12px_30px_rgba(16,38,26,0.1)] border border-black/5"
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-[var(--color-leaf-soft)] flex items-center justify-center text-[var(--color-green-forest)]">
+                  <HeartHandshake className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-playfair text-xl font-bold text-[var(--color-earth-dark)]">30+</div>
+                  <div className="text-[10px] font-bold text-[var(--color-earth-mid)] uppercase tracking-wider">Years of Trust</div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Text Content */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={slideInRightVariants}
+            className="lg:pl-8"
+          >
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-green-forest)] uppercase mb-4 block">
+              About Al Baraka
+            </span>
+
+            <h2 className="font-playfair text-[clamp(2.2rem,4.5vw,3.5rem)] font-bold leading-[1.1] text-[var(--color-earth-dark)]">
+              Built on Trust,{" "}
+              <span className="italic text-[var(--color-green-forest)]">Grown with Integrity</span>
+            </h2>
+
+            <p className="mt-6 text-base md:text-lg leading-relaxed text-[var(--color-earth-mid)]">
+              For over 30 years, Al Baraka has been a symbol of quality,
+              reliability, and excellence in agricultural exports. From our
+              farms to your table, we ensure freshness, safety, and satisfaction
+              in every shipment.
+            </p>
+
+            <div className="mt-8 grid gap-4">
+              {[
+                { title: "Direct Farmer Partnerships", desc: "Working closely with growers in Egypt and Poland" },
+                { title: "Global Certifications", desc: "ISO, HACCP, and Global GAP certified facilities" },
+                { title: "Advanced Cold-Chain", desc: "State-of-the-art logistics preserving peak freshness" },
+              ].map((item, i) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + (i * 0.1) }}
+                  viewport={{ once: true }}
+                  key={item.title}
+                  className="flex gap-3 p-3 rounded-xl transition-colors hover:bg-[var(--color-cream)]"
+                >
+                  <div className="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-[var(--color-green-forest)]/10 flex items-center justify-center text-[var(--color-green-forest)]">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-earth-dark)] text-sm">{item.title}</h4>
+                    <p className="text-[var(--color-earth-mid)] text-sm mt-0.5">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-2 rounded-full bg-[var(--color-earth-dark)] px-7 py-3.5 font-bold text-white text-sm transition-all hover:bg-[var(--color-green-forest)] hover:shadow-lg"
+              >
+                Discover Our Heritage <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================
+          METRICS ROW
+          ============================================ */}
+      <section className="bg-[var(--color-cream)] py-16 md:py-20">
+        <div className="container mx-auto px-5 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={staggerContainerVariants}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
+          >
+            {[
+              { value: 30, suffix: "+", label: "Years Experience" },
+              { value: 6, suffix: "", label: "Product Lines" },
+              { value: 100, suffix: "%", label: "Natural & Safe" },
+              { value: 2, suffix: "", label: "Countries Served" },
+            ].map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={staggerItemVariants}
+                className="text-center"
+              >
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  label={stat.label}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================
+          PROMISE SECTION
+          ============================================ */}
+      <section className="relative bg-[var(--color-cream)] py-20 md:py-28 overflow-hidden">
+        {/* Decorative leaf */}
+        <div className="absolute top-16 left-10 w-20 h-20 opacity-15 pointer-events-none -rotate-12">
+          <Image src={images.greenLeaf} alt="" fill className="object-contain" aria-hidden="true" />
+        </div>
+
+        <div className="container mx-auto px-5 md:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={clipRevealVariants}
+            className="mx-auto mb-14 md:mb-20 max-w-2xl text-center flex flex-col items-center"
+          >
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-green-forest)] uppercase mb-4">
+              Our Promise
+            </span>
+            <h2 className="font-playfair text-[clamp(2.2rem,4.5vw,3.5rem)] font-bold text-[var(--color-earth-dark)] leading-[1.1]">
+              Quality in <span className="italic text-[var(--color-green-forest)]">Every Step</span>
+            </h2>
+            <p className="mt-5 text-base md:text-lg text-[var(--color-earth-mid)] max-w-lg">
+              We oversee every detail from planting to export, ensuring you receive only the best.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={staggerContainerVariants}
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
             {qualityItems.map((item) => (
               <motion.div
                 key={item.title}
                 variants={staggerItemVariants}
-                className="soft-card rounded-[24px] p-8 text-center"
+                className="group rounded-3xl bg-white p-8 text-center shadow-[0_8px_24px_rgba(16,38,26,0.04)] border border-black/[0.04] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(15,107,58,0.08)] hover:-translate-y-1"
               >
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
-                  <item.icon className="h-9 w-9" />
+                {/* Circular Icon Container */}
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)] transition-transform duration-500 group-hover:scale-110">
+                  <item.icon className="h-7 w-7" />
                 </div>
-                <h3 className="font-playfair text-3xl text-[var(--color-earth-dark)]">
+                <h3 className="font-playfair text-xl font-bold text-[var(--color-earth-dark)]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--color-earth-mid)]">
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-earth-mid)]">
                   {item.copy}
                 </p>
               </motion.div>
@@ -321,48 +571,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative bg-white pb-20 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-8">
+      {/* ============================================
+          CTA SECTION — Rounded Dark Green Banner
+          ============================================ */}
+      <section className="relative bg-[var(--color-cream)] pb-20 md:pb-28 overflow-hidden">
+        <div className="container mx-auto px-5 md:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true, margin: "-60px" }}
             variants={scaleRevealVariants}
-            className="relative overflow-hidden rounded-[28px] bg-[var(--color-green-forest)] p-8 text-white md:p-12"
+            className="relative overflow-hidden rounded-[32px] md:rounded-[48px] bg-[var(--color-earth-dark)] p-10 md:p-16 lg:p-20 text-white"
           >
-            <video
-              src={videos.qualityProcess}
-              className="absolute inset-0 h-full w-full object-cover opacity-[0.18]"
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[1fr_auto_auto]">
-              <div>
-                <h2 className="font-playfair text-4xl md:text-5xl">
+            {/* Subtle texture overlay */}
+            <div className="absolute inset-0 bg-[url('/assets/Texture-Overlay_pd7zx5.png')] opacity-15 mix-blend-overlay pointer-events-none" />
+
+            {/* Decorative leaves inside CTA */}
+            <div className="absolute top-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
+              <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-45" aria-hidden="true" />
+            </div>
+            <div className="absolute bottom-8 left-8 w-12 h-12 opacity-10 pointer-events-none">
+              <Image src={images.greenLeaf} alt="" fill className="object-contain -rotate-12" aria-hidden="true" />
+            </div>
+
+            <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+              <div className="max-w-xl">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold tracking-widest text-white/80 uppercase mb-5 border border-white/10">
+                  <Globe2 className="h-3.5 w-3.5" /> Global Export
+                </span>
+                <h2 className="font-playfair text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.1]">
                   Ready to Work With Us?
                 </h2>
-                <p className="mt-3 text-white/80">
-                  Let us build a fresh and fruitful partnership.
+                <p className="mt-5 text-base md:text-lg text-white/80 leading-relaxed">
+                  Let us build a fresh and fruitful partnership. Contact our sales team today to discuss your supply needs.
                 </p>
               </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-white px-7 py-4 font-semibold text-[var(--color-green-forest)]"
-              >
-                Contact Us <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/products"
-                className="inline-flex items-center justify-center gap-3 rounded-[10px] border border-white/50 px-7 py-4 font-semibold text-white"
-              >
-                View Products <ArrowRight className="h-5 w-5" />
-              </Link>
+
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-bold text-[var(--color-green-forest)] text-sm transition-transform hover:scale-105 shadow-lg"
+                >
+                  Contact Sales <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/products"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 font-bold text-white text-sm transition-all hover:bg-white/10"
+                >
+                  View Catalog
+                </Link>
+              </div>
             </div>
-            <Globe2 className="absolute right-10 top-8 h-20 w-20 text-white/10" />
-            <Leaf className="absolute -left-4 -bottom-4 h-32 w-32 text-white/[0.06] rotate-45" />
           </motion.div>
         </div>
       </section>
