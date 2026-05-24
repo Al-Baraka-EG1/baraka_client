@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 import { images } from "@/lib/images";
+import TransparentImage from "./TransparentImage";
 
 interface LeafConfig {
   src: string;
@@ -51,12 +51,12 @@ export default function FloatingLeaves({ leaves = defaultLeaves, className = "" 
             delay: leaf.delay,
           }}
         >
-          <Image
+          <TransparentImage
             src={leaf.src}
             alt=""
             width={leaf.size}
             height={leaf.size}
-            className="object-contain"
+            className="w-full h-full"
             style={{ opacity: leaf.opacity }}
           />
         </motion.div>

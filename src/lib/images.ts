@@ -11,7 +11,7 @@ export const images = {
   floatingLeaf: `${cloud}/image/upload/v1778013733/Hero-Floating-Accent-Element_n5vepl.png`,
   goldAccent: `${cloud}/image/upload/v1778013709/Gold-Accent-Element_ib3opc.png`,
   greenLeaf:
-    "/assets/green-leaf-isolated-transparent-white-background-png_888962-522.avif",
+    "/assets/leaf.png",
   pepperPng1: "/assets/pngwing.com.png",
   pepperPng2: "/assets/pngwing.com (1).png",
   aboutHeroBg: `${cloud}/image/upload/v1778013631/About-Page-Hero-Background_hcyon1.png`,

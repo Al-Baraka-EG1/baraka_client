@@ -7,6 +7,7 @@ import { useRef } from "react";
 
 import ProductCard from "@/components/custom/ProductCard";
 import AnimatedCounter from "@/components/custom/AnimatedCounter";
+import TransparentImage from "@/components/custom/TransparentImage";
 import {
   clipRevealVariants,
   scaleRevealVariants,
@@ -15,7 +16,7 @@ import {
   staggerContainerVariants,
   staggerItemVariants,
 } from "@/lib/animations";
-import { images } from "@/lib/images";
+import { images, videos } from "@/lib/images";
 import { products } from "@/lib/products";
 import {
   ArrowRight,
@@ -46,220 +47,220 @@ export default function HomePage() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  // Immersive 3-layer parallax coordinates for premium depth
+  const yVideo = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
+  const yFrame = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
 
   return (
     <div className="overflow-hidden bg-[var(--color-cream)]" ref={containerRef}>
       {/* ============================================
-          HERO SECTION — Light, Airy, Editorial Premium
+          HERO SECTION — Immersive Nature Loop & Leaf Canopy
           ============================================ */}
-      <section className="relative min-h-[100dvh] bg-[var(--color-cream)] overflow-hidden">
-        {/* Organic Blob Shapes — Soft decorative background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Blob 1: Behind crate, right side */}
-          <div
-            className="absolute top-[10%] right-[5%] w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full opacity-60"
-            style={{
-              background: "radial-gradient(circle, rgba(78,157,111,0.15) 0%, rgba(78,157,111,0) 70%)",
-              filter: "blur(40px)",
-            }}
+      <section className="relative min-h-[100dvh] bg-black overflow-hidden flex items-center">
+        {/* Layer 1: Cloudinary Looping Video Background */}
+        <motion.div
+          style={{ y: yVideo }}
+          className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden"
+        >
+          <video
+            src={videos.hero}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover scale-[1.05]"
           />
-          {/* Blob 2: Upper left accent */}
-          <div
-            className="absolute top-[5%] left-[-5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full opacity-40"
-            style={{
-              background: "radial-gradient(circle, rgba(180,119,54,0.12) 0%, rgba(180,119,54,0) 70%)",
-              filter: "blur(50px)",
-            }}
-          />
-          {/* Blob 3: Lower right soft green */}
-          <div
-            className="absolute bottom-[10%] right-[15%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full opacity-50"
-            style={{
-              background: "radial-gradient(circle, rgba(15,107,58,0.1) 0%, rgba(15,107,58,0) 70%)",
-              filter: "blur(60px)",
-            }}
-          />
-        </div>
+        </motion.div>
 
-        {/* Scattered Floating Leaves — Organic decoration */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
-          {/* Leaf 1 — Top left */}
+        {/* Layer 2: Radial Contrast Gradient & Blends */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/35 to-[var(--color-cream)]" />
+
+        {/* Layer 3: Organic Leafs-Frame Canopy Parallax Overlay */}
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.95 }}
+          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{ y: yFrame }}
+          className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+        >
+          <Image
+            src="/assets/leafs-frame.png"
+            alt=""
+            fill
+            priority
+            className="object-cover w-full h-full opacity-50"
+            aria-hidden="true"
+          />
+        </motion.div>
+
+        {/* Floating Leaves — Organically surrounding the centered content */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[15]">
+          {/* Leaf 1 — Top-left corner */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotate: -20 }}
+            animate={{ opacity: 0.85, y: 0, rotate: -25 }}
+            transition={{ delay: 0.6, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-[10%] left-[5%] w-14 h-14 md:w-20 md:h-20 leaf-drift"
+          >
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full" />
+          </motion.div>
+
+          {/* Leaf 2 — Left of headline */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 0.7, x: 0 }}
+            transition={{ delay: 0.9, duration: 1 }}
+            className="absolute top-[32%] left-[6%] md:left-[12%] w-12 h-12 md:w-16 md:h-16 leaf-drift-slow"
+          >
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[20deg]" />
+          </motion.div>
+
+          {/* Leaf 3 — Right of headline */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 0.75, x: 0 }}
+            transition={{ delay: 0.8, duration: 1.1 }}
+            className="absolute top-[28%] right-[6%] md:right-[12%] w-16 h-16 md:w-22 md:h-22 leaf-drift"
+          >
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[40deg]" />
+          </motion.div>
+
+          {/* Leaf 4 — Bottom-left */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 0.8, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="absolute top-[12%] left-[8%] w-12 h-12 md:w-16 md:h-16"
+            animate={{ opacity: 0.65, y: 0 }}
+            transition={{ delay: 1.1, duration: 1 }}
+            className="absolute bottom-[18%] left-[8%] md:left-[15%] w-10 h-10 md:w-14 md:h-14 leaf-drift-slow"
           >
-            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[-25deg]" aria-hidden="true" />
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[-35deg]" />
           </motion.div>
-          {/* Leaf 2 — Near headline */}
+
+          {/* Leaf 5 — Bottom-right */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 0.7, x: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="absolute top-[28%] left-[3%] w-10 h-10 md:w-14 md:h-14"
-          >
-            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[15deg]" aria-hidden="true" />
-          </motion.div>
-          {/* Leaf 3 — Right side, mid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 0.6, y: 0 }}
-            transition={{ delay: 1.2, duration: 1 }}
-            className="absolute top-[35%] right-[8%] w-14 h-14 md:w-20 md:h-20"
-          >
-            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[35deg]" aria-hidden="true" />
-          </motion.div>
-          {/* Leaf 4 — Bottom left */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 0.5, x: 0 }}
-            transition={{ delay: 1.4, duration: 0.9 }}
-            className="absolute bottom-[25%] left-[12%] w-10 h-10 md:w-12 md:h-12"
-          >
-            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[-40deg]" aria-hidden="true" />
-          </motion.div>
-          {/* Leaf 5 — Bottom right */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 0.7, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="absolute bottom-[15%] right-[5%] w-12 h-12 md:w-16 md:h-16"
+            transition={{ delay: 1.3, duration: 1 }}
+            className="absolute bottom-[20%] right-[8%] md:right-[14%] w-12 h-12 md:w-18 md:h-18 leaf-drift"
           >
-            <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[60deg]" aria-hidden="true" />
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[55deg]" />
           </motion.div>
-          {/* Leaf 6 — Top right, small */}
+
+          {/* Leaf 6 — Top-right accent */}
+          <motion.div
+            initial={{ opacity: 0, rotate: 30 }}
+            animate={{ opacity: 0.6, rotate: 45 }}
+            transition={{ delay: 1, duration: 1.2 }}
+            className="absolute top-[14%] right-[4%] w-10 h-10 md:w-14 md:h-14 float-gentle-delayed"
+          >
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full" />
+          </motion.div>
+
+          {/* Leaf 7 — Mid-left accent */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
-            transition={{ delay: 1.3, duration: 1 }}
-            className="absolute top-[8%] right-[35%] w-8 h-8 md:w-10 md:h-10"
+            transition={{ delay: 1.5, duration: 1 }}
+            className="absolute top-[55%] left-[3%] w-8 h-8 md:w-12 md:h-12 float-gentle"
           >
-            <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-[-10deg]" aria-hidden="true" />
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[-60deg]" />
+          </motion.div>
+
+          {/* Leaf 8 — Mid-right accent */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.55 }}
+            transition={{ delay: 1.4, duration: 1 }}
+            className="absolute top-[50%] right-[3%] w-9 h-9 md:w-13 md:h-13 leaf-drift-slow"
+          >
+            <TransparentImage src={images.greenLeaf} alt="" fill className="w-full h-full rotate-[70deg]" />
           </motion.div>
         </div>
 
-        {/* Hero Content Grid */}
-        <div className="container relative z-20 mx-auto px-5 md:px-8 lg:px-12 pt-32 pb-20 lg:pt-36 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[70vh]">
-            {/* Left: Text Content */}
+        {/* Hero Content — Centered Layout */}
+        <motion.div
+          style={{ y: yText }}
+          className="container relative z-20 mx-auto px-5 md:px-8 lg:px-12 pt-32 pb-20 lg:pt-36 lg:pb-24 w-full flex items-center justify-center min-h-[80vh]"
+        >
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainerVariants}
+            className="flex flex-col items-center text-center max-w-3xl z-20"
+          >
+            {/* Small Label */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainerVariants}
-              className="flex flex-col items-start max-w-xl lg:max-w-none"
+              variants={staggerItemVariants}
+              className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/10 px-5 py-2.5 text-xs font-bold tracking-[0.2em] text-white uppercase border border-white/15 backdrop-blur-md"
             >
-              {/* Small Label */}
-              <motion.div
-                variants={staggerItemVariants}
-                className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-[var(--color-green-forest)]/8 px-5 py-2.5 text-xs font-bold tracking-[0.2em] text-[var(--color-green-forest)] uppercase border border-[var(--color-green-forest)]/10"
-              >
-                <Leaf className="h-3.5 w-3.5" />
-                Premium Egyptian Produce
-              </motion.div>
-
-              {/* Headline */}
-              <motion.h1
-                variants={staggerItemVariants}
-                className="font-playfair text-[clamp(2.8rem,6vw,5.5rem)] font-bold leading-[1.05] text-[var(--color-earth-dark)] tracking-tight"
-              >
-                Fresh From{" "}
-                <span className="text-[var(--color-green-forest)] italic">Nature,</span>
-                <br />
-                Delivered With Care
-              </motion.h1>
-
-              {/* Subtitle */}
-              <motion.p
-                variants={staggerItemVariants}
-                className="mt-6 max-w-lg text-base md:text-lg leading-relaxed text-[var(--color-earth-mid)] font-medium"
-              >
-                Premium fruits and vegetables sourced from trusted farms in Egypt
-                and Poland, delivered with cold-chain precision and unmatched
-                quality directly to you.
-              </motion.p>
-
-              {/* CTA Buttons */}
-              <motion.div
-                variants={staggerItemVariants}
-                className="mt-10 flex flex-col sm:flex-row gap-4"
-              >
-                <Link
-                  href="/products"
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-8 py-4 font-bold text-white text-sm shadow-[0_12px_28px_rgba(15,107,58,0.25)] transition-all hover:shadow-[0_16px_36px_rgba(15,107,58,0.35)] hover:-translate-y-0.5"
-                >
-                  Explore Products
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[var(--color-earth-dark)]/15 px-8 py-4 font-bold text-[var(--color-earth-dark)] text-sm transition-all hover:bg-[var(--color-earth-dark)] hover:text-white hover:border-[var(--color-earth-dark)]"
-                >
-                  Contact Us
-                </Link>
-              </motion.div>
+              <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
+              Premium Egyptian Produce
             </motion.div>
 
-            {/* Right: Hero Crate Image with Organic Blob Background */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: 40 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="relative flex items-center justify-center"
+            {/* Headline */}
+            <motion.h1
+              variants={staggerItemVariants}
+              className="font-playfair text-[clamp(2.8rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white tracking-tight"
+              style={{ textShadow: "0 4px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)" }}
             >
-              {/* Organic Blob Behind Crate */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div
-                  className="w-[90%] h-[90%] rounded-[60%_40%_50%_50%/50%_55%_45%_50%] opacity-70"
-                  style={{
-                    background: "radial-gradient(ellipse at center, rgba(78,157,111,0.18) 0%, rgba(78,157,111,0.05) 60%, transparent 100%)",
-                    filter: "blur(20px)",
-                  }}
-                />
-              </div>
+              Fresh From{" "}
+              <span className="text-[var(--color-green-bright)] italic font-cormorant">Nature,</span>
+              <br />
+              Delivered With Care
+            </motion.h1>
 
-              {/* Crate Image */}
-              <div className="relative w-full max-w-[550px] aspect-square">
-                <Image
-                  src={images.heroCrate}
-                  alt="Premium wooden crate filled with fresh bell peppers, strawberries, and produce from Al Baraka"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 90vw, 550px"
-                  className="object-contain drop-shadow-[0_30px_60px_rgba(16,38,26,0.15)]"
-                />
-              </div>
+            {/* Subtitle */}
+            <motion.p
+              variants={staggerItemVariants}
+              className="mt-6 max-w-xl text-base md:text-lg leading-relaxed text-white/90 font-medium"
+              style={{ textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+            >
+              Premium fruits and vegetables sourced from trusted farms in Egypt
+              and Poland, delivered with cold-chain precision and unmatched
+              quality directly to you.
+            </motion.p>
 
-              {/* Floating "Since 1995" Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.6 }}
-                className="absolute bottom-[5%] left-[-5%] md:left-[5%] rounded-2xl bg-white px-5 py-3 shadow-[0_12px_30px_rgba(16,38,26,0.1)] border border-black/5"
+            {/* CTA Buttons */}
+            <motion.div
+              variants={staggerItemVariants}
+              className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link
+                href="/products"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-8 py-4 font-bold text-white text-sm shadow-[0_12px_28px_rgba(15,107,58,0.3)] transition-all hover:bg-[var(--color-green-fresh)] hover:shadow-[0_16px_36px_rgba(15,107,58,0.45)] hover:-translate-y-0.5"
               >
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-[var(--color-leaf-soft)] flex items-center justify-center text-[var(--color-green-forest)]">
-                    <CheckCircle2 className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="font-playfair text-xl font-bold text-[var(--color-earth-dark)]">1995</div>
-                    <div className="text-[10px] font-bold text-[var(--color-earth-mid)] uppercase tracking-wider">Established</div>
-                  </div>
+                Explore Products
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-white/35 px-8 py-4 font-bold text-white text-sm backdrop-blur-md transition-all hover:bg-white hover:text-[var(--color-earth-dark)] hover:border-white hover:-translate-y-0.5"
+              >
+                Contact Us
+              </Link>
+            </motion.div>
+
+            {/* Trust badges row — below CTA */}
+            <motion.div
+              variants={staggerItemVariants}
+              className="mt-12 flex flex-wrap items-center justify-center gap-6 md:gap-8"
+            >
+              {[
+                { icon: Sprout, text: "100% Natural" },
+                { icon: Award, text: "ISO Certified" },
+                { icon: ShieldCheck, text: "Since 1995" },
+                { icon: Snowflake, text: "Cold Chain" },
+              ].map((badge) => (
+                <div key={badge.text} className="flex items-center gap-2 text-white/80">
+                  <badge.icon className="h-4 w-4 text-[var(--color-green-bright)]" />
+                  <span className="text-xs font-bold tracking-wide uppercase" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.3)" }}>
+                    {badge.text}
+                  </span>
                 </div>
-              </motion.div>
-
-              {/* Floating Leaf near crate */}
-              <motion.div
-                animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute top-[10%] right-[0%] w-16 h-16 md:w-20 md:h-20 opacity-70"
-              >
-                <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-[25deg]" aria-hidden="true" />
-              </motion.div>
+              ))}
             </motion.div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Scroll Indicator — Minimal, elegant */}
         <motion.div
@@ -271,9 +272,9 @@ export default function HomePage() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border-2 border-[var(--color-earth-dark)]/20 flex items-start justify-center p-1"
+            className="w-5 h-8 rounded-full border-2 border-white/40 flex items-start justify-center p-1 backdrop-blur-sm"
           >
-            <div className="w-1 h-2 rounded-full bg-[var(--color-green-forest)]" />
+            <div className="w-1 h-2 rounded-full bg-[var(--color-green-bright)]" />
           </motion.div>
         </motion.div>
       </section>
@@ -281,7 +282,7 @@ export default function HomePage() {
       {/* ============================================
           TRUST BADGES — Minimal 4-Column Row
           ============================================ */}
-      <section className="relative z-30 px-5 md:px-8 bg-[var(--color-cream)] pb-16 md:pb-20">
+      <section className="relative z-30 px-5 md:px-8 bg-[var(--color-cream)] pb-16 md:pb-20 mt-20">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -313,7 +314,7 @@ export default function HomePage() {
       <section className="relative bg-[var(--color-cream)] py-20 md:py-28 overflow-hidden">
         {/* Decorative leaf */}
         <div className="absolute top-20 right-10 w-24 h-24 opacity-20 pointer-events-none rotate-12">
-          <Image src={images.floatingLeaf} alt="" fill className="object-contain" aria-hidden="true" />
+          <Image src={images.greenLeaf} alt="" fill className="object-contain" aria-hidden="true" />
         </div>
 
         <div className="container mx-auto px-5 md:px-8">
@@ -588,7 +589,7 @@ export default function HomePage() {
 
             {/* Decorative leaves inside CTA */}
             <div className="absolute top-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
-              <Image src={images.floatingLeaf} alt="" fill className="object-contain rotate-45" aria-hidden="true" />
+              <Image src={images.greenLeaf} alt="" fill className="object-contain rotate-45" aria-hidden="true" />
             </div>
             <div className="absolute bottom-8 left-8 w-12 h-12 opacity-10 pointer-events-none">
               <Image src={images.greenLeaf} alt="" fill className="object-contain -rotate-12" aria-hidden="true" />

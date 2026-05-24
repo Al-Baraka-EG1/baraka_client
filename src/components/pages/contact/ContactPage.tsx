@@ -31,6 +31,7 @@ import {
 } from "@/constants/contactdata";
 import Field from "@/components/custom/FieldForm";
 import { useContactForm } from "@/hooks/useContactForm";
+import TransparentImage from "@/components/custom/TransparentImage";
 
 export default function ContactPage() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -104,12 +105,12 @@ export default function ContactPage() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative w-full h-full min-h-[400px]"
             >
-              <Image
+              <TransparentImage
                 src={images.pepperPng2}
                 alt="Contact Al Baraka"
                 fill
                 priority
-                className="object-contain drop-shadow-[0_32px_40px_rgba(16,38,26,0.18)]"
+                className="w-full h-full drop-shadow-[0_32px_40px_rgba(16,38,26,0.18)]"
               />
             </motion.div>
           </div>
