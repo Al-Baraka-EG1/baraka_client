@@ -26,52 +26,76 @@ import { milestones, values } from "@/constants/aboutdata";
 export default function AboutPage() {
   return (
     <div className="overflow-hidden bg-[var(--color-cream)] pt-24">
-      <section className="relative min-h-[680px] bg-white">
+      <section className="relative min-h-[580px] lg:min-h-[660px] bg-[var(--color-cream)] overflow-hidden">
+        {/* Background image with elegant overlay */}
         <Image
           src={images.aboutHeroBg}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-right opacity-85"
+          className="object-cover object-center opacity-35"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
-        <div className="container relative z-10 mx-auto grid min-h-[680px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-cream)]/95 via-[var(--color-cream)]/70 to-[var(--color-cream)]" />
+
+        {/* Decorative elements */}
+        <div className="absolute right-1/4 top-0 h-72 w-72 rounded-full bg-[var(--color-green-forest)]/5 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 h-60 w-60 rounded-full bg-[var(--color-gold)]/5 blur-3xl" />
+
+        <div className="container relative z-10 mx-auto flex min-h-[580px] lg:min-h-[660px] flex-col items-center justify-center px-4 md:px-8 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={clipRevealVariants}
+            className="max-w-3xl"
           >
-            <div className="mb-5 text-[var(--color-earth-mid)]">
-              <Link href="/" className="hover:text-[var(--color-green-forest)]">
+            {/* Breadcrumb */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="mb-6 text-sm text-[var(--color-earth-mid)]"
+            >
+              <Link href="/" className="hover:text-[var(--color-green-forest)] transition-colors">
                 Home
               </Link>
-              <span className="mx-3">/</span>
-              <span className="text-[var(--color-green-forest)]">About Us</span>
-            </div>
-            <h1 className="font-playfair text-7xl font-semibold leading-none text-[var(--color-earth-dark)] md:text-8xl lg:text-[108px]">
-              About
-              <br />
-              <span className="text-[var(--color-green-forest)]">
-                Al Baraka
-              </span>
+              <span className="mx-2">/</span>
+              <span className="text-[var(--color-green-forest)] font-medium">About Us</span>
+            </motion.div>
+
+            <h1 className="font-playfair text-5xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] sm:text-6xl md:text-7xl lg:text-8xl">
+              About{" "}
+              <span className="text-[var(--color-green-forest)]">Al Baraka</span>
             </h1>
-            <p className="mt-7 max-w-lg text-xl leading-9 text-[var(--color-earth-mid)]">
+            <div className="mx-auto mt-6 h-[2px] w-24 bg-[var(--color-gold)]" />
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
               Bringing nature&apos;s finest from Egypt to tables around the
               world.
             </p>
-          </motion.div>
 
-          <div className="relative hidden min-h-[460px] lg:block">
-            <div className="absolute right-0 top-8 h-[430px] w-[78%] overflow-hidden rounded-[44%_56%_43%_57%/45%_42%_58%_55%]">
-              <Image
-                src={images.aboutHeroBg}
-                alt="Al Baraka farm fields"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mx-auto mt-10 grid max-w-lg grid-cols-3 gap-4"
+            >
+              {[
+                { value: "1995", label: "Established" },
+                { value: "EG & PL", label: "Sourced" },
+                { value: "Global", label: "Export" },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-black/5 bg-white/60 p-4 backdrop-blur-sm">
+                  <div className="font-playfair text-2xl font-semibold text-[var(--color-green-forest)] md:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-xs font-medium uppercase tracking-wider text-[var(--color-earth-mid)]">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

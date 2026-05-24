@@ -64,47 +64,72 @@ export default function ProductsPage({ products }: ProductsPageProps) {
 
   return (
     <div className="overflow-hidden bg-[var(--color-cream)] pt-24">
-      <section className="relative min-h-[620px] bg-white">
+      <section className="relative min-h-[580px] lg:min-h-[640px] bg-[var(--color-cream)] overflow-hidden">
+        {/* Background image with elegant overlay */}
         <Image
           src={images.productsHeroBg}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-right opacity-85"
+          className="object-cover object-center opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
-        <div className="container relative z-10 mx-auto grid min-h-[620px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-cream)] via-[var(--color-cream)]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cream)] via-transparent to-transparent" />
+
+        {/* Decorative top-right accent */}
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--color-green-forest)]/5 blur-3xl" />
+        <div className="absolute -left-20 top-40 h-60 w-60 rounded-full bg-[var(--color-gold)]/5 blur-3xl" />
+
+        <div className="container relative z-10 mx-auto flex min-h-[580px] lg:min-h-[640px] flex-col items-center justify-center px-4 md:px-8 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={clipRevealVariants}
+            className="max-w-3xl"
           >
-            <div className="section-label mb-5">Fresh From Egypt</div>
-            <h1 className="font-playfair text-7xl font-semibold leading-none text-[var(--color-green-forest)] md:text-8xl lg:text-[116px]">
-              Our Products
+            <div className="section-label mb-5 tracking-[0.2em]">Fresh From Egypt</div>
+            <h1 className="font-playfair text-5xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] sm:text-6xl md:text-7xl lg:text-8xl">
+              Our <span className="text-[var(--color-green-forest)]">Products</span>
             </h1>
-            <div className="mt-8 h-px w-28 bg-[var(--color-green-forest)]" />
-            <p className="mt-8 max-w-xl text-xl leading-9 text-[var(--color-earth-mid)]">
+            <div className="mx-auto mt-6 h-[2px] w-20 bg-[var(--color-green-forest)]" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
               Handpicked with care. Naturally fresh. Prepared for reliable
               supply across retail, foodservice, and export partners.
             </p>
+
+            {/* Quick category pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mx-auto mt-8 flex flex-wrap justify-center gap-2"
+            >
+              {["Fresh", "Frozen", "Fruits", "Vegetables"].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-full border border-[var(--color-green-forest)]/20 bg-white/70 px-4 py-1.5 text-sm font-medium text-[var(--color-green-forest)] backdrop-blur-sm"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
 
+          {/* Bottom product dots for visual interest */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative hidden min-h-[430px] lg:block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3"
           >
-            <Image
-              src={images.heroCrate}
-              alt="Fresh Al Baraka produce crate"
-              width={820}
-              height={448}
-              priority
-              className="absolute bottom-0 right-0 w-full max-w-[760px] drop-shadow-[0_34px_42px_rgba(16,38,26,0.16)]"
-            />
+            {products.slice(0, 5).map((product) => (
+              <span
+                key={product.slug}
+                className="h-3 w-3 rounded-full ring-2 ring-white/50"
+                style={{ backgroundColor: product.color }}
+              />
+            ))}
           </motion.div>
         </div>
       </section>

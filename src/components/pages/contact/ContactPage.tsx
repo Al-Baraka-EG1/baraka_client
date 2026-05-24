@@ -53,40 +53,58 @@ export default function ContactPage() {
 
   return (
     <div className="overflow-hidden bg-[var(--color-cream)] pt-24">
-      <section className="relative min-h-[690px] bg-white">
+      <section className="relative min-h-[580px] lg:min-h-[640px] bg-[var(--color-cream)] overflow-hidden">
+        {/* Background image with elegant overlay */}
         <Image
           src={images.contactHeroBg}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-right opacity-[0.82]"
+          className="object-cover object-center opacity-30"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
-        <div className="container relative z-10 mx-auto grid min-h-[690px] items-center gap-10 px-4 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-cream)] via-[var(--color-cream)]/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cream)] via-transparent to-transparent" />
+
+        {/* Decorative elements */}
+        <div className="absolute left-0 top-1/3 h-72 w-72 rounded-full bg-[var(--color-green-forest)]/5 blur-3xl" />
+        <div className="absolute right-0 bottom-1/4 h-60 w-60 rounded-full bg-[var(--color-gold)]/5 blur-3xl" />
+
+        <div className="container relative z-10 mx-auto flex min-h-[580px] lg:min-h-[640px] flex-col items-center justify-center px-4 md:px-8 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={clipRevealVariants}
+            className="max-w-3xl"
           >
-            <h1 className="font-playfair text-6xl font-semibold leading-none text-[var(--color-earth-dark)] md:text-8xl lg:text-[98px]">
+            <div className="section-label mb-5 tracking-[0.2em]">Get In Touch</div>
+            <h1 className="font-playfair text-5xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] sm:text-6xl md:text-7xl lg:text-8xl">
               Let&apos;s Grow
-              <br />
-              Something Great
               <br />
               <span className="text-[var(--color-green-forest)]">Together</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-earth-mid)]">
+            <div className="mx-auto mt-6 h-[2px] w-20 bg-[var(--color-green-forest)]" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
               We are here to answer your questions, listen to your needs, and
               provide the best solutions for your business.
             </p>
-            <div className="mt-8 flex flex-wrap gap-5">
+
+            {/* Benefits row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mx-auto mt-10 flex flex-wrap justify-center gap-4"
+            >
               {heroBenefits.map((benefit) => (
-                <span key={benefit.title} className="flex items-center gap-3">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
-                    <benefit.icon className="h-5 w-5" />
+                <span
+                  key={benefit.title}
+                  className="flex items-center gap-3 rounded-full border border-black/5 bg-white/70 px-5 py-2.5 backdrop-blur-sm"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                    <benefit.icon className="h-4 w-4" />
                   </span>
-                  <span>
+                  <span className="text-left">
                     <span className="block text-sm font-semibold text-[var(--color-earth-dark)]">
                       {benefit.title}
                     </span>
@@ -96,24 +114,8 @@ export default function ContactPage() {
                   </span>
                 </span>
               ))}
-            </div>
-          </motion.div>
-
-          <div className="relative hidden min-h-[450px] lg:flex items-center justify-center">
-            <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full h-full min-h-[400px]"
-            >
-              <TransparentImage
-                src={images.pepperPng2}
-                alt="Contact Al Baraka"
-                fill
-                priority
-                className="w-full h-full drop-shadow-[0_32px_40px_rgba(16,38,26,0.18)]"
-              />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
