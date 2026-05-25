@@ -10,6 +10,45 @@ export default function CloudinaryTestPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+  if (!cloudName) {
+    return (
+      <div className="min-h-screen bg-neutral-950 text-white p-8 font-sans flex items-center justify-center relative overflow-hidden">
+        {/* Sleek background gradient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-md w-full bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl relative z-10 space-y-6 shadow-2xl">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/5 animate-pulse">
+              <Upload className="w-8 h-8 rotate-180" />
+            </div>
+            
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+              Configuration Needed
+            </h1>
+            
+            <p className="text-neutral-400 text-sm leading-relaxed">
+              This page requires Cloudinary integration. To view the optimized media library, please configure the required environment variable.
+            </p>
+          </div>
+
+          <div className="bg-black/40 border border-white/5 rounded-2xl p-4 font-mono text-xs text-neutral-300 select-all overflow-x-auto">
+            <p className="text-neutral-500 mb-1"># Add this to your environment variables</p>
+            <p className="text-blue-400">NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME<span className="text-white">=</span><span className="text-green-400">"your_cloud_name"</span></p>
+          </div>
+
+          <div className="text-center">
+            <p className="text-xs text-neutral-500">
+              Once configured, restart the dev server or re-deploy to activate the page.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const fetchAssets = async () => {
     setLoading(true);
     const result = await getCloudinaryAssets();
