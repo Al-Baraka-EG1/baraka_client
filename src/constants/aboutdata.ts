@@ -22,7 +22,7 @@ const milestones = [
   [
     "1995",
     "Our Beginning",
-    "Al Baraka was founded in Cairo with a vision to deliver premium produce.",
+    "Al BARAKA FOR IMPORT & EXPORT was founded in Cairo with a vision to deliver premium produce.",
   ],
   [
     "2000s",

@@ -14,12 +14,12 @@ const contactCards = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@albaraka.com.eg\nsales@albaraka.com.eg",
+    value: "info@albaraka-eg.org",
   },
   {
     icon: MapPin,
     label: "Address",
-    value: "Al Azbakiyah, Cairo, Egypt\n11511",
+    value: "64 RABAA INVESTMENT BUILDINGS NASR CITY\n11765 CAIRO - EGYPT",
   },
   {
     icon: Clock,

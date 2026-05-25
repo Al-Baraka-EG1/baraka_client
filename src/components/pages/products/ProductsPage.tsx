@@ -143,11 +143,10 @@ export default function ProductsPage({ products }: ProductsPageProps) {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`flex min-w-fit items-center gap-3 rounded-full border px-6 py-3 text-sm font-semibold transition-all ${
-                  activeFilter === filter
-                    ? "border-[var(--color-green-forest)] bg-[var(--color-green-forest)] text-white shadow-[0_12px_28px_rgba(15,107,58,0.18)]"
-                    : "border-black/10 bg-white text-[var(--color-earth-dark)] hover:border-[var(--color-green-forest)]"
-                }`}
+                className={`flex min-w-fit items-center gap-3 rounded-full border px-6 py-3 text-sm font-semibold transition-all ${activeFilter === filter
+                  ? "border-[var(--color-green-forest)] bg-[var(--color-green-forest)] text-white shadow-[0_12px_28px_rgba(15,107,58,0.18)]"
+                  : "border-black/10 bg-white text-[var(--color-earth-dark)] hover:border-[var(--color-green-forest)]"
+                  }`}
               >
                 <Icon className="h-4 w-4" />
                 {filter === "All" ? "All Products" : filter}
@@ -224,7 +223,7 @@ export default function ProductsPage({ products }: ProductsPageProps) {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainerVariants}
-            className="grid gap-6 border-y border-black/10 py-7 md:grid-cols-4"
+            className="grid gap-6 py-7 md:grid-cols-4 mt-10"
           >
             {productBenefits.map((benefit) => (
               <motion.div

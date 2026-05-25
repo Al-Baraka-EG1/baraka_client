@@ -121,7 +121,7 @@ export default function ContactPage() {
 
       <section className="relative bg-white pb-20 overflow-hidden">
         <FloatingLeaves />
-        <div className="container mx-auto grid gap-10 px-4 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-14">
+        <div className="container mx-auto grid gap-10 px-4 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-14 mt-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -248,7 +248,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white shadow-[0_18px_34px_rgba(15,107,58,0.22)] disabled:opacity-60"
+                    className="inline-flex cursor-pointer transition-all duration-200 hover:bg-green-700 items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-7 py-4 font-semibold text-white shadow-[0_18px_34px_rgba(15,107,58,0.22)] disabled:opacity-60"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                     <Send className="h-5 w-5" />
@@ -279,7 +279,7 @@ export default function ContactPage() {
             </div>
             <div className="relative h-[430px]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.61185012588!2d31.258464350000003!3d30.05961135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+                src="https://maps.google.com/maps?q=64%20Rabaa%20Investment%20Buildings%2C%20Nasr%20City%2C%20Cairo%2011765%2C%20Egypt&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "saturate(0.8) contrast(1.04)" }}
@@ -289,10 +289,10 @@ export default function ContactPage() {
               />
               <div className="soft-card absolute left-8 top-8 rounded-[18px] p-5">
                 <h3 className="font-semibold text-[var(--color-earth-dark)]">
-                  Al Baraka Head Office
+                  Al BARAKA FOR IMPORT & EXPORT
                 </h3>
                 <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
-                  Al Azbakiyah, Cairo, Egypt 11511
+                  64 Rabaa Investment Buildings, Nasr City, Cairo, Egypt 11765
                 </p>
               </div>
             </div>
@@ -356,44 +356,74 @@ export default function ContactPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={scaleRevealVariants}
-            className="botanical-shell relative overflow-hidden rounded-[28px] border border-black/10 p-8 md:p-10"
+            className="botanical-shell relative overflow-hidden rounded-[28px] border border-black/10 shadow-[0_24px_70px_rgba(16,38,26,0.06)]"
           >
-            <video
-              src={videos.contactClosing}
-              className="absolute inset-y-0 left-0 hidden h-full w-1/3 object-cover opacity-[0.45] md:block"
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid items-center gap-8 md:grid-cols-[1fr_auto_auto_auto] md:pl-[32%]">
-              <div>
-                <h2 className="font-playfair text-4xl text-[var(--color-green-forest)]">
-                  Ready to Start a Partnership?
-                </h2>
-                <p className="mt-2 text-sm text-[var(--color-earth-mid)]">
-                  We are ready to supply the best quality products for your
-                  business.
-                </p>
-              </div>
-              {partnershipBenefits.map((benefit) => (
-                <span
-                  key={benefit.label}
-                  className="text-center text-xs font-semibold text-[var(--color-earth-dark)]"
-                >
-                  <span className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white text-[var(--color-green-forest)]">
-                    <benefit.icon className="h-5 w-5" />
+            <div className="grid md:grid-cols-12 items-stretch min-h-[320px]">
+              {/* Left Column - Video Showcase */}
+              <div className="relative col-span-12 md:col-span-5 min-h-[220px] md:min-h-full overflow-hidden bg-[var(--color-earth-dark)]">
+                <video
+                  src={videos.contactClosing}
+                  className="absolute inset-0 h-full w-full object-cover opacity-60 mix-blend-luminosity"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--color-earth-dark)]/40 md:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-earth-dark)]/80 via-transparent to-transparent md:hidden" />
+                <div className="absolute bottom-6 left-6 right-6 z-10 md:hidden">
+                  <span className="font-space-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold-light)] font-bold">
+                    Global Export Partners
                   </span>
-                  {benefit.label}
-                </span>
-              ))}
-              <Link
-                href="/products"
-                className="inline-flex items-center justify-center gap-3 rounded-[10px] bg-[var(--color-green-forest)] px-6 py-3 font-semibold text-white"
-              >
-                View Products <ArrowRight className="h-5 w-5" />
-              </Link>
+                </div>
+              </div>
+
+              {/* Right Column - Partnership content */}
+              <div className="col-span-12 md:col-span-7 flex flex-col justify-center p-8 md:p-12 lg:p-14 bg-white/40 backdrop-blur-md">
+                <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="max-w-md">
+                    <span className="font-space-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)] font-bold block mb-2">
+                      Ready to Start a Partnership?
+                    </span>
+                    <h2 className="font-playfair text-3xl md:text-4xl text-[var(--color-earth-dark)] font-semibold leading-tight">
+                      Let&apos;s Build a <span className="text-[var(--color-green-forest)]">Sustainable Supply</span>
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--color-earth-mid)]">
+                      We are ready to supply the best quality premium fruits and vegetables for your business, matching the highest global standards.
+                    </p>
+                  </div>
+
+                  {/* Partnership Benefits */}
+                  <div className="flex flex-wrap gap-4 lg:flex-col lg:gap-3">
+                    {partnershipBenefits.map((benefit) => (
+                      <div
+                        key={benefit.label}
+                        className="flex items-center gap-3 rounded-xl border border-black/[0.05] bg-white/80 px-4 py-2.5 shadow-sm transition-all duration-300 hover:border-[var(--color-green-forest)]/30 hover:shadow-md"
+                      >
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-leaf-soft)] text-[var(--color-green-forest)]">
+                          <benefit.icon className="h-4 w-4" />
+                        </span>
+                        <span className="text-xs font-bold text-[var(--color-earth-dark)]">
+                          {benefit.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-black/[0.06] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <p className="text-xs text-[var(--color-earth-mid)]">
+                    Certified ISO & HACCP premium quality supply chains.
+                  </p>
+                  <Link
+                    href="/products"
+                    className="inline-flex cursor-pointer transition-all duration-300 hover:bg-[var(--color-green-fresh)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(15,107,58,0.25)] items-center justify-center gap-3 rounded-full bg-[var(--color-green-forest)] px-8 py-3.5 text-sm font-bold text-white shadow-[0_12px_24px_rgba(15,107,58,0.15)]"
+                  >
+                    View Our Products <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -131,12 +131,12 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2.5 group/logo"
-            aria-label="Al Baraka home"
+            aria-label="Al BARAKA FOR IMPORT & EXPORT home"
           >
             <span className="relative block h-10 w-10 md:h-14 md:w-14 shrink-0 transition-transform duration-500 group-hover/logo:scale-105">
               <Image
                 src="/assets/logo-noback.png"
-                alt="Al Baraka Fruits and Vegetables logo"
+                alt="Al BARAKA FOR IMPORT & EXPORT logo"
                 fill
                 priority
                 sizes="44px"
@@ -172,7 +172,7 @@ export default function Navbar() {
                     : undefined
                 }
               >
-                Fruits & Vegetables
+                IMPORT & EXPORT
               </span>
             </span>
           </Link>
@@ -330,13 +330,18 @@ export default function Navbar() {
                 <span className="relative block h-10 w-10">
                   <Image
                     src="/assets/logo-noback.png"
-                    alt="Al Baraka logo"
+                    alt="Al BARAKA FOR IMPORT & EXPORT logo"
                     fill
                     className="object-contain"
                   />
                 </span>
-                <span className="font-playfair text-xl font-semibold text-[var(--color-earth-dark)]">
-                  AL BARAKA
+                <span className="flex flex-col leading-none">
+                  <span className="font-playfair text-lg font-semibold text-[var(--color-earth-dark)]">
+                    AL BARAKA
+                  </span>
+                  <span className="mt-0.5 font-space-mono text-[8px] uppercase tracking-[0.2em] text-[var(--color-earth-mid)]">
+                    IMPORT & EXPORT
+                  </span>
                 </span>
               </Link>
               <button

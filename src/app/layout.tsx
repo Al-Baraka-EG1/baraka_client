@@ -8,9 +8,10 @@ import {
 import "./globals.css";
 import Navbar from "@/components/global/Navbar";
 import Footer from "@/components/global/Footer";
+import BackToTop from "@/components/global/BackToTop";
 import { LenisScrollProvider } from "@/providers/LenisProvider";
 import { MotionProvider } from "@/providers/MotionProvider";
-
+ 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
@@ -36,13 +37,15 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Al Baraka | Premium Fruits & Vegetables",
-    template: "%s | Al Baraka",
+    default: "Al BARAKA FOR IMPORT & EXPORT | Premium Produce",
+    template: "%s | Al BARAKA FOR IMPORT & EXPORT",
   },
   description:
-    "Al Baraka is Egypt's leading provider of premium fresh and frozen fruits and vegetables. ISO & HACCP certified. Serving the Middle East since 1995.",
+    "Al BARAKA FOR IMPORT & EXPORT is Egypt's leading provider of premium fresh and frozen fruits and vegetables. ISO & HACCP certified. Serving global markets.",
   keywords: [
+    "Al BARAKA FOR IMPORT & EXPORT",
     "Al Baraka",
+    "Al Baraka Import & Export",
     "Egyptian produce",
     "fresh vegetables",
     "frozen fruits",
@@ -56,7 +59,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://albarakafruits.com",
-    siteName: "Al Baraka",
+    siteName: "Al BARAKA FOR IMPORT & EXPORT",
   },
 };
 
@@ -76,6 +79,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-grow">{children}</main>
             <Footer />
+            <BackToTop />
           </MotionProvider>
         </LenisScrollProvider>
       </body>

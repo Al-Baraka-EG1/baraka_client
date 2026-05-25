@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="relative block h-14 w-14">
                 <Image
                   src="/assets/logo-noback.png"
-                  alt="Al Baraka logo"
+                  alt="Al BARAKA FOR IMPORT & EXPORT logo"
                   fill
                   className="object-contain"
                 />
@@ -24,7 +24,7 @@ export default function Footer() {
                   AL BARAKA
                 </span>
                 <span className="font-space-mono text-[9px] uppercase tracking-[0.36em] text-[var(--color-earth-mid)]">
-                  Fruits & Vegetables
+                  IMPORT & EXPORT
                 </span>
               </span>
             </Link>
@@ -127,11 +127,11 @@ export default function Footer() {
               </span>
               <span className="flex gap-3">
                 <Mail className="h-4 w-4 text-[var(--color-green-forest)]" />
-                info@albaraka.com.eg
+                info@albaraka-eg.org
               </span>
               <span className="flex gap-3">
                 <MapPin className="h-4 w-4 text-[var(--color-green-forest)]" />
-                Al Azbakiyah, Cairo, Egypt
+                64 Rabaa Investment Buildings, Nasr City, Cairo, Egypt
               </span>
             </div>
           </div>
@@ -139,11 +139,11 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col justify-between gap-4 border-t border-black/10 pt-6 text-xs text-[var(--color-earth-mid)] md:flex-row">
           <p>
-            Copyright {new Date().getFullYear()} Al Baraka. All rights reserved.
+            Copyright {new Date().getFullYear()} Al BARAKA FOR IMPORT & EXPORT. All rights reserved.
           </p>
           <div className="flex gap-5">
-            <Link href="#">Privacy Policy</Link>
-            <Link href="#">Terms & Conditions</Link>
+            <Link href="/privacy" className="hover:text-[var(--color-green-forest)]">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[var(--color-green-forest)]">Terms & Conditions</Link>
           </div>
         </div>
       </div>
