@@ -60,7 +60,7 @@ export default function ProductsPage({ products }: ProductsPageProps) {
             </h1>
             <div className="mx-auto mt-6 h-[2px] w-24 bg-[var(--color-green-forest)]" />
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
-              Browse Al Baraka export products by simple fresh and frozen categories.
+              A focused Egyptian product range prepared for importers, distributors, wholesalers, supermarkets, and food trading companies.
             </p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,7 +102,9 @@ export default function ProductsPage({ products }: ProductsPageProps) {
               <div className="section-label mb-3">Product Range</div>
               <h2 className="font-playfair text-4xl font-semibold text-[var(--color-earth-dark)] md:text-5xl">{activeLabel}</h2>
             </div>
-            <p className="max-w-lg text-sm leading-6 text-[var(--color-earth-mid)]">Use the filters to browse fresh vegetables, fresh fruits, frozen vegetables, and frozen fruits.</p>
+            <div className="rounded-full border border-black/10 bg-[var(--color-leaf-mist)] px-5 py-2 text-sm font-bold text-[var(--color-green-forest)]">
+              {filteredProducts.length} export-ready items
+            </div>
           </div>
 
           <AnimatePresence mode="popLayout">
