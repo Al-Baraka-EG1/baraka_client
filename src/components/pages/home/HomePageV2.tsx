@@ -69,22 +69,21 @@ const trustItems = [
 
 const heroStats = [
   { value: `${products.length}+`, label: "Catalog Items" },
-  { value: "4", label: "Main Categories" },
+  { value: "4", label: "Product Families" },
   { value: "2", label: "Fresh / Frozen" },
 ];
 
-const heroCategories = [
-  { label: "Fresh Vegetables", icon: Sprout },
-  { label: "Fresh Fruits", icon: Leaf },
-  { label: "Frozen Vegetables", icon: Snowflake },
-  { label: "Frozen Fruits", icon: Snowflake },
+const heroPrograms = [
+  { label: "Fresh Products", detail: "Vegetables, fruits, and seasonal supply", icon: Sprout },
+  { label: "Frozen Products", detail: "IQF fruits, vegetables, and prepared items", icon: Snowflake },
+  { label: "Export Support", detail: "Packaging, documents, and shipment support", icon: ClipboardCheck },
 ];
 
 const exportFlow = [
-  { title: "Select", copy: "Product requirements", icon: Sprout },
-  { title: "Pack", copy: "Flexible options", icon: PackageCheck },
-  { title: "Document", copy: "Export support", icon: ClipboardCheck },
-  { title: "Ship", copy: "Buyer destination", icon: Truck },
+  { title: "Select", copy: "Product specs" },
+  { title: "Pack", copy: "Flexible options" },
+  { title: "Document", copy: "Export support" },
+  { title: "Ship", copy: "Buyer market" },
 ];
 
 export default function HomePageV2() {
@@ -100,50 +99,60 @@ export default function HomePageV2() {
           className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,24,16,0.42)_0%,rgba(11,24,16,0.30)_42%,rgba(11,24,16,0.70)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(139,198,63,0.24),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(242,193,78,0.14),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,24,16,0.84)_0%,rgba(11,24,16,0.62)_42%,rgba(11,24,16,0.22)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_35%,rgba(85,165,111,0.26),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(225,181,111,0.12),transparent_28%)]" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/16 to-transparent" />
-        <div className="absolute inset-0 opacity-[0.10] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:90px_90px]" />
+        <div className="absolute inset-0 opacity-[0.09] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:88px_88px]" />
 
         <motion.div
           aria-hidden="true"
-          className="absolute left-1/2 top-[44%] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
-          animate={{ scale: [1, 1.06, 1], opacity: [0.18, 0.30, 0.18] }}
+          className="absolute -left-28 top-1/2 h-[560px] w-[560px] -translate-y-1/2 rounded-full border border-white/10"
+          animate={{ scale: [1, 1.06, 1], opacity: [0.16, 0.30, 0.16] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden="true"
-          className="absolute left-1/2 top-[44%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
-          animate={{ scale: [1.08, 1, 1.08], opacity: [0.14, 0.28, 0.14] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-[8%] top-[22%] h-72 w-72 rounded-full bg-[var(--color-green-bright)]/12 blur-3xl"
+          animate={{ scale: [1, 1.18, 1], opacity: [0.18, 0.36, 0.18] }}
+          transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="container relative z-10 mx-auto flex min-h-[100dvh] flex-col justify-center px-5 pb-36 pt-36 text-center md:px-8 lg:px-12">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto max-w-5xl">
+        <div className="container relative z-10 mx-auto grid min-h-[100dvh] items-center gap-12 px-5 pb-24 pt-36 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:px-12 lg:pt-32">
+          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="max-w-4xl text-center lg:text-left">
             <motion.div variants={staggerItemVariants} className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
               <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
-              Fresh & Frozen Agricultural Products From Egypt
+              Egyptian Fresh & Frozen Produce Supplier
+            </motion.div>
+
+            <motion.div variants={staggerItemVariants} className="mb-5 inline-flex items-center gap-3 rounded-2xl border border-white/12 bg-white/[0.08] px-4 py-3 text-white backdrop-blur-md">
+              <span className="relative block h-11 w-11 shrink-0 rounded-xl bg-white/12 p-1.5">
+                <Image src="/assets/logo-noback.png" alt="Al Baraka logo" fill priority className="object-contain p-1" />
+              </span>
+              <span className="text-left leading-none">
+                <span className="block font-space-mono text-[9px] font-bold uppercase tracking-[0.36em] text-[var(--color-gold-light)]">Company</span>
+                <span className="mt-1 block font-playfair text-3xl font-semibold tracking-wide text-white">AL BARAKA</span>
+              </span>
             </motion.div>
 
             <motion.h1
               variants={staggerItemVariants}
-              className="font-playfair text-[clamp(3.1rem,8.4vw,8.3rem)] font-bold leading-[0.88] tracking-tight text-white"
+              className="font-playfair text-[clamp(3.2rem,7.9vw,7.6rem)] font-bold leading-[0.9] tracking-tight text-white"
               style={{ textShadow: "0 6px 32px rgba(0,0,0,0.42)" }}
             >
-              Supply Egypt's
+              For Import
               <br />
-              <span className="font-cormorant italic text-[var(--color-green-bright)]">finest produce</span>
+              <span className="font-cormorant italic text-[var(--color-green-bright)]">& Export</span>
             </motion.h1>
 
             <motion.p
               variants={staggerItemVariants}
-              className="mx-auto mt-8 max-w-3xl text-base font-medium leading-8 text-white/90 md:text-xl"
+              className="mx-auto mt-7 max-w-2xl text-base font-medium leading-8 text-white/90 md:text-xl lg:mx-0"
               style={{ textShadow: "0 2px 12px rgba(0,0,0,0.34)" }}
             >
-              Al Baraka supports importers, distributors, wholesalers, supermarkets, and food trading companies with reliable fresh and frozen product programs, flexible packaging, and professional shipment support.
+              Fresh and frozen fruits and vegetables from Egypt for importers, distributors, wholesalers, supermarkets, and food trading companies.
             </motion.p>
 
-            <motion.div variants={staggerItemVariants} className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <motion.div variants={staggerItemVariants} className="mt-10 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
               <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-9 py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(15,107,58,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_18px_42px_rgba(15,107,58,0.45)]">
                 Explore Export Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -151,60 +160,69 @@ export default function HomePageV2() {
                 Request Supply Details
               </Link>
             </motion.div>
-
-            <motion.div variants={staggerItemVariants} className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
-              {heroStats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-white/14 bg-white/[0.10] px-5 py-4 text-white backdrop-blur-md">
-                  <div className="font-playfair text-3xl font-bold md:text-4xl">{stat.value}</div>
-                  <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/62">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.82, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-8 left-1/2 z-20 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2"
-        >
-          <div className="overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.10] text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-            <div className="grid lg:grid-cols-[1.1fr_1.25fr]">
-              <div className="border-b border-white/12 p-5 lg:border-b-0 lg:border-r">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-gold-light)]">Product Families</span>
-                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Export Ready</span>
+          <motion.div
+            initial={{ opacity: 0, x: 34, scale: 0.98 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.78, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto w-full max-w-xl"
+          >
+            <div className="rounded-[34px] border border-white/14 bg-white/[0.10] p-5 text-white shadow-[0_30px_90px_rgba(0,0,0,0.30)] backdrop-blur-xl md:p-6">
+              <div className="flex items-start justify-between gap-4 border-b border-white/12 pb-5">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-gold-light)]">Export Supply Desk</span>
+                  <h2 className="mt-2 font-playfair text-3xl font-semibold md:text-4xl">Fresh & Frozen Programs</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {heroCategories.map((category) => (
-                    <div key={category.label} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-3">
-                      <category.icon className="h-4 w-4 shrink-0 text-[var(--color-green-bright)]" />
-                      <span className="text-xs font-bold text-white/78">{category.label}</span>
-                    </div>
-                  ))}
-                </div>
+                <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl bg-[var(--color-green-bright)]/18 text-[var(--color-green-bright)] md:h-14 md:w-14">
+                  <Boxes className="h-6 w-6 md:h-7 md:w-7" />
+                </span>
               </div>
 
-              <div className="p-5">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/64">Supply Workflow</span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/52">From Egypt to your market</span>
+              <div className="mt-5 grid gap-3">
+                {heroPrograms.map((program) => (
+                  <div key={program.label} className="group rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition-all hover:-translate-y-1 hover:bg-white/[0.12]">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--color-green-bright)]/14 text-[var(--color-green-bright)]">
+                        <program.icon className="h-5 w-5" />
+                      </span>
+                      <span>
+                        <span className="block font-bold text-white">{program.label}</span>
+                        <span className="mt-1 block text-sm leading-6 text-white/62">{program.detail}</span>
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 grid grid-cols-3 gap-3">
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/10 px-3 py-4 text-center">
+                    <div className="font-playfair text-2xl font-bold md:text-3xl">{stat.value}</div>
+                    <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.14em] text-white/56">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 rounded-3xl border border-white/10 bg-black/10 p-4">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <span className="text-sm font-bold">Supply Workflow</span>
+                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Professional</span>
                 </div>
                 <div className="grid grid-cols-4 gap-2">
                   {exportFlow.map((step, index) => (
-                    <div key={step.title} className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-3 text-center">
-                      {index < exportFlow.length - 1 && <span className="absolute -right-3 top-1/2 hidden h-px w-4 bg-white/18 md:block" />}
-                      <step.icon className="mx-auto mb-2 h-4 w-4 text-[var(--color-green-bright)]" />
-                      <span className="block text-xs font-bold text-white">{step.title}</span>
-                      <span className="mt-1 hidden text-[10px] leading-4 text-white/54 sm:block">{step.copy}</span>
+                    <div key={step.title} className="relative text-center">
+                      {index < exportFlow.length - 1 && <span className="absolute left-[70%] top-5 hidden h-px w-[60%] bg-white/18 sm:block" />}
+                      <span className="relative mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/18 bg-[var(--color-earth-dark)] text-sm font-bold text-[var(--color-green-bright)]">{index + 1}</span>
+                      <span className="mt-3 block text-xs font-bold text-white/80">{step.title}</span>
+                      <span className="mt-1 hidden text-[10px] leading-4 text-white/48 sm:block">{step.copy}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <section className="relative z-20 bg-[var(--color-cream)] px-5 pb-16 pt-10 md:px-8 md:pb-20">
