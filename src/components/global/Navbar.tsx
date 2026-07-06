@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Leaf, Menu, X } from "lucide-react";
+import { ArrowRight, Leaf, Mail, Menu, PackageCheck, Phone, Snowflake, Sprout, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx";
 
@@ -13,6 +13,12 @@ const navLinks = [
   { name: "Products", path: "/products" },
   { name: "About Us", path: "/about" },
   { name: "Contact", path: "/contact" },
+];
+
+const mobileHighlights = [
+  { label: "Fresh Vegetables", icon: Sprout },
+  { label: "Frozen Products", icon: Snowflake },
+  { label: "Export Support", icon: PackageCheck },
 ];
 
 const EASE_SMOOTH_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
@@ -35,7 +41,7 @@ export default function Navbar() {
 
     if (currentY <= 60) {
       setVisible(true);
-    } else if (currentY > lastY.current) {
+    } else if (currentY > lastY.current && !mobileMenuOpen) {
       setVisible(false);
     } else {
       setVisible(true);
@@ -43,7 +49,7 @@ export default function Navbar() {
 
     lastY.current = currentY;
     ticking.current = false;
-  }, []);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -94,9 +100,9 @@ export default function Navbar() {
           className={clsx(
             "relative mx-auto flex items-center justify-between",
             scrolled
-              ? "mx-4 mt-3 max-w-[1280px] rounded-full border border-black/[0.06] bg-white/70 px-6 py-2.5 shadow-[0_12px_40px_rgba(16,38,26,0.08)] md:mx-auto"
+              ? "mx-3 mt-3 max-w-[1280px] rounded-full border border-black/[0.06] bg-white/78 px-4 py-2.5 shadow-[0_12px_40px_rgba(16,38,26,0.08)] backdrop-blur-xl md:mx-auto md:px-6"
               : clsx(
-                  "mt-0 w-full max-w-[1400px] px-6 py-4 md:px-8",
+                  "mt-0 w-full max-w-[1400px] px-5 py-4 md:px-8",
                   isDarkHeader
                     ? "border-b border-white/[0.08]"
                     : "border-b border-black/[0.06] bg-white/30"
@@ -106,25 +112,18 @@ export default function Navbar() {
             transitionProperty: "background, border-color, border-radius, box-shadow, backdrop-filter",
             transitionDuration: `${DURATION_BASE}ms`,
             transitionTimingFunction: EASE_SMOOTH_CSS,
-            backdropFilter: scrolled ? "blur(16px)" : "none",
-            WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+            backdropFilter: scrolled ? "blur(18px)" : "none",
+            WebkitBackdropFilter: scrolled ? "blur(18px)" : "none",
           }}
         >
-          <Link href="/" className="flex items-center gap-2.5 group/logo" aria-label="Al BARAKA FOR IMPORT & EXPORT home">
+          <Link href="/" className="group/logo flex items-center gap-2.5" aria-label="Al BARAKA FOR IMPORT & EXPORT home">
             <span className="relative block h-10 w-10 shrink-0 transition-transform duration-500 group-hover/logo:scale-105 md:h-14 md:w-14">
-              <Image
-                src="/assets/logo-noback.png"
-                alt="Al BARAKA FOR IMPORT & EXPORT logo"
-                fill
-                priority
-                sizes="44px"
-                className="object-contain"
-              />
+              <Image src="/assets/logo-noback.png" alt="Al BARAKA FOR IMPORT & EXPORT logo" fill priority sizes="44px" className="object-contain" />
             </span>
-            <span className="hidden flex-col leading-none sm:flex">
+            <span className="flex flex-col leading-none">
               <span
                 className={clsx(
-                  "font-playfair text-xl font-semibold transition-colors duration-300 md:text-2xl",
+                  "font-playfair text-lg font-semibold transition-colors duration-300 md:text-2xl",
                   isDarkHeader ? "text-white" : "text-[var(--color-earth-dark)]"
                 )}
                 style={isDarkHeader ? { textShadow: "0 2px 14px rgba(0,0,0,0.55)" } : undefined}
@@ -133,7 +132,7 @@ export default function Navbar() {
               </span>
               <span
                 className={clsx(
-                  "mt-0.5 font-space-mono text-[9px] uppercase tracking-[0.3em] transition-colors duration-300",
+                  "mt-0.5 font-space-mono text-[7px] uppercase tracking-[0.24em] transition-colors duration-300 sm:text-[9px]",
                   isDarkHeader ? "text-white/80" : "text-[var(--color-earth-mid)]"
                 )}
                 style={isDarkHeader ? { textShadow: "0 1px 10px rgba(0,0,0,0.45)" } : undefined}
@@ -152,8 +151,8 @@ export default function Navbar() {
                   "group relative py-2 text-[15px] font-semibold transition-colors duration-300",
                   isActive(link.path)
                     ? isDarkHeader
-                      ? "text-[var(--color-gold-light)] font-bold"
-                      : "text-[var(--color-green-forest)] font-bold"
+                      ? "font-bold text-[var(--color-gold-light)]"
+                      : "font-bold text-[var(--color-green-forest)]"
                     : isDarkHeader
                       ? "text-white hover:text-[var(--color-gold-light)]"
                       : "text-[var(--color-earth-dark)] hover:text-[var(--color-green-forest)]"
@@ -186,10 +185,11 @@ export default function Navbar() {
               <Leaf className="h-3.5 w-3.5" />
             </Link>
 
-            <button
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.92 }}
               className={clsx(
-                "flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-300 lg:hidden",
+                "relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border transition-colors duration-300 lg:hidden",
                 isDarkHeader
                   ? "border-white/25 bg-white/15 text-white hover:bg-white/25"
                   : "border-black/10 bg-white text-[var(--color-earth-dark)] hover:bg-black/5"
@@ -199,8 +199,9 @@ export default function Navbar() {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
             >
-              <Menu className="h-5 w-5" />
-            </button>
+              <motion.span className="absolute h-8 w-8 rounded-full bg-[var(--color-green-forest)]/10" animate={{ scale: [1, 1.18, 1] }} transition={{ duration: 2.4, repeat: Infinity }} />
+              <Menu className="relative h-5 w-5" />
+            </motion.button>
           </div>
         </div>
       </header>
@@ -212,64 +213,103 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: EASE_SMOOTH_ARR }}
-            className="fixed inset-0 z-[110] overflow-y-auto bg-[var(--color-cream)] px-5 py-5 lg:hidden"
+            transition={{ duration: 0.28, ease: EASE_SMOOTH_ARR }}
+            className="fixed inset-0 z-[110] overflow-hidden bg-[var(--color-earth-dark)] lg:hidden"
           >
-            <div className="flex items-center justify-between">
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2.5">
-                <span className="relative block h-10 w-10">
-                  <Image src="/assets/logo-noback.png" alt="Al BARAKA FOR IMPORT & EXPORT logo" fill className="object-contain" />
-                </span>
-                <span className="flex flex-col leading-none">
-                  <span className="font-playfair text-lg font-semibold text-[var(--color-earth-dark)]">AL BARAKA</span>
-                  <span className="mt-0.5 font-space-mono text-[8px] uppercase tracking-[0.2em] text-[var(--color-earth-mid)]">IMPORT & EXPORT</span>
-                </span>
-              </Link>
-              <button
-                type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close navigation"
-              >
-                <X className="h-5 w-5 text-[var(--color-earth-dark)]" />
-              </button>
-            </div>
-
-            <nav className="mt-10 flex flex-col gap-1">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.35, ease: EASE_SMOOTH_ARR }}
-                >
-                  <Link
-                    href={link.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={clsx(
-                      "block border-b border-black/10 py-4 font-playfair text-2xl transition-colors duration-200",
-                      isActive(link.path) ? "font-semibold text-[var(--color-green-forest)]" : "text-[var(--color-earth-dark)]"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,198,63,0.26),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(242,193,78,0.18),transparent_40%)]" />
+            <motion.div animate={{ y: [0, -18, 0], rotate: [0, 8, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute -left-10 top-28 h-32 w-32 opacity-20">
+              <Image src="/assets/leaf.png" alt="" fill className="object-contain" aria-hidden="true" />
+            </motion.div>
+            <motion.div animate={{ y: [0, 16, 0], rotate: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-8 bottom-24 h-40 w-40 opacity-20">
+              <Image src="/assets/leaf.png" alt="" fill className="object-contain" aria-hidden="true" />
+            </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.4, ease: EASE_SMOOTH_ARR }}
-              className="mt-8"
+              initial={{ y: -24, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -18, opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.42, ease: EASE_SMOOTH_ARR }}
+              className="relative flex h-full flex-col overflow-y-auto px-5 pb-6 pt-5"
             >
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-full bg-[var(--color-green-forest)] px-6 py-3.5 text-center font-bold text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(15,107,58,0.30)]"
-              >
-                Request a Quote <Leaf className="h-4 w-4" />
-              </Link>
+              <div className="flex items-center justify-between">
+                <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3">
+                  <span className="relative block h-12 w-12 rounded-2xl bg-white/10 p-2 backdrop-blur-md">
+                    <Image src="/assets/logo-noback.png" alt="Al BARAKA FOR IMPORT & EXPORT logo" fill className="object-contain p-1" />
+                  </span>
+                  <span className="flex flex-col leading-none">
+                    <span className="font-playfair text-xl font-semibold text-white">AL BARAKA</span>
+                    <span className="mt-1 font-space-mono text-[8px] uppercase tracking-[0.28em] text-white/65">IMPORT & EXPORT</span>
+                  </span>
+                </Link>
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: 0.9, rotate: 6 }}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close navigation"
+                >
+                  <X className="h-5 w-5" />
+                </motion.button>
+              </div>
+
+              <div className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.08] p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl">
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.38 }}>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-gold-light)]">
+                    <Leaf className="h-3 w-3" /> Egyptian Export Supplier
+                  </span>
+                  <h2 className="mt-5 font-playfair text-4xl font-semibold leading-tight">
+                    Fresh & Frozen
+                    <span className="block text-[var(--color-green-bright)]">Products</span>
+                  </h2>
+                  <p className="mt-3 text-sm leading-6 text-white/70">
+                    Reliable supply for importers, distributors, wholesalers, supermarkets, and food trading companies.
+                  </p>
+                </motion.div>
+
+                <nav className="mt-7 grid gap-3">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: -18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.18 + index * 0.06, duration: 0.36, ease: EASE_SMOOTH_ARR }}
+                    >
+                      <Link
+                        href={link.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={clsx(
+                          "group flex items-center justify-between rounded-2xl border px-4 py-4 transition-all",
+                          isActive(link.path)
+                            ? "border-[var(--color-green-bright)]/40 bg-[var(--color-green-forest)]/45 text-white"
+                            : "border-white/10 bg-white/8 text-white/82 hover:border-white/20 hover:bg-white/12"
+                        )}
+                      >
+                        <span className="font-playfair text-2xl font-semibold">{link.name}</span>
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.4 }} className="mt-5 grid grid-cols-3 gap-2">
+                  {mobileHighlights.map((item) => (
+                    <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.08] p-3 text-center">
+                      <item.icon className="mx-auto mb-2 h-5 w-5 text-[var(--color-green-bright)]" />
+                      <span className="block text-[10px] font-bold leading-4 text-white/72">{item.label}</span>
+                    </div>
+                  ))}
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.52, duration: 0.4 }} className="mt-5 grid gap-3">
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[var(--color-green-forest)] shadow-lg">
+                    Request a Quote <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <div className="grid gap-2 rounded-2xl border border-white/10 bg-black/10 p-4 text-xs text-white/68">
+                    <span className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-[var(--color-green-bright)]" /> +20 10 01269029</span>
+                    <span className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-[var(--color-green-bright)]" /> info@albaraka-eg.org</span>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         )}
