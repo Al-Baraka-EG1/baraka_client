@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Boxes,
   CheckCircle2,
+  ClipboardCheck,
   Globe2,
   Leaf,
   PackageCheck,
@@ -72,13 +73,14 @@ const stats = [
   { value: 2, label: "Fresh & Frozen" },
 ];
 
-const heroLeaves = [
-  { className: "left-[5%] top-[14%] h-14 w-14 md:h-20 md:w-20", delay: 0.2, rotate: -22 },
-  { className: "right-[6%] top-[16%] h-12 w-12 md:h-16 md:w-16", delay: 0.45, rotate: 38 },
-  { className: "left-[3%] top-[52%] h-10 w-10 md:h-14 md:w-14", delay: 0.7, rotate: -54 },
-  { className: "right-[4%] bottom-[18%] h-16 w-16 md:h-24 md:w-24", delay: 0.95, rotate: 52 },
-  { className: "left-[12%] bottom-[13%] h-10 w-10 md:h-14 md:w-14", delay: 1.15, rotate: 18 },
+const heroCategories = [
+  { label: "Fresh Vegetables", detail: "Farm-selected produce", icon: Sprout },
+  { label: "Frozen Vegetables", detail: "Prepared for long supply", icon: Snowflake },
+  { label: "Frozen Fruits", detail: "Year-round programs", icon: Snowflake },
+  { label: "Export Support", detail: "Packing & documents", icon: ClipboardCheck },
 ];
+
+const exportSteps = ["Select", "Pack", "Document", "Ship"];
 
 export default function HomePageV2() {
   return (
@@ -90,48 +92,55 @@ export default function HomePageV2() {
           muted
           loop
           playsInline
-          className="absolute inset-0 h-full w-full scale-[1.03] object-cover"
+          className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/58 via-black/26 to-black/5" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/30 to-transparent" />
-        <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-green-bright)]/10 blur-3xl" />
 
-        <div className="pointer-events-none absolute inset-0 z-[2] overflow-hidden">
-          {heroLeaves.map((leaf) => (
-            <motion.div
-              key={leaf.className}
-              initial={{ opacity: 0, y: 30, rotate: leaf.rotate - 10 }}
-              animate={{ opacity: 0.78, y: [0, -18, 0], rotate: [leaf.rotate, leaf.rotate + 8, leaf.rotate] }}
-              transition={{ delay: leaf.delay, y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 6.5, repeat: Infinity, ease: "easeInOut" }, opacity: { duration: 0.8 } }}
-              className={`absolute ${leaf.className}`}
-            >
-              <Image src={images.greenLeaf} alt="" fill className="object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.18)]" aria-hidden="true" />
-            </motion.div>
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(139,198,63,0.20),transparent_30%),linear-gradient(90deg,rgba(13,27,18,0.78)_0%,rgba(13,27,18,0.42)_47%,rgba(13,27,18,0.12)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/20 to-transparent" />
+        <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,255,255,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.16)_1px,transparent_1px)] [background-size:72px_72px]" />
+        <motion.div
+          aria-hidden="true"
+          className="absolute left-[12%] top-[18%] h-64 w-64 rounded-full border border-white/10"
+          animate={{ scale: [1, 1.08, 1], opacity: [0.22, 0.35, 0.22] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="absolute right-[8%] bottom-[18%] h-80 w-80 rounded-full bg-[var(--color-green-bright)]/10 blur-3xl"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.18, 0.32, 0.18] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
 
-        <div className="container relative z-10 mx-auto grid min-h-[100dvh] items-center gap-12 px-5 pb-24 pt-36 md:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-12 lg:pt-32">
+        <div className="container relative z-10 mx-auto grid min-h-[100dvh] items-center gap-10 px-5 pb-24 pt-36 md:px-8 lg:grid-cols-[1.04fr_0.96fr] lg:px-12 lg:pt-32">
           <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="max-w-3xl text-center lg:text-left">
             <motion.div variants={staggerItemVariants} className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
               <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
               Al Baraka for Import & Export
             </motion.div>
 
-            <motion.h1 variants={staggerItemVariants} className="font-playfair text-[clamp(3.1rem,7.2vw,6.8rem)] font-bold leading-[0.96] tracking-tight text-white" style={{ textShadow: "0 5px 28px rgba(0,0,0,0.42)" }}>
-              Fresh & Frozen
+            <motion.h1 variants={staggerItemVariants} className="font-playfair text-[clamp(3.1rem,7.1vw,6.8rem)] font-bold leading-[0.96] tracking-tight text-white" style={{ textShadow: "0 5px 28px rgba(0,0,0,0.42)" }}>
+              Egyptian Produce
               <br />
-              <span className="font-cormorant italic text-[var(--color-green-bright)]">Produce From Egypt</span>
+              <span className="font-cormorant italic text-[var(--color-green-bright)]">Ready for Export</span>
             </motion.h1>
 
             <motion.p variants={staggerItemVariants} className="mx-auto mt-7 max-w-2xl text-base font-medium leading-8 text-white/90 md:text-lg lg:mx-0" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.32)" }}>
-              Reliable Egyptian supply for importers, distributors, wholesalers, supermarkets, and food trading companies — with professional export handling from product selection to shipment support.
+              Fresh and frozen fruits and vegetables supplied from Egypt for importers, distributors, wholesalers, supermarkets, and food trading companies.
             </motion.p>
 
-            <motion.div variants={staggerItemVariants} className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-              {["Fresh Vegetables", "Frozen Fruits", "Frozen Vegetables", "Flexible Packaging"].map((item) => (
-                <span key={item} className="rounded-full border border-white/16 bg-white/10 px-4 py-2 text-xs font-bold text-white/82 backdrop-blur-md">
-                  {item}
-                </span>
+            <motion.div variants={staggerItemVariants} className="mt-8 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
+              {heroCategories.map((item) => (
+                <div key={item.label} className="group rounded-2xl border border-white/14 bg-white/[0.09] p-4 text-left text-white backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white/[0.13]">
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-green-bright)]/16 text-[var(--color-green-bright)]">
+                      <item.icon className="h-5 w-5" />
+                    </span>
+                    <span>
+                      <span className="block font-bold">{item.label}</span>
+                      <span className="mt-1 block text-sm text-white/64">{item.detail}</span>
+                    </span>
+                  </div>
+                </div>
               ))}
             </motion.div>
 
@@ -145,32 +154,52 @@ export default function HomePageV2() {
             </motion.div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 40, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="relative mx-auto hidden w-full max-w-xl lg:block">
-            <div className="absolute -inset-6 rounded-[44px] bg-white/10 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[40px] border border-white/16 bg-white/[0.14] p-5 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-              <div className="relative h-[420px] overflow-hidden rounded-[30px] bg-[var(--color-earth-dark)]/30">
-                <Image src={images.heroCrate} alt="Al Baraka fresh produce crate" fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 rounded-2xl border border-white/16 bg-white/14 px-4 py-3 text-white backdrop-blur-md">
-                  <span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-white/62">Product Range</span>
-                  <span className="mt-1 block font-playfair text-3xl font-bold">{products.length}+ Items</span>
+          <motion.div initial={{ opacity: 0, x: 36, scale: 0.98 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.35, duration: 0.75, ease: [0.16, 1, 0.3, 1] }} className="mx-auto hidden w-full max-w-xl lg:block">
+            <div className="rounded-[38px] border border-white/14 bg-white/[0.10] p-6 text-white shadow-[0_30px_90px_rgba(0,0,0,0.30)] backdrop-blur-xl">
+              <div className="flex items-center justify-between gap-6 border-b border-white/12 pb-5">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-gold-light)]">Buyer Dashboard</span>
+                  <h2 className="mt-2 font-playfair text-4xl font-semibold">Supply Overview</h2>
                 </div>
-                <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
-                  {stats.map((stat) => (
-                    <div key={stat.label} className="rounded-2xl border border-white/12 bg-white/16 px-4 py-4 text-center text-white backdrop-blur-md">
-                      <div className="font-playfair text-3xl font-bold">{stat.value}+</div>
-                      <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white/70">{stat.label}</div>
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-green-bright)]/18 text-[var(--color-green-bright)]">
+                  <Boxes className="h-7 w-7" />
+                </span>
+              </div>
+
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="rounded-2xl border border-white/12 bg-white/[0.10] p-4 text-center">
+                    <div className="font-playfair text-3xl font-bold">{stat.value}+</div>
+                    <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white/62">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 rounded-3xl border border-white/12 bg-black/10 p-5">
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="font-bold">Export Workflow</span>
+                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Professional</span>
+                </div>
+                <div className="relative grid grid-cols-4 gap-3">
+                  <span className="absolute left-[8%] right-[8%] top-5 h-px bg-white/14" />
+                  {exportSteps.map((step, index) => (
+                    <div key={step} className="relative text-center">
+                      <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/18 bg-[var(--color-earth-dark)] text-sm font-bold text-[var(--color-green-bright)]">{index + 1}</span>
+                      <span className="mt-3 block text-xs font-bold text-white/76">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                {catalogGroups.slice(0, 4).map((group) => (
-                  <div key={group.title} className="rounded-2xl border border-white/12 bg-white/12 p-4 text-white">
-                    <group.icon className="mb-3 h-5 w-5 text-[var(--color-green-bright)]" />
-                    <span className="block text-sm font-bold">{group.title}</span>
-                    <span className="mt-1 block text-xs leading-5 text-white/62">Export-ready supply</span>
+              <div className="mt-6 grid gap-3">
+                {[
+                  "Flexible packaging according to buyer needs",
+                  "Fresh and frozen product programs",
+                  "Shipment and documentation support",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.08] p-4">
+                    <CheckCircle2 className="h-5 w-5 text-[var(--color-green-bright)]" />
+                    <span className="text-sm font-semibold text-white/78">{item}</span>
                   </div>
                 ))}
               </div>
