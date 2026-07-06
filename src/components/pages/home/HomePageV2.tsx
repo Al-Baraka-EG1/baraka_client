@@ -88,17 +88,17 @@ const exportFlow = [
 ];
 
 const heroLeaves = [
-  { className: "left-[6%] top-[18%] h-14 w-14 md:h-20 md:w-20", delay: 0.25, rotate: -24 },
-  { className: "right-[8%] top-[17%] h-12 w-12 md:h-16 md:w-16", delay: 0.5, rotate: 34 },
-  { className: "left-[3%] top-[56%] h-10 w-10 md:h-14 md:w-14", delay: 0.75, rotate: -54 },
-  { className: "right-[5%] bottom-[20%] h-16 w-16 md:h-24 md:w-24", delay: 0.95, rotate: 52 },
-  { className: "left-[14%] bottom-[16%] h-10 w-10 md:h-14 md:w-14", delay: 1.15, rotate: 18 },
+  { className: "left-[5%] top-[16%] h-14 w-14 md:h-20 md:w-20", delay: 0.25, rotate: -24 },
+  { className: "right-[7%] top-[17%] h-12 w-12 md:h-16 md:w-16", delay: 0.5, rotate: 34 },
+  { className: "left-[4%] top-[53%] h-10 w-10 md:h-14 md:w-14", delay: 0.75, rotate: -54 },
+  { className: "right-[5%] bottom-[23%] h-16 w-16 md:h-24 md:w-24", delay: 0.95, rotate: 52 },
+  { className: "left-[13%] bottom-[22%] h-10 w-10 md:h-14 md:w-14", delay: 1.15, rotate: 18 },
 ];
 
 export default function HomePageV2() {
   return (
     <div className="overflow-hidden bg-[var(--color-cream)]">
-      <section className="relative flex min-h-[106dvh] items-center overflow-hidden bg-[var(--color-earth-dark)] lg:min-h-[112dvh]">
+      <section className="relative min-h-[100svh] overflow-hidden bg-[var(--color-earth-dark)] lg:min-h-[980px] xl:min-h-[1040px]">
         <video
           src={videos.hero}
           autoPlay
@@ -108,9 +108,9 @@ export default function HomePageV2() {
           className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,24,16,0.40)_0%,rgba(10,24,16,0.24)_40%,rgba(10,24,16,0.78)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_33%,rgba(85,165,111,0.30),transparent_32%),radial-gradient(circle_at_78%_18%,rgba(225,181,111,0.13),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/16 to-transparent" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,24,16,0.42)_0%,rgba(10,24,16,0.28)_39%,rgba(10,24,16,0.76)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(85,165,111,0.28),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(225,181,111,0.12),transparent_28%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/15 to-transparent" />
         <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:92px_92px]" />
 
         <motion.div
@@ -145,23 +145,23 @@ export default function HomePageV2() {
           ))}
         </div>
 
-        <div className="container relative z-10 mx-auto flex min-h-[100dvh] flex-col justify-center px-5 pb-48 pt-32 text-center md:px-8 lg:px-12 lg:pb-56">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto max-w-6xl">
+        <div className="container relative z-10 mx-auto flex min-h-[100svh] items-center px-5 py-28 text-center md:px-8 md:py-32 lg:min-h-[980px] lg:px-12 lg:py-36 xl:min-h-[1040px]">
+          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto flex w-full max-w-6xl flex-col items-center">
             <motion.div variants={staggerItemVariants} className="mb-5 flex justify-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
-                <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
+              <span className="inline-flex max-w-[92vw] items-center justify-center gap-2 rounded-full border border-white/18 bg-white/12 px-4 py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:px-5 sm:text-xs sm:tracking-[0.22em]">
+                <Leaf className="h-3.5 w-3.5 shrink-0 text-[var(--color-green-bright)]" />
                 Fresh & Frozen Agricultural Products From Egypt
               </span>
             </motion.div>
 
             <motion.h1
               variants={staggerItemVariants}
-              className="font-playfair font-bold leading-[0.86] tracking-tight text-white"
+              className="font-playfair font-bold leading-[0.88] tracking-tight text-white"
               style={{ textShadow: "0 6px 32px rgba(0,0,0,0.42)" }}
             >
-              <span className="block text-[clamp(3.2rem,8vw,7.7rem)] tracking-[0.03em]">AL BARAKA</span>
-              <span className="mt-4 block text-[clamp(2.8rem,6.7vw,6.8rem)]">Supply Egypt&apos;s</span>
-              <span className="mt-2 block font-cormorant text-[clamp(3.3rem,7.6vw,7.4rem)] italic text-[var(--color-green-bright)]">
+              <span className="block text-[clamp(3.2rem,8vw,7.7rem)] tracking-[0.025em]">AL BARAKA</span>
+              <span className="mt-4 block text-[clamp(2.55rem,6.35vw,6.35rem)]">Supply Egypt&apos;s</span>
+              <span className="mt-2 block font-cormorant text-[clamp(3.1rem,7.25vw,7.15rem)] italic text-[var(--color-green-bright)]">
                 finest produce
               </span>
             </motion.h1>
@@ -174,16 +174,16 @@ export default function HomePageV2() {
               Al Baraka supports importers, distributors, wholesalers, supermarkets, and food trading companies with reliable fresh and frozen product programs, flexible packaging, and professional shipment support.
             </motion.p>
 
-            <motion.div variants={staggerItemVariants} className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-              <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-9 py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(15,107,58,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_18px_42px_rgba(15,107,58,0.45)]">
+            <motion.div variants={staggerItemVariants} className="mt-8 flex w-full max-w-xl flex-col justify-center gap-4 sm:flex-row">
+              <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-8 py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(15,107,58,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_18px_42px_rgba(15,107,58,0.45)] sm:px-9">
                 Explore Export Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-white/35 bg-white/8 px-9 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-[var(--color-earth-dark)]">
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-white/35 bg-white/8 px-8 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-[var(--color-earth-dark)] sm:px-9">
                 Request Supply Details
               </Link>
             </motion.div>
 
-            <motion.div variants={staggerItemVariants} className="mx-auto mt-9 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
+            <motion.div variants={staggerItemVariants} className="mx-auto mt-8 grid w-full max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
               {heroStats.map((stat) => (
                 <div key={stat.label} className="rounded-2xl border border-white/14 bg-white/[0.10] px-5 py-4 text-white backdrop-blur-md">
                   <div className="font-playfair text-3xl font-bold md:text-4xl">{stat.value}</div>
@@ -191,53 +191,51 @@ export default function HomePageV2() {
                 </div>
               ))}
             </motion.div>
+
+            <motion.div
+              variants={staggerItemVariants}
+              className="mt-9 hidden w-full max-w-6xl lg:block"
+            >
+              <div className="overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.10] text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+                <div className="grid lg:grid-cols-[1.1fr_1.25fr]">
+                  <div className="border-b border-white/12 p-5 lg:border-b-0 lg:border-r">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-gold-light)]">Product Families</span>
+                      <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Export Ready</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {heroFamilies.map((family) => (
+                        <div key={family.label} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-3">
+                          <family.icon className="h-4 w-4 shrink-0 text-[var(--color-green-bright)]" />
+                          <span className="text-xs font-bold text-white/78">{family.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/64">Supply Workflow</span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/52">From Egypt to your market</span>
+                    </div>
+                    <div className="grid grid-cols-4 gap-2">
+                      {exportFlow.map((step, index) => (
+                        <div key={step.title} className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-3 text-center">
+                          {index < exportFlow.length - 1 && <span className="absolute -right-3 top-1/2 hidden h-px w-4 bg-white/18 md:block" />}
+                          <step.icon className="mx-auto mb-2 h-4 w-4 text-[var(--color-green-bright)]" />
+                          <span className="block text-xs font-bold text-white">{step.title}</span>
+                          <span className="mt-1 hidden text-[10px] leading-4 text-white/54 sm:block">{step.copy}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.82, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-20 left-1/2 z-20 hidden w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 lg:block"
-        >
-          <div className="overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.10] text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-            <div className="grid lg:grid-cols-[1.1fr_1.25fr]">
-              <div className="border-b border-white/12 p-5 lg:border-b-0 lg:border-r">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-gold-light)]">Product Families</span>
-                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Export Ready</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {heroFamilies.map((family) => (
-                    <div key={family.label} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-3">
-                      <family.icon className="h-4 w-4 shrink-0 text-[var(--color-green-bright)]" />
-                      <span className="text-xs font-bold text-white/78">{family.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-5">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/64">Supply Workflow</span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/52">From Egypt to your market</span>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {exportFlow.map((step, index) => (
-                    <div key={step.title} className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-3 text-center">
-                      {index < exportFlow.length - 1 && <span className="absolute -right-3 top-1/2 hidden h-px w-4 bg-white/18 md:block" />}
-                      <step.icon className="mx-auto mb-2 h-4 w-4 text-[var(--color-green-bright)]" />
-                      <span className="block text-xs font-bold text-white">{step.title}</span>
-                      <span className="mt-1 hidden text-[10px] leading-4 text-white/54 sm:block">{step.copy}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.15, duration: 0.8 }} className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 md:flex">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.15, duration: 0.8 }} className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 xl:flex">
           <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Scroll</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} className="flex h-9 w-6 justify-center rounded-full border border-white/35 p-1">
             <span className="h-2 w-1 rounded-full bg-[var(--color-green-bright)]" />
