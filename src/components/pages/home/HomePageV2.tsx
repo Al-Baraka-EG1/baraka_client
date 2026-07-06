@@ -67,20 +67,25 @@ const trustItems = [
   { icon: Globe2, label: "Egyptian Origin", detail: "Fresh and frozen agricultural products" },
 ];
 
-const stats = [
-  { value: products.length, label: "Catalog Items" },
-  { value: 4, label: "Main Categories" },
-  { value: 2, label: "Fresh & Frozen" },
+const heroStats = [
+  { value: `${products.length}+`, label: "Catalog Items" },
+  { value: "4", label: "Main Categories" },
+  { value: "2", label: "Fresh / Frozen" },
 ];
 
 const heroCategories = [
-  { label: "Fresh Vegetables", detail: "Farm-selected produce", icon: Sprout },
-  { label: "Frozen Vegetables", detail: "Prepared for long supply", icon: Snowflake },
-  { label: "Frozen Fruits", detail: "Year-round programs", icon: Snowflake },
-  { label: "Export Support", detail: "Packing & documents", icon: ClipboardCheck },
+  { label: "Fresh Vegetables", icon: Sprout },
+  { label: "Fresh Fruits", icon: Leaf },
+  { label: "Frozen Vegetables", icon: Snowflake },
+  { label: "Frozen Fruits", icon: Snowflake },
 ];
 
-const exportSteps = ["Select", "Pack", "Document", "Ship"];
+const exportFlow = [
+  { title: "Select", copy: "Product requirements", icon: Sprout },
+  { title: "Pack", copy: "Flexible options", icon: PackageCheck },
+  { title: "Document", copy: "Export support", icon: ClipboardCheck },
+  { title: "Ship", copy: "Buyer destination", icon: Truck },
+];
 
 export default function HomePageV2() {
   return (
@@ -95,123 +100,110 @@ export default function HomePageV2() {
           className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
         />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(139,198,63,0.20),transparent_30%),linear-gradient(90deg,rgba(13,27,18,0.78)_0%,rgba(13,27,18,0.42)_47%,rgba(13,27,18,0.12)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/20 to-transparent" />
-        <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,255,255,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.16)_1px,transparent_1px)] [background-size:72px_72px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,24,16,0.42)_0%,rgba(11,24,16,0.30)_42%,rgba(11,24,16,0.70)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(139,198,63,0.24),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(242,193,78,0.14),transparent_28%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/16 to-transparent" />
+        <div className="absolute inset-0 opacity-[0.10] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:90px_90px]" />
+
         <motion.div
           aria-hidden="true"
-          className="absolute left-[12%] top-[18%] h-64 w-64 rounded-full border border-white/10"
-          animate={{ scale: [1, 1.08, 1], opacity: [0.22, 0.35, 0.22] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          aria-hidden="true"
-          className="absolute right-[8%] bottom-[18%] h-80 w-80 rounded-full bg-[var(--color-green-bright)]/10 blur-3xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.18, 0.32, 0.18] }}
+          className="absolute left-1/2 top-[44%] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+          animate={{ scale: [1, 1.06, 1], opacity: [0.18, 0.30, 0.18] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
+        <motion.div
+          aria-hidden="true"
+          className="absolute left-1/2 top-[44%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+          animate={{ scale: [1.08, 1, 1.08], opacity: [0.14, 0.28, 0.14] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
 
-        <div className="container relative z-10 mx-auto grid min-h-[100dvh] items-center gap-10 px-5 pb-24 pt-36 md:px-8 lg:grid-cols-[1.04fr_0.96fr] lg:px-12 lg:pt-32">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="max-w-3xl text-center lg:text-left">
+        <div className="container relative z-10 mx-auto flex min-h-[100dvh] flex-col justify-center px-5 pb-36 pt-36 text-center md:px-8 lg:px-12">
+          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto max-w-5xl">
             <motion.div variants={staggerItemVariants} className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
               <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
-              Al Baraka for Import & Export
+              Fresh & Frozen Agricultural Products From Egypt
             </motion.div>
 
-            <motion.h1 variants={staggerItemVariants} className="font-playfair text-[clamp(3.1rem,7.1vw,6.8rem)] font-bold leading-[0.96] tracking-tight text-white" style={{ textShadow: "0 5px 28px rgba(0,0,0,0.42)" }}>
-              Egyptian Produce
+            <motion.h1
+              variants={staggerItemVariants}
+              className="font-playfair text-[clamp(3.1rem,8.4vw,8.3rem)] font-bold leading-[0.88] tracking-tight text-white"
+              style={{ textShadow: "0 6px 32px rgba(0,0,0,0.42)" }}
+            >
+              Supply Egypt's
               <br />
-              <span className="font-cormorant italic text-[var(--color-green-bright)]">Ready for Export</span>
+              <span className="font-cormorant italic text-[var(--color-green-bright)]">finest produce</span>
             </motion.h1>
 
-            <motion.p variants={staggerItemVariants} className="mx-auto mt-7 max-w-2xl text-base font-medium leading-8 text-white/90 md:text-lg lg:mx-0" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.32)" }}>
-              Fresh and frozen fruits and vegetables supplied from Egypt for importers, distributors, wholesalers, supermarkets, and food trading companies.
+            <motion.p
+              variants={staggerItemVariants}
+              className="mx-auto mt-8 max-w-3xl text-base font-medium leading-8 text-white/90 md:text-xl"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.34)" }}
+            >
+              Al Baraka supports importers, distributors, wholesalers, supermarkets, and food trading companies with reliable fresh and frozen product programs, flexible packaging, and professional shipment support.
             </motion.p>
 
-            <motion.div variants={staggerItemVariants} className="mt-8 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
-              {heroCategories.map((item) => (
-                <div key={item.label} className="group rounded-2xl border border-white/14 bg-white/[0.09] p-4 text-left text-white backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white/[0.13]">
-                  <div className="flex items-start gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-green-bright)]/16 text-[var(--color-green-bright)]">
-                      <item.icon className="h-5 w-5" />
-                    </span>
-                    <span>
-                      <span className="block font-bold">{item.label}</span>
-                      <span className="mt-1 block text-sm text-white/64">{item.detail}</span>
-                    </span>
-                  </div>
+            <motion.div variants={staggerItemVariants} className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-9 py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(15,107,58,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_18px_42px_rgba(15,107,58,0.45)]">
+                Explore Export Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-white/35 bg-white/8 px-9 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-[var(--color-earth-dark)]">
+                Request Supply Details
+              </Link>
+            </motion.div>
+
+            <motion.div variants={staggerItemVariants} className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/14 bg-white/[0.10] px-5 py-4 text-white backdrop-blur-md">
+                  <div className="font-playfair text-3xl font-bold md:text-4xl">{stat.value}</div>
+                  <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/62">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
-
-            <motion.div variants={staggerItemVariants} className="mt-10 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-8 py-4 text-sm font-bold text-white shadow-[0_12px_28px_rgba(15,107,58,0.3)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_16px_36px_rgba(15,107,58,0.45)]">
-                Explore Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-white/35 bg-white/8 px-8 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-[var(--color-earth-dark)]">
-                Request a Quote
-              </Link>
-            </motion.div>
           </motion.div>
+        </div>
 
-          <motion.div initial={{ opacity: 0, x: 36, scale: 0.98 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ delay: 0.35, duration: 0.75, ease: [0.16, 1, 0.3, 1] }} className="mx-auto hidden w-full max-w-xl lg:block">
-            <div className="rounded-[38px] border border-white/14 bg-white/[0.10] p-6 text-white shadow-[0_30px_90px_rgba(0,0,0,0.30)] backdrop-blur-xl">
-              <div className="flex items-center justify-between gap-6 border-b border-white/12 pb-5">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-gold-light)]">Buyer Dashboard</span>
-                  <h2 className="mt-2 font-playfair text-4xl font-semibold">Supply Overview</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.82, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-8 left-1/2 z-20 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2"
+        >
+          <div className="overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.10] text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+            <div className="grid lg:grid-cols-[1.1fr_1.25fr]">
+              <div className="border-b border-white/12 p-5 lg:border-b-0 lg:border-r">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-gold-light)]">Product Families</span>
+                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Export Ready</span>
                 </div>
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-green-bright)]/18 text-[var(--color-green-bright)]">
-                  <Boxes className="h-7 w-7" />
-                </span>
-              </div>
-
-              <div className="mt-6 grid grid-cols-3 gap-3">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-white/12 bg-white/[0.10] p-4 text-center">
-                    <div className="font-playfair text-3xl font-bold">{stat.value}+</div>
-                    <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white/62">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 rounded-3xl border border-white/12 bg-black/10 p-5">
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="font-bold">Export Workflow</span>
-                  <span className="rounded-full bg-[var(--color-green-bright)]/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-green-bright)]">Professional</span>
-                </div>
-                <div className="relative grid grid-cols-4 gap-3">
-                  <span className="absolute left-[8%] right-[8%] top-5 h-px bg-white/14" />
-                  {exportSteps.map((step, index) => (
-                    <div key={step} className="relative text-center">
-                      <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/18 bg-[var(--color-earth-dark)] text-sm font-bold text-[var(--color-green-bright)]">{index + 1}</span>
-                      <span className="mt-3 block text-xs font-bold text-white/76">{step}</span>
+                <div className="grid grid-cols-2 gap-2">
+                  {heroCategories.map((category) => (
+                    <div key={category.label} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-3">
+                      <category.icon className="h-4 w-4 shrink-0 text-[var(--color-green-bright)]" />
+                      <span className="text-xs font-bold text-white/78">{category.label}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-3">
-                {[
-                  "Flexible packaging according to buyer needs",
-                  "Fresh and frozen product programs",
-                  "Shipment and documentation support",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.08] p-4">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--color-green-bright)]" />
-                    <span className="text-sm font-semibold text-white/78">{item}</span>
-                  </div>
-                ))}
+              <div className="p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/64">Supply Workflow</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/52">From Egypt to your market</span>
+                </div>
+                <div className="grid grid-cols-4 gap-2">
+                  {exportFlow.map((step, index) => (
+                    <div key={step.title} className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-3 text-center">
+                      {index < exportFlow.length - 1 && <span className="absolute -right-3 top-1/2 hidden h-px w-4 bg-white/18 md:block" />}
+                      <step.icon className="mx-auto mb-2 h-4 w-4 text-[var(--color-green-bright)]" />
+                      <span className="block text-xs font-bold text-white">{step.title}</span>
+                      <span className="mt-1 hidden text-[10px] leading-4 text-white/54 sm:block">{step.copy}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} className="absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 md:flex">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Scroll</span>
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} className="flex h-9 w-6 justify-center rounded-full border border-white/35 p-1">
-            <span className="h-2 w-1 rounded-full bg-[var(--color-green-bright)]" />
-          </motion.div>
+          </div>
         </motion.div>
       </section>
 
