@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "upload:product-images": "node scripts/upload-product-images.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
