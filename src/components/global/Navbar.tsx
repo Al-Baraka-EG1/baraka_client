@@ -25,6 +25,47 @@ const EASE_SMOOTH_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
 const EASE_SMOOTH_ARR: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const DURATION_BASE = 500;
 
+const mobileMenuVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.26, ease: EASE_SMOOTH_ARR } },
+  exit: { opacity: 0, transition: { delay: 0.18, duration: 0.28, ease: EASE_SMOOTH_ARR } },
+};
+
+const mobilePanelVariants = {
+  hidden: {
+    clipPath: "circle(0% at calc(100% - 44px) 44px)",
+    opacity: 0.4,
+  },
+  visible: {
+    clipPath: "circle(150% at calc(100% - 44px) 44px)",
+    opacity: 1,
+    transition: { duration: 0.62, ease: EASE_SMOOTH_ARR },
+  },
+  exit: {
+    clipPath: "circle(0% at calc(100% - 44px) 44px)",
+    opacity: 0.5,
+    transition: { delay: 0.1, duration: 0.48, ease: EASE_SMOOTH_ARR },
+  },
+};
+
+const mobileContentVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { delayChildren: 0.18, staggerChildren: 0.055 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { staggerChildren: 0.035, staggerDirection: -1, duration: 0.18 },
+  },
+};
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.36, ease: EASE_SMOOTH_ARR } },
+  exit: { opacity: 0, y: -12, scale: 0.98, transition: { duration: 0.24, ease: EASE_SMOOTH_ARR } },
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -206,32 +247,40 @@ export default function Navbar() {
         </div>
       </header>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {mobileMenuOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.28, ease: EASE_SMOOTH_ARR }}
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="fixed inset-0 z-[110] overflow-hidden bg-[var(--color-earth-dark)] lg:hidden"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,198,63,0.26),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(242,193,78,0.18),transparent_40%)]" />
-            <motion.div animate={{ y: [0, -18, 0], rotate: [0, 8, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute -left-10 top-28 h-32 w-32 opacity-20">
+            <motion.div variants={mobilePanelVariants} className="absolute inset-0 bg-[var(--color-earth-dark)]" />
+            <motion.div variants={mobilePanelVariants} className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,198,63,0.26),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(242,193,78,0.18),transparent_40%)]" />
+            <motion.div
+              animate={{ y: [0, -18, 0], rotate: [0, 8, 0] }}
+              exit={{ opacity: 0, y: -30, rotate: -12, transition: { duration: 0.24 } }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -left-10 top-28 h-32 w-32 opacity-20"
+            >
               <Image src="/assets/leaf.png" alt="" fill className="object-contain" aria-hidden="true" />
             </motion.div>
-            <motion.div animate={{ y: [0, 16, 0], rotate: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-8 bottom-24 h-40 w-40 opacity-20">
+            <motion.div
+              animate={{ y: [0, 16, 0], rotate: [0, -10, 0] }}
+              exit={{ opacity: 0, y: 34, rotate: 16, transition: { duration: 0.24 } }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -right-8 bottom-24 h-40 w-40 opacity-20"
+            >
               <Image src="/assets/leaf.png" alt="" fill className="object-contain" aria-hidden="true" />
             </motion.div>
 
             <motion.div
-              initial={{ y: -24, opacity: 0, scale: 0.98 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: -18, opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.42, ease: EASE_SMOOTH_ARR }}
+              variants={mobileContentVariants}
               className="relative flex h-full flex-col overflow-y-auto px-5 pb-6 pt-5"
             >
-              <div className="flex items-center justify-between">
+              <motion.div variants={mobileItemVariants} className="flex items-center justify-between">
                 <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3">
                   <span className="relative block h-12 w-12 rounded-2xl bg-white/10 p-2 backdrop-blur-md">
                     <Image src="/assets/logo-noback.png" alt="Al BARAKA FOR IMPORT & EXPORT logo" fill className="object-contain p-1" />
@@ -248,12 +297,14 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Close navigation"
                 >
-                  <X className="h-5 w-5" />
+                  <motion.span animate={{ rotate: [0, 90, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
+                    <X className="h-5 w-5" />
+                  </motion.span>
                 </motion.button>
-              </div>
+              </motion.div>
 
-              <div className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.08] p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl">
-                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.38 }}>
+              <motion.div variants={mobileItemVariants} className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.08] p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl">
+                <motion.div variants={mobileItemVariants}>
                   <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-gold-light)]">
                     <Leaf className="h-3 w-3" /> Egyptian Export Supplier
                   </span>
@@ -267,13 +318,8 @@ export default function Navbar() {
                 </motion.div>
 
                 <nav className="mt-7 grid gap-3">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -18 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.18 + index * 0.06, duration: 0.36, ease: EASE_SMOOTH_ARR }}
-                    >
+                  {navLinks.map((link) => (
+                    <motion.div key={link.name} variants={mobileItemVariants}>
                       <Link
                         href={link.path}
                         onClick={() => setMobileMenuOpen(false)}
@@ -291,7 +337,7 @@ export default function Navbar() {
                   ))}
                 </nav>
 
-                <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.4 }} className="mt-5 grid grid-cols-3 gap-2">
+                <motion.div variants={mobileItemVariants} className="mt-5 grid grid-cols-3 gap-2">
                   {mobileHighlights.map((item) => (
                     <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.08] p-3 text-center">
                       <item.icon className="mx-auto mb-2 h-5 w-5 text-[var(--color-green-bright)]" />
@@ -300,7 +346,7 @@ export default function Navbar() {
                   ))}
                 </motion.div>
 
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.52, duration: 0.4 }} className="mt-5 grid gap-3">
+                <motion.div variants={mobileItemVariants} className="mt-5 grid gap-3">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[var(--color-green-forest)] shadow-lg">
                     Request a Quote <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -309,7 +355,7 @@ export default function Navbar() {
                     <span className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-[var(--color-green-bright)]" /> info@albaraka-eg.org</span>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
