@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Globe2, Leaf, PackageCheck, ShieldCheck, Snowflake, Sprout, Truck } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Leaf, PackageCheck, ShieldCheck, Snowflake, Sprout, Truck } from "lucide-react";
 import { motion } from "motion/react";
 import FloatingLeaves from "@/components/custom/FloatingLeaves";
 import { clipRevealVariants, scaleRevealVariants, slideInLeftVariants, slideInRightVariants, staggerContainerVariants, staggerItemVariants } from "@/lib/animations";
