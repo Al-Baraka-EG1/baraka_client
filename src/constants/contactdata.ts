@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 const contactCards = [
-  { icon: Phone, label: "Phone", value: "+20 100 123 4567\n+20 100 987 6543" },
+  { icon: Phone, label: "Phone", value: "+20 10 01269029\n+20 2 24142974" },
   {
     icon: Mail,
     label: "Email",
@@ -19,7 +19,7 @@ const contactCards = [
   {
     icon: MapPin,
     label: "Address",
-    value: "64 RABAA INVESTMENT BUILDINGS NASR CITY\n11765 CAIRO - EGYPT",
+    value: "64 Rabaa Investment Buildings\nNasr City, 11765 Cairo, Egypt",
   },
   {
     icon: Clock,
@@ -28,42 +28,42 @@ const contactCards = [
   },
   {
     icon: Globe2,
-    label: "Export Markets",
-    value: "Middle East, Europe,\nAfrica and Asia",
+    label: "Buyer Types",
+    value: "Importers, distributors, wholesalers, supermarkets\nand food trading companies",
   },
 ];
 
 const heroBenefits = [
-  { title: "Fast Response", detail: "We reply within 24 hours", icon: Leaf },
+  { title: "Fast Response", detail: "Supply details and quotation support", icon: Leaf },
   {
-    title: "Trusted Partner",
-    detail: "Quality you can rely on",
+    title: "Export Partner",
+    detail: "Fresh and frozen products from Egypt",
     icon: ShieldCheck,
   },
 ];
 
 const partnershipBenefits = [
-  { label: "Premium Quality", icon: ShieldCheck },
   { label: "Reliable Supply", icon: PackageCheck },
-  { label: "Global Standards", icon: Globe2 },
+  { label: "Flexible Packaging", icon: Leaf },
+  { label: "Shipment Support", icon: Globe2 },
 ];
 
 const faqs = [
   {
     q: "What types of products does Al Baraka offer?",
-    a: "We offer fresh and frozen fruits and vegetables including bell peppers, carrots, apples, and IQF strawberries.",
+    a: "We supply fresh products such as carrots, potatoes, colored peppers, broccoli, citrus fruits, garlic, onions, and green beans, plus frozen products such as strawberries, mango, green peas, green beans, molokhia, okra, mixed vegetables, carrot cuts, spinach, and broccoli.",
   },
   {
-    q: "Do you offer bulk orders and private labeling?",
-    a: "Yes. Our team supports wholesale supply, private label discussions, and distribution partnerships.",
+    q: "Who does Al Baraka work with?",
+    a: "We work with importers, distributors, wholesalers, supermarkets, and food trading companies looking for reliable fresh and frozen product supply from Egypt.",
   },
   {
-    q: "What certifications do you have?",
-    a: "Our products and handling process follow ISO and HACCP quality standards.",
+    q: "Do you support packaging and shipment requirements?",
+    a: "Yes. Our team supports flexible packaging discussions, product specifications, documentation, and shipment support according to buyer requirements.",
   },
   {
-    q: "Which countries do you export to?",
-    a: "We serve partners across the Middle East and beyond, with Egyptian supply and Polish apple sourcing through Marianna.",
+    q: "Where is Al Baraka located?",
+    a: "Our office is located at 64 Rabaa Investment Buildings, Nasr City, 11765 Cairo, Egypt.",
   },
 ];
 
