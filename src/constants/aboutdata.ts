@@ -1,44 +1,52 @@
-import { CheckCircle2, ShieldCheck, Sprout } from "lucide-react";
+import { CheckCircle2, PackageCheck, ShieldCheck, Sprout } from "lucide-react";
 
 const values = [
   {
     icon: Sprout,
     title: "Freshness",
-    copy: "We deliver nature's goodness at its peak, preserving taste, nutrition, and freshness in every harvest.",
+    copy: "We focus on clean, market-ready fresh and frozen products prepared according to buyer needs.",
   },
   {
     icon: ShieldCheck,
-    title: "Integrity",
-    copy: "Honesty and transparency guide every step we take, from our farms to your hands.",
+    title: "Reliability",
+    copy: "We build long-term supply relationships through clear communication, careful handling, and dependable follow-up.",
   },
   {
     icon: CheckCircle2,
-    title: "Quality",
-    copy: "We never compromise on quality. Our global standards ensure the best reaches you, always.",
+    title: "Quality Focus",
+    copy: "Every order is treated with attention to selection, packaging requirements, documentation, and shipment support.",
   },
 ];
 
 const milestones = [
   [
-    "1995",
-    "Our Beginning",
-    "Al BARAKA FOR IMPORT & EXPORT was founded in Cairo with a vision to deliver premium produce.",
+    "01",
+    "Understand Requirements",
+    "We align on product type, quantity, specifications, packaging, destination, and delivery expectations.",
   ],
   [
-    "2000s",
-    "Building Partnerships",
-    "Strategic relationships helped expand our regional reach.",
+    "02",
+    "Prepare Supply",
+    "Our team coordinates product selection, packing options, and export-ready preparation from Egypt.",
   ],
   [
-    "2019",
-    "Poland Link",
-    "Marianna in Warsaw strengthened our apple sourcing and European supply.",
+    "03",
+    "Support Documentation",
+    "We support the buyer with shipment details, documentation flow, and clear communication.",
   ],
   [
-    "Today",
-    "Stronger Together",
-    "A modern fresh and frozen produce partner for the Middle East.",
+    "04",
+    "Build Partnership",
+    "We follow up after each shipment to improve future programs and create a reliable long-term supply relationship.",
   ],
 ];
 
-export { milestones, values };
+const partnerTypes = [
+  { title: "Importers", icon: PackageCheck },
+  { title: "Distributors", icon: CheckCircle2 },
+  { title: "Wholesalers", icon: Sprout },
+  { title: "Supermarkets", icon: ShieldCheck },
+  { title: "Food Trading Companies", icon: PackageCheck },
+];
+
+export { milestones, values, partnerTypes };
