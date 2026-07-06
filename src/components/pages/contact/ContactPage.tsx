@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ChevronDown, Leaf, Mail, MapPin, PackageCheck, Phone, Send } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown, Leaf, Mail, MapPin, Phone, Send } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import FloatingLeaves from "@/components/custom/FloatingLeaves";
 import { clipRevealVariants, scaleRevealVariants, slideInLeftVariants, slideInRightVariants } from "@/lib/animations";
