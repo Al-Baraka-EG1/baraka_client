@@ -36,7 +36,7 @@ export default function CloudinaryTestPage() {
 
           <div className="bg-black/40 border border-white/5 rounded-2xl p-4 font-mono text-xs text-neutral-300 select-all overflow-x-auto">
             <p className="text-neutral-500 mb-1"># Add this to your environment variables</p>
-            <p className="text-blue-400">NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME<span className="text-white">=</span><span className="text-green-400">"your_cloud_name"</span></p>
+            <p className="text-blue-400">NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME<span className="text-white">=</span><span className="text-green-400">&quot;your_cloud_name&quot;</span></p>
           </div>
 
           <div className="text-center">

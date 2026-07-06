@@ -1,0 +1,21 @@
+{
+  "0": "animations.ts",
+  "1": "devDependencies",
+  "2": "ProductDetailPage.tsx",
+  "3": "components.json",
+  "4": "HomePage.tsx",
+  "5": "compilerOptions",
+  "6": "dependencies",
+  "7": "ContactPage.tsx",
+  "8": "products.ts",
+  "9": "layout.tsx",
+  "10": "cloudinary.ts",
+  "11": "graphify_code_only.py",
+  "12": "button.tsx",
+  "13": "eslint.config.mjs",
+  "14": "next.config.ts",
+  "15": "next-env.d.ts",
+  "16": "postcss.config.mjs",
+  "17": "ProductDetailsAnimations.tsx",
+  "18": "useProductDetailAnimations.ts"
+}

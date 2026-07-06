@@ -1,0 +1,442 @@
+{
+  "communities": {
+    "0": [
+      "src_app_about_page",
+      "src_app_about_page_metadata",
+      "src_app_about_page_page",
+      "src_app_privacy_page",
+      "src_app_privacy_page_metadata",
+      "src_app_privacy_page_page",
+      "src_app_terms_page",
+      "src_app_terms_page_metadata",
+      "src_app_terms_page_page",
+      "src_components_custom_floatingleaves_floatingleaves",
+      "src_components_pages_about_aboutpage",
+      "src_components_pages_about_aboutpage_aboutpage",
+      "src_components_pages_privacy_privacypage",
+      "src_components_pages_privacy_privacypage_privacypage",
+      "src_components_pages_terms_termspage",
+      "src_components_pages_terms_termspage_termspage",
+      "src_constants_aboutdata",
+      "src_constants_aboutdata_milestones",
+      "src_constants_aboutdata_values",
+      "src_hooks_useaboutanimations",
+      "src_hooks_useaboutanimations_useaboutanimations",
+      "src_hooks_usecontactanimations",
+      "src_hooks_usecontactanimations_usecontactanimations",
+      "src_hooks_usehomeanimations",
+      "src_hooks_usehomeanimations_usehomeanimations",
+      "src_lib_animations",
+      "src_lib_animations_cliprevealvariants",
+      "src_lib_animations_fadeinupvariants",
+      "src_lib_animations_scalerevealvariants",
+      "src_lib_animations_slideinleftvariants",
+      "src_lib_animations_slideinrightvariants",
+      "src_lib_animations_staggeritemvariants",
+      "src_lib_animations_useparallax",
+      "src_lib_animations_usescrollfadein",
+      "src_lib_animations_usescrollvideo"
+    ],
+    "1": [
+      "package",
+      "package_devdependencies",
+      "package_devdependencies_babel_plugin_react_compiler",
+      "package_devdependencies_dotenv",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_config_next",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_postcss",
+      "package_devdependencies_tsx",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_graphify_build",
+      "package_scripts_graphify_install",
+      "package_scripts_graphify_query",
+      "package_scripts_graphify_update",
+      "package_scripts_lint",
+      "package_scripts_start",
+      "package_version"
+    ],
+    "2": [
+      "src_components_custom_productcard",
+      "src_components_custom_productcard_motionlink",
+      "src_components_custom_productcard_productcard",
+      "src_components_custom_productcard_productcardprops",
+      "src_components_pages_products_productdetailpage",
+      "src_components_pages_products_productdetailpage_productdetailpage",
+      "src_components_pages_products_productdetailpage_productdetailpageprops",
+      "src_components_pages_products_productspage",
+      "src_components_pages_products_productspage_filtericons",
+      "src_components_pages_products_productspage_productbenefits",
+      "src_components_pages_products_productspage_productspage",
+      "src_components_pages_products_productspage_productspageprops",
+      "src_constants_productdetaildata",
+      "src_constants_productdetaildata_standardsteps",
+      "src_hooks_useproductsanimations",
+      "src_hooks_useproductsanimations_useproductsanimations",
+      "src_lib_animations_staggercontainervariants",
+      "src_lib_images",
+      "src_lib_images_getproductgallery",
+      "src_lib_images_getproductheroimage",
+      "src_lib_images_getproductimage",
+      "src_lib_images_getproductvideo",
+      "src_types_productstypes",
+      "src_types_productstypes_productstype"
+    ],
+    "3": [
+      "components",
+      "components_aliases",
+      "components_aliases_components",
+      "components_aliases_hooks",
+      "components_aliases_lib",
+      "components_aliases_ui",
+      "components_aliases_utils",
+      "components_iconlibrary",
+      "components_menuaccent",
+      "components_menucolor",
+      "components_registries",
+      "components_rsc",
+      "components_rtl",
+      "components_schema",
+      "components_style",
+      "components_tailwind",
+      "components_tailwind_basecolor",
+      "components_tailwind_config",
+      "components_tailwind_css",
+      "components_tailwind_cssvariables",
+      "components_tailwind_prefix",
+      "components_tsx"
+    ],
+    "4": [
+      "src_app_page",
+      "src_app_page_home",
+      "src_components_custom_animatedcounter",
+      "src_components_custom_animatedcounter_animatedcounter",
+      "src_components_custom_animatedcounter_animatedcounterprops",
+      "src_components_custom_floatingleaves",
+      "src_components_custom_floatingleaves_defaultleaves",
+      "src_components_custom_floatingleaves_floatingleavesprops",
+      "src_components_custom_floatingleaves_leafconfig",
+      "src_components_custom_transparentimage",
+      "src_components_custom_transparentimage_transparentimage",
+      "src_components_custom_transparentimage_transparentimageprops",
+      "src_components_pages_home_homepage",
+      "src_components_pages_home_homepage_homepage",
+      "src_components_pages_home_homepage_trustbadges",
+      "src_constants_homedata",
+      "src_constants_homedata_qualityitems",
+      "src_constants_homedata_trustitems",
+      "src_lib_images_images",
+      "src_lib_images_videos"
+    ],
+    "5": [
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_esmoduleinterop",
+      "tsconfig_compileroptions_incremental",
+      "tsconfig_compileroptions_isolatedmodules",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_paths",
+      "tsconfig_compileroptions_plugins",
+      "tsconfig_compileroptions_resolvejsonmodule",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict",
+      "tsconfig_compileroptions_target",
+      "tsconfig_exclude",
+      "tsconfig_include",
+      "tsconfig_paths"
+    ],
+    "6": [
+      "package_dependencies",
+      "package_dependencies_class_variance_authority",
+      "package_dependencies_clsx",
+      "package_dependencies_gsap",
+      "package_dependencies_gsap_react",
+      "package_dependencies_hookform_resolvers",
+      "package_dependencies_lucide_react",
+      "package_dependencies_motion",
+      "package_dependencies_next",
+      "package_dependencies_next_cloudinary",
+      "package_dependencies_radix_ui",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_hook_form",
+      "package_dependencies_shadcn",
+      "package_dependencies_tailwind_merge",
+      "package_dependencies_tw_animate_css",
+      "package_dependencies_zod"
+    ],
+    "7": [
+      "src_app_contact_page",
+      "src_app_contact_page_metadata",
+      "src_app_contact_page_page",
+      "src_components_custom_fieldform",
+      "src_components_custom_fieldform_field",
+      "src_components_pages_contact_contactpage",
+      "src_components_pages_contact_contactpage_contactpage",
+      "src_constants_contactdata",
+      "src_constants_contactdata_contactcards",
+      "src_constants_contactdata_faqs",
+      "src_constants_contactdata_herobenefits",
+      "src_constants_contactdata_partnershipbenefits",
+      "src_hooks_usecontactform",
+      "src_hooks_usecontactform_usecontactform",
+      "src_lib_validations_contactschema",
+      "src_lib_validations_contactschema_formdata",
+      "src_lib_validations_contactschema_formschema"
+    ],
+    "8": [
+      "src_app_products_page",
+      "src_app_products_page_metadata",
+      "src_app_products_page_page",
+      "src_app_products_slug_page",
+      "src_app_products_slug_page_generatemetadata",
+      "src_app_products_slug_page_generatestaticparams",
+      "src_app_products_slug_page_page",
+      "src_app_products_slug_page_props",
+      "src_components_global_footer",
+      "src_components_global_footer_footer",
+      "src_components_global_navbar",
+      "src_components_global_navbar_ease_smooth_arr",
+      "src_components_global_navbar_navbar",
+      "src_components_global_navbar_navlinks",
+      "src_lib_products",
+      "src_lib_products_getproductbyslug",
+      "src_lib_products_products"
+    ],
+    "9": [
+      "package_dependencies_lenis",
+      "src_app_layout",
+      "src_app_layout_cormorant",
+      "src_app_layout_dmsans",
+      "src_app_layout_metadata",
+      "src_app_layout_playfair",
+      "src_app_layout_rootlayout",
+      "src_app_layout_spacemono",
+      "src_components_global_backtotop",
+      "src_components_global_backtotop_backtotop",
+      "src_providers_lenisprovider",
+      "src_providers_lenisprovider_lenisscrollprovider",
+      "src_providers_motionprovider",
+      "src_providers_motionprovider_motionprovider"
+    ],
+    "10": [
+      "package_dependencies_cloudinary",
+      "src_app_actions_cloudinary",
+      "src_app_actions_cloudinary_cloudinaryasset",
+      "src_app_actions_cloudinary_cloudinaryassetsresult",
+      "src_app_actions_cloudinary_getcloudinaryassets",
+      "src_app_cloudinary_test_page",
+      "src_app_cloudinary_test_page_cloudinarytestpage",
+      "src_lib_cloudinary",
+      "src_utils_fetch_assets",
+      "src_utils_fetch_assets_main"
+    ],
+    "11": [
+      "path",
+      "scripts_graphify_code_only",
+      "scripts_graphify_code_only_code_files",
+      "scripts_graphify_code_only_is_skipped",
+      "scripts_graphify_code_only_main",
+      "scripts_graphify_code_only_word_count"
+    ],
+    "12": [
+      "src_components_ui_button",
+      "src_components_ui_button_button",
+      "src_components_ui_button_buttonvariants",
+      "src_lib_utils",
+      "src_lib_utils_cn"
+    ],
+    "13": [
+      "eslint_config",
+      "eslint_config_eslintconfig"
+    ],
+    "14": [
+      "next_config",
+      "next_config_nextconfig"
+    ],
+    "15": [
+      "next_env_d",
+      "next_env_d_rationale_5"
+    ],
+    "16": [
+      "postcss_config",
+      "postcss_config_config"
+    ],
+    "17": [
+      "src_app_products_slug_productdetailsanimations",
+      "src_app_products_slug_productdetailsanimations_productdetailsanimations"
+    ],
+    "18": [
+      "src_hooks_useproductdetailanimations",
+      "src_hooks_useproductdetailanimations_useproductdetailanimations"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09411764705882353,
+    "1": 0.08,
+    "2": 0.18478260869565216,
+    "3": 0.09090909090909091,
+    "4": 0.12631578947368421,
+    "5": 0.1,
+    "6": 0.1111111111111111,
+    "7": 0.20588235294117646,
+    "8": 0.16911764705882354,
+    "9": 0.17582417582417584,
+    "10": 0.3333333333333333,
+    "11": 0.6666666666666666,
+    "12": 0.7,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0
+  },
+  "labels": {
+    "0": "animations.ts",
+    "1": "devDependencies",
+    "2": "ProductDetailPage.tsx",
+    "3": "components.json",
+    "4": "HomePage.tsx",
+    "5": "compilerOptions",
+    "6": "dependencies",
+    "7": "ContactPage.tsx",
+    "8": "products.ts",
+    "9": "layout.tsx",
+    "10": "cloudinary.ts",
+    "11": "graphify_code_only.py",
+    "12": "button.tsx",
+    "13": "eslint.config.mjs",
+    "14": "next.config.ts",
+    "15": "next-env.d.ts",
+    "16": "postcss.config.mjs",
+    "17": "ProductDetailsAnimations.tsx",
+    "18": "useProductDetailAnimations.ts"
+  },
+  "gods": [
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 16
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 9
+    },
+    {
+      "id": "src_lib_animations_usescrollfadein",
+      "label": "useScrollFadeIn()",
+      "degree": 9
+    },
+    {
+      "id": "src_types_productstypes_productstype",
+      "label": "ProductsType",
+      "degree": 9
+    },
+    {
+      "id": "src_lib_animations_scalerevealvariants",
+      "label": "scaleRevealVariants",
+      "degree": 8
+    },
+    {
+      "id": "src_lib_animations_cliprevealvariants",
+      "label": "clipRevealVariants",
+      "degree": 8
+    },
+    {
+      "id": "src_components_custom_floatingleaves_floatingleaves",
+      "label": "FloatingLeaves()",
+      "degree": 7
+    },
+    {
+      "id": "components_tailwind",
+      "label": "tailwind",
+      "degree": 6
+    },
+    {
+      "id": "components_aliases",
+      "label": "aliases",
+      "degree": 6
+    },
+    {
+      "id": "src_lib_images_images",
+      "label": "images",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "LenisScrollProvider()",
+      "target": "lenis",
+      "source_files": [
+        "src/providers/LenisProvider.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "CloudinaryTestPage()",
+      "target": "getCloudinaryAssets()",
+      "source_files": [
+        "src/app/cloudinary-test/page.tsx",
+        "src/app/actions/cloudinary.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `CloudinaryTestPage()` unexpectedly reaches hub `getCloudinaryAssets()`"
+    },
+    {
+      "source": "main()",
+      "target": "getCloudinaryAssets()",
+      "source_files": [
+        "src/utils/fetch_assets.ts",
+        "src/app/actions/cloudinary.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `main()` unexpectedly reaches hub `getCloudinaryAssets()`"
+    },
+    {
+      "source": "ProductCardProps",
+      "target": "ProductsType",
+      "source_files": [
+        "src/components/custom/ProductCard.tsx",
+        "src/types/ProductsTypes.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `ProductCardProps` unexpectedly reaches hub `ProductsType`"
+    },
+    {
+      "source": "ProductDetailPageProps",
+      "target": "ProductsType",
+      "source_files": [
+        "src/components/pages/products/ProductDetailPage.tsx",
+        "src/types/ProductsTypes.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `ProductDetailPageProps` unexpectedly reaches hub `ProductsType`"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

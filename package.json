@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "graphify:install": "uv tool run --from git+https://github.com/Graphify-Labs/graphify.git@aba1232b669024f43a6ad2731933a27e88b1b656 graphify install --project --platform codex",
+    "graphify:build": "uv tool run --from git+https://github.com/Graphify-Labs/graphify.git@aba1232b669024f43a6ad2731933a27e88b1b656 python scripts/graphify_code_only.py",
+    "graphify:update": "uv tool run --from git+https://github.com/Graphify-Labs/graphify.git@aba1232b669024f43a6ad2731933a27e88b1b656 graphify update .",
+    "graphify:query": "uv tool run --from git+https://github.com/Graphify-Labs/graphify.git@aba1232b669024f43a6ad2731933a27e88b1b656 graphify query"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
