@@ -98,7 +98,7 @@ const heroLeaves = [
 export default function HomePageV2() {
   return (
     <div className="overflow-hidden bg-[var(--color-cream)]">
-      <section className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-earth-dark)]">
+      <section className="relative flex min-h-[106dvh] items-center overflow-hidden bg-[var(--color-earth-dark)] lg:min-h-[112dvh]">
         <video
           src={videos.hero}
           autoPlay
@@ -108,20 +108,20 @@ export default function HomePageV2() {
           className="absolute inset-0 h-full w-full scale-[1.02] object-cover"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,24,16,0.44)_0%,rgba(10,24,16,0.28)_42%,rgba(10,24,16,0.74)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(85,165,111,0.28),transparent_32%),radial-gradient(circle_at_78%_18%,rgba(225,181,111,0.13),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/14 to-transparent" />
-        <div className="absolute inset-0 opacity-[0.09] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:92px_92px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,24,16,0.40)_0%,rgba(10,24,16,0.24)_40%,rgba(10,24,16,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_33%,rgba(85,165,111,0.30),transparent_32%),radial-gradient(circle_at_78%_18%,rgba(225,181,111,0.13),transparent_28%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/16 to-transparent" />
+        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:92px_92px]" />
 
         <motion.div
           aria-hidden="true"
-          className="absolute left-1/2 top-[42%] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+          className="absolute left-1/2 top-[40%] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
           animate={{ scale: [1, 1.06, 1], opacity: [0.15, 0.30, 0.15] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden="true"
-          className="absolute left-1/2 top-[42%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+          className="absolute left-1/2 top-[40%] h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
           animate={{ scale: [1.08, 1, 1.08], opacity: [0.13, 0.25, 0.13] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -145,19 +145,9 @@ export default function HomePageV2() {
           ))}
         </div>
 
-        <div className="container relative z-10 mx-auto flex min-h-[100dvh] flex-col justify-center px-5 pb-36 pt-36 text-center md:px-8 lg:px-12">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto max-w-5xl">
-            <motion.div variants={staggerItemVariants} className="mb-6 inline-flex items-center gap-3 rounded-2xl border border-white/16 bg-white/[0.10] px-4 py-3 text-white shadow-[0_18px_60px_rgba(0,0,0,0.18)] backdrop-blur-md">
-              <span className="relative block h-11 w-11 shrink-0 rounded-xl bg-white/12 p-1.5">
-                <Image src="/assets/logo-noback.png" alt="Al Baraka logo" fill priority className="object-contain p-1" />
-              </span>
-              <span className="text-left leading-none">
-                <span className="block font-space-mono text-[9px] font-bold uppercase tracking-[0.36em] text-[var(--color-gold-light)]">Company</span>
-                <span className="mt-1 block font-playfair text-3xl font-semibold tracking-wide text-white md:text-4xl">AL BARAKA</span>
-              </span>
-            </motion.div>
-
-            <motion.div variants={staggerItemVariants} className="mb-6 flex justify-center">
+        <div className="container relative z-10 mx-auto flex min-h-[100dvh] flex-col justify-center px-5 pb-48 pt-32 text-center md:px-8 lg:px-12 lg:pb-56">
+          <motion.div initial="hidden" animate="visible" variants={staggerContainerVariants} className="mx-auto max-w-6xl">
+            <motion.div variants={staggerItemVariants} className="mb-5 flex justify-center">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/12 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
                 <Leaf className="h-3.5 w-3.5 text-[var(--color-green-bright)]" />
                 Fresh & Frozen Agricultural Products From Egypt
@@ -166,23 +156,25 @@ export default function HomePageV2() {
 
             <motion.h1
               variants={staggerItemVariants}
-              className="font-playfair text-[clamp(3.1rem,8.4vw,8.3rem)] font-bold leading-[0.88] tracking-tight text-white"
+              className="font-playfair font-bold leading-[0.86] tracking-tight text-white"
               style={{ textShadow: "0 6px 32px rgba(0,0,0,0.42)" }}
             >
-              Supply Egypt&apos;s
-              <br />
-              <span className="font-cormorant italic text-[var(--color-green-bright)]">finest produce</span>
+              <span className="block text-[clamp(3.2rem,8vw,7.7rem)] tracking-[0.03em]">AL BARAKA</span>
+              <span className="mt-4 block text-[clamp(2.8rem,6.7vw,6.8rem)]">Supply Egypt&apos;s</span>
+              <span className="mt-2 block font-cormorant text-[clamp(3.3rem,7.6vw,7.4rem)] italic text-[var(--color-green-bright)]">
+                finest produce
+              </span>
             </motion.h1>
 
             <motion.p
               variants={staggerItemVariants}
-              className="mx-auto mt-8 max-w-3xl text-base font-medium leading-8 text-white/90 md:text-xl"
+              className="mx-auto mt-7 max-w-3xl text-base font-medium leading-8 text-white/90 md:text-xl"
               style={{ textShadow: "0 2px 12px rgba(0,0,0,0.34)" }}
             >
               Al Baraka supports importers, distributors, wholesalers, supermarkets, and food trading companies with reliable fresh and frozen product programs, flexible packaging, and professional shipment support.
             </motion.p>
 
-            <motion.div variants={staggerItemVariants} className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <motion.div variants={staggerItemVariants} className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/products" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--color-green-forest)] px-9 py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(15,107,58,0.34)] transition-all hover:-translate-y-0.5 hover:bg-[var(--color-green-fresh)] hover:shadow-[0_18px_42px_rgba(15,107,58,0.45)]">
                 Explore Export Catalog <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -191,7 +183,7 @@ export default function HomePageV2() {
               </Link>
             </motion.div>
 
-            <motion.div variants={staggerItemVariants} className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
+            <motion.div variants={staggerItemVariants} className="mx-auto mt-9 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
               {heroStats.map((stat) => (
                 <div key={stat.label} className="rounded-2xl border border-white/14 bg-white/[0.10] px-5 py-4 text-white backdrop-blur-md">
                   <div className="font-playfair text-3xl font-bold md:text-4xl">{stat.value}</div>
@@ -206,7 +198,7 @@ export default function HomePageV2() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.82, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-10 left-1/2 z-20 hidden w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 lg:block"
+          className="absolute bottom-20 left-1/2 z-20 hidden w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 lg:block"
         >
           <div className="overflow-hidden rounded-[28px] border border-white/14 bg-white/[0.10] text-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
             <div className="grid lg:grid-cols-[1.1fr_1.25fr]">
@@ -245,7 +237,7 @@ export default function HomePageV2() {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.15, duration: 0.8 }} className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 md:flex lg:bottom-3">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.15, duration: 0.8 }} className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 md:flex">
           <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Scroll</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} className="flex h-9 w-6 justify-center rounded-full border border-white/35 p-1">
             <span className="h-2 w-1 rounded-full bg-[var(--color-green-bright)]" />
