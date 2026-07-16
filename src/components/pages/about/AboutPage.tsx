@@ -9,6 +9,8 @@ import { clipRevealVariants, scaleRevealVariants, slideInLeftVariants, slideInRi
 import { images, videos } from "@/lib/images";
 import { milestones, partnerTypes, values } from "@/constants/aboutdata";
 
+const mariannaWebsite = "https://www.marianna-biz.com/";
+
 const partnerPromise = [
   { title: "Fresh Products", copy: "Carrots, potatoes, colored peppers, broccoli, citrus, garlic, onions, green beans, and seasonal supply.", icon: Sprout },
   { title: "Frozen Products", copy: "Strawberries, mango, peas, beans, molokhia, okra, mixed vegetables, spinach, broccoli, and more.", icon: Snowflake },
@@ -20,6 +22,24 @@ const supportCards = [
   { name: "Flexible Packaging", icon: Leaf },
   { name: "Quality Selection", icon: ShieldCheck },
   { name: "Shipment Support", icon: Truck },
+];
+
+const partnershipStrengths = [
+  {
+    title: "Egypt-Poland Cooperation",
+    copy: "A cross-border commercial relationship connecting Egyptian sourcing and export support with Marianna's presence in Poland.",
+    icon: Truck,
+  },
+  {
+    title: "Structured Coordination",
+    copy: "Professional follow-up across product requirements, commercial documents, order communication, and shipment planning.",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Long-Term Business Focus",
+    copy: "A partnership built around dependable supply, clear communication, and lasting relationships with international buyers.",
+    icon: ShieldCheck,
+  },
 ];
 
 export default function AboutPage() {
@@ -41,20 +61,30 @@ export default function AboutPage() {
 
             <div className="section-label mb-5 tracking-[0.2em]">Al Baraka for Import & Export</div>
             <h1 className="font-playfair text-5xl font-semibold leading-[0.95] text-[var(--color-earth-dark)] sm:text-6xl md:text-7xl lg:text-8xl">
-              Your Egyptian
+              Egyptian Roots.
               <br />
-              <span className="text-[var(--color-green-forest)]">Supply Partner</span>
+              <span className="text-[var(--color-green-forest)]">International Partnerships.</span>
             </h1>
             <div className="mx-auto mt-6 h-[2px] w-24 bg-[var(--color-gold)]" />
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
-              We support importers, distributors, wholesalers, supermarkets, and food trading companies with fresh and frozen products from Egypt.
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-[var(--color-earth-mid)] md:text-xl">
+              We support importers, distributors, wholesalers, supermarkets, and food trading companies with fresh and frozen products from Egypt, backed by professional export coordination and international business relationships.
             </p>
+
+            <a
+              href={mariannaWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto mt-7 inline-flex items-center gap-3 rounded-full border border-[var(--color-green-forest)]/20 bg-white/80 px-5 py-3 text-sm font-semibold text-[var(--color-green-forest)] shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-[var(--color-green-forest)] hover:bg-white"
+            >
+              Commercial partner: Marianna, Poland
+              <ArrowRight className="h-4 w-4" />
+            </a>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }} className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
               {[
-                { value: "Fresh", label: "Products" },
-                { value: "Frozen", label: "Programs" },
-                { value: "Export", label: "Support" },
+                { value: "Egypt", label: "Sourcing Base" },
+                { value: "Poland", label: "Partner Network" },
+                { value: "Export", label: "Coordination" },
               ].map((stat) => (
                 <div key={stat.label} className="rounded-2xl border border-black/5 bg-white/65 p-4 backdrop-blur-sm">
                   <div className="font-playfair text-2xl font-semibold text-[var(--color-green-forest)] md:text-3xl">{stat.value}</div>
@@ -107,6 +137,79 @@ export default function AboutPage() {
                 </div>
               </div>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[var(--color-earth-dark)] py-24 text-white">
+        <div className="absolute -left-20 top-10 h-80 w-80 rounded-full bg-[var(--color-green-forest)]/20 blur-3xl" />
+        <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-[var(--color-gold)]/10 blur-3xl" />
+
+        <div className="container relative z-10 mx-auto grid items-center gap-12 px-4 md:px-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideInLeftVariants} className="relative">
+            <div className="relative min-h-[560px] overflow-hidden rounded-[34px] border border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.28)]">
+              <Image
+                src={images.polandOrchard}
+                alt="Al Baraka and Marianna international agricultural partnership"
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+              <div className="absolute left-6 top-6 rounded-full border border-white/20 bg-black/25 px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-xl">
+                Egypt x Poland
+              </div>
+              <div className="absolute bottom-7 left-7 right-7 rounded-[26px] border border-white/15 bg-white/10 p-6 backdrop-blur-xl">
+                <div className="font-playfair text-3xl font-semibold">Al Baraka & Marianna</div>
+                <p className="mt-2 max-w-xl text-sm leading-6 text-white/75">
+                  A commercial relationship built around professional coordination, international trade, and long-term business development.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideInRightVariants}>
+            <div className="mb-5 text-xs font-bold uppercase tracking-[0.24em] text-[var(--color-gold-light)]">International Partnership</div>
+            <h2 className="font-playfair text-5xl font-semibold leading-tight md:text-6xl">
+              Stronger through
+              <br />
+              serious cooperation.
+            </h2>
+            <div className="mt-7 space-y-5 text-lg leading-8 text-white/72">
+              <p>
+                Al Baraka works in commercial partnership with Marianna in Poland. This relationship shows that our company operates through real cross-border cooperation, structured communication, and professional commercial follow-up.
+              </p>
+              <p>
+                By connecting Al Baraka&apos;s Egyptian sourcing and export support with Marianna&apos;s European business presence, we strengthen the link between product origin, market requirements, documentation, and buyer expectations.
+              </p>
+            </div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainerVariants} className="mt-9 grid gap-4">
+              {partnershipStrengths.map((item) => (
+                <motion.div key={item.title} variants={staggerItemVariants} className="flex gap-4 rounded-[22px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-[var(--color-green-bright)]">
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-playfair text-2xl font-semibold">{item.title}</span>
+                    <span className="mt-1 block text-sm leading-6 text-white/65">{item.copy}</span>
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href={mariannaWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-[12px] bg-[var(--color-gold)] px-7 py-4 font-bold text-[var(--color-earth-dark)] transition-transform hover:-translate-y-0.5"
+              >
+                Visit Marianna Website
+                <ArrowRight className="h-5 w-5" />
+              </a>
+              <span className="text-xs text-white/45">Official external website - opens in a new tab</span>
+            </div>
           </motion.div>
         </div>
       </section>
