@@ -45,26 +45,25 @@ export function useScrollFadeIn(
 }
 
 /**
- * MOTION IMPLEMENTATIONS (New Performance-Focused)
- * These follow the S-Tier Motion AI Kit recommendations.
+ * MOTION IMPLEMENTATIONS
+ * Hidden states intentionally remain visible so content never disappears when
+ * a mobile browser delays or skips IntersectionObserver callbacks.
  */
-
 export const fadeInUpVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 1, y: 18 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: i * 0.1,
       duration: 0.8,
-      ease: [0.21, 0.47, 0.32, 0.98], // Custom smooth ease
+      ease: [0.21, 0.47, 0.32, 0.98],
     },
   }),
 };
 
-// Stagger children reveal
 export const staggerContainerVariants: Record<string, Variant> = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
@@ -75,7 +74,7 @@ export const staggerContainerVariants: Record<string, Variant> = {
 };
 
 export const staggerItemVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  hidden: { opacity: 1, y: 14, scale: 0.985 },
   visible: {
     opacity: 1,
     y: 0,
@@ -87,9 +86,8 @@ export const staggerItemVariants: Record<string, Variant> = {
   },
 };
 
-// Scale reveal from center
 export const scaleRevealVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, scale: 0.85 },
+  hidden: { opacity: 1, scale: 0.97 },
   visible: {
     opacity: 1,
     scale: 1,
@@ -100,23 +98,20 @@ export const scaleRevealVariants: Record<string, Variant> = {
   },
 };
 
-// Clip reveal (slides up from behind a mask)
 export const clipRevealVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, y: 60, clipPath: "inset(100% 0% 0% 0%)" },
+  hidden: { opacity: 1, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    clipPath: "inset(0% 0% 0% 0%)",
     transition: {
-      duration: 0.9,
+      duration: 0.75,
       ease: [0.21, 0.47, 0.32, 0.98],
     },
   },
 };
 
-// Slide in from left
 export const slideInLeftVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 1, x: -24 },
   visible: {
     opacity: 1,
     x: 0,
@@ -127,9 +122,8 @@ export const slideInLeftVariants: Record<string, Variant> = {
   },
 };
 
-// Slide in from right
 export const slideInRightVariants: Record<string, Variant> = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 1, x: 24 },
   visible: {
     opacity: 1,
     x: 0,
@@ -163,7 +157,6 @@ export function useParallax(
   );
 }
 
-// Video scroll-speed effect: play/pause based on visibility
 export function useScrollVideo(ref: RefObject<HTMLVideoElement | null>) {
   useGSAP(
     () => {
