@@ -1,160 +1,412 @@
 # Al Baraka for Import & Export — Corporate Website
 
-**The public-facing corporate and B2B product website for Al Baraka for Import & Export, an Egyptian company focused on fresh and frozen agricultural products and international trade support.**
+**Public-facing corporate and B2B website for Al Baraka for Import & Export, presenting the company, its fresh and frozen agricultural products, export capabilities, and international partnership opportunities.**
 
-This repository contains the company's modern web presence built with **Next.js 16, React 19, TypeScript, Tailwind CSS 4, Motion/GSAP, Cloudinary, React Hook Form and Zod**.
+Built with **Next.js 16.2.3, React 19.2.4, TypeScript, Tailwind CSS 4, GSAP, Motion, Lenis, Cloudinary, React Hook Form, Zod 4, Radix UI, and shadcn tooling**.
 
 ---
 
-## Project Purpose
+## Table of Contents
 
-The website is designed to present Al Baraka professionally to international buyers and commercial partners such as:
+- [Project Role](#project-role)
+- [Business Audience](#business-audience)
+- [Website Goals](#website-goals)
+- [Core Website Areas](#core-website-areas)
+- [Product Discovery](#product-discovery)
+- [B2B and Export Positioning](#b2b-and-export-positioning)
+- [Technology Stack](#technology-stack)
+- [Application Architecture](#application-architecture)
+- [Routing and Page Model](#routing-and-page-model)
+- [Content and Data Organization](#content-and-data-organization)
+- [Forms and Validation](#forms-and-validation)
+- [Media and Cloudinary](#media-and-cloudinary)
+- [Motion and Interaction](#motion-and-interaction)
+- [Responsive Design](#responsive-design)
+- [Engineering Tooling](#engineering-tooling)
+- [Local Development](#local-development)
+- [Environment Configuration](#environment-configuration)
+- [Build and Verification](#build-and-verification)
+- [Engineering Conventions](#engineering-conventions)
+- [Documentation Relationship](#documentation-relationship)
+- [Scope Boundary](#scope-boundary)
+- [Project Status](#project-status)
+- [License](#license)
+
+---
+
+## Project Role
+
+This repository contains the **public corporate website** for Al Baraka for Import & Export.
+
+Its primary job is to represent the company professionally to international commercial partners and make the company's products, positioning, and contact pathways easy to understand.
+
+The website is not the company's internal business-management system. Internal operational software is a separate initiative and should remain in separate repositories/documentation.
+
+---
+
+## Business Audience
+
+The site is designed for B2B visitors such as:
 
 - Importers
 - Distributors
 - Wholesalers
 - Supermarkets
-- Food trading companies
-- Other B2B partners looking for Egyptian fresh and frozen produce
+- Food-trading companies
+- Foodservice buyers
+- Food manufacturers
+- International sourcing partners
 
-The product experience focuses on clear company positioning, product discovery, export-support messaging, trust, contact opportunities and international partnership context.
+The presentation therefore prioritizes trust, product clarity, company credibility, and partnership-oriented calls to action rather than consumer e-commerce behavior.
 
-> **Scope note:** this repository contains the **public corporate website**. The broader internal Al Baraka business-management system is a separate initiative currently under development and should not be confused with this codebase.
+---
+
+## Website Goals
+
+The public website is intended to:
+
+- Present Al Baraka as an established Egyptian import/export company
+- Showcase fresh and frozen agricultural products
+- Explain the company's export-support capabilities
+- Give international buyers clear product-discovery paths
+- Communicate sourcing, packaging, documentation, and shipment-support value
+- Present selected partnership/company context
+- Provide direct business contact opportunities
+- Maintain a polished, modern, responsive visual identity
+
+---
 
 ## Core Website Areas
 
-### Corporate Presentation
+Current public routes include:
 
-- Company overview and positioning
-- Export-support value proposition
-- Egyptian sourcing and international partnership messaging
-- Commercial-partner presentation
-- Structured company values and process content
+```text
+src/app/
+├── about/
+├── contact/
+├── products/
+├── privacy/
+├── terms/
+└── actions/
+```
 
-### Product Discovery
+### Main content areas
 
-- Product catalog
-- Dedicated product detail pages
-- Fresh and frozen product positioning
-- Rich product imagery and media
-- Calls to action focused on partnership and buyer inquiries
-
-### Business & Support Pages
-
+- Homepage
 - About
-- Products
+- Product catalog
+- Product detail experiences
 - Contact
 - Privacy
 - Terms
 
-## Product & Export Positioning
+### Page responsibilities
 
-The website communicates Al Baraka's role as a supplier and export-support partner for fresh and frozen fruits and vegetables from Egypt.
+#### Homepage
+Introduces the brand, export positioning, product categories, and partnership value.
 
-Content in the application highlights areas such as:
+#### About
+Explains company identity, sourcing/export context, values, and international-business narrative.
 
-- Product sourcing
+#### Products
+Provides product discovery and product-led presentation for fresh/frozen agricultural items.
+
+#### Contact
+Creates a clear path for business inquiries and partnership communication.
+
+#### Privacy / Terms
+Provides supporting legal/informational pages required for a complete public company website.
+
+---
+
+## Product Discovery
+
+The product experience is designed around B2B scanning and visual confidence rather than a consumer shopping cart.
+
+### Product presentation goals
+
+- Clear product names/categories
+- High-quality product imagery
+- Fresh/frozen positioning
+- Product-specific detail content
+- Easy transition from discovery to inquiry/contact
+
+### Typical visitor flow
+
+```text
+Homepage / Products
+        ↓
+Browse product catalog
+        ↓
+Open product detail
+        ↓
+Review product presentation
+        ↓
+Contact / business inquiry
+```
+
+---
+
+## B2B and Export Positioning
+
+The website communicates company capabilities around areas such as:
+
+- Egyptian agricultural sourcing
 - Fresh and frozen product supply
-- Flexible packaging discussions
+- Packaging discussions
 - Commercial documentation support
 - Shipment coordination
 - Buyer communication and follow-up
 - International business relationships
 
-The About experience also presents the company's commercial relationship with **Marianna in Poland** as part of its international partnership narrative.
+The About experience also references the company's relationship with **Marianna in Poland** as part of the wider international-partnership story represented in the project content.
+
+The site should remain careful not to promise commercial terms, certifications, or capabilities that are not actually approved by the business.
+
+---
 
 ## Technology Stack
 
 ### Core
 
-- **Next.js 16**
-- **React 19**
-- **TypeScript**
-- **App Router**
+- **Next.js 16.2.3**
+- **React 19.2.4**
+- **React DOM 19.2.4**
+- **TypeScript 5**
+- **Next.js App Router**
+- **React Compiler**
 
-### Styling & UI
+### Styling and UI
 
 - **Tailwind CSS 4**
-- **shadcn/ui / Radix UI**
+- **Radix UI**
+- **shadcn tooling**
 - **Lucide React**
 - **class-variance-authority**
+- `clsx`
+- `tailwind-merge`
+- `tw-animate-css`
 
-### Motion & Interaction
+### Motion and Interaction
 
-- **GSAP**
-- **Motion**
-- **Lenis** for smooth-scrolling behavior where used
+- **GSAP 3.15**
+- **@gsap/react**
+- **Motion 12.38**
+- **Lenis 1.3**
 
-### Forms & Validation
+### Forms and Validation
 
-- **React Hook Form**
-- **Zod**
+- **React Hook Form 7.75**
+- **Zod 4.4**
+- **@hookform/resolvers**
 
 ### Media
 
-- **Cloudinary**
-- **next-cloudinary**
-- Next.js image optimization
+- **Cloudinary 2.10**
+- **next-cloudinary 6.17**
+- Next.js image handling
 
-## Application Structure
+### Tooling
+
+- **ESLint 9**
+- **eslint-config-next 16.2.3**
+- **Graphify scripts** for project/code inspection support
+
+The exact installed versions are defined in `package.json`.
+
+---
+
+## Application Architecture
 
 ```text
 src/
-├── app/                 # Next.js routes and route-level application files
-│   ├── about/
-│   ├── contact/
-│   ├── products/
-│   ├── privacy/
-│   ├── terms/
-│   └── actions/
-├── components/          # Shared and page-level UI components
-├── constants/           # Content/configuration constants
-├── hooks/               # Reusable React hooks
-├── lib/                 # Shared libraries, images and animation helpers
-├── providers/           # Application providers
+├── app/                 # Next.js routes, layouts, actions
+├── components/          # Shared and page-level UI
+├── constants/           # Reusable content/configuration
+├── hooks/               # Reusable React behavior
+├── lib/                 # Shared libraries, media/animation helpers
+├── providers/           # App-level providers
 ├── types/               # TypeScript contracts
 └── utils/               # Reusable utilities
 ```
 
-Product UI is separated into dedicated page-level components, including the product listing and product-detail experiences.
+### Architecture responsibilities
 
-## Design Direction
+#### `app/`
+Owns route-level composition and server/client boundaries.
 
-The interface uses an agricultural/export-oriented visual system built around:
+#### `components/`
+Contains reusable visual components and page-specific composition pieces.
 
-- Warm cream and white surfaces
-- Natural green tones
-- Earth-inspired typography and accents
-- Product-led imagery
-- Editorial B2B storytelling
-- Motion used to support hierarchy and polish rather than replace content
+#### `constants/`
+Keeps structured company/product content and configuration separate from low-level UI logic where appropriate.
 
-The goal is to make the company feel established, trustworthy and internationally ready while keeping product and partnership information easy to scan.
+#### `hooks/`
+Hosts reusable interaction/state behavior.
 
-## Responsive & Interaction Considerations
+#### `lib/`
+Contains shared application libraries and helper infrastructure such as animation/media-related logic.
 
-The codebase is designed around modern responsive layouts and includes:
+#### `types/`
+Defines shared TypeScript contracts.
 
-- Mobile and desktop page compositions
-- Responsive product grids and content sections
-- Optimized media presentation
-- Reusable animation variants
-- Interactive CTAs and navigation
-- Progressive visual enhancement through Motion and GSAP
+#### `utils/`
+Contains reusable non-visual helpers.
 
-## Media Management
+---
 
-The project uses Cloudinary-related tooling for media workflows and centralizes reusable image/video references in the application rather than scattering asset URLs across page components.
+## Routing and Page Model
 
-A dedicated server action exists for Cloudinary-related behavior.
+The App Router keeps major public sections isolated as route domains.
 
-## Development
+```text
+/
+/about
+/contact
+/products
+/products/...
+/privacy
+/terms
+```
+
+Product UI is split between listing/catalog presentation and product-detail composition.
+
+### Routing principles
+
+- Keep public routes stable for business sharing/searchability.
+- Keep legal/support pages independent from marketing components.
+- Keep route files focused on page composition rather than embedding all reusable UI logic directly.
+
+---
+
+## Content and Data Organization
+
+The project separates structured company/product content from purely visual implementation where practical.
+
+This helps with:
+
+- Maintaining consistent copy across sections
+- Reusing product/company information
+- Keeping components smaller
+- Updating business content without rewriting layout logic
+
+### Content rule
+
+Public company claims should be treated as business content, not guessed from code. When business information changes, update the relevant content source and verify all pages that consume it.
+
+---
+
+## Forms and Validation
+
+React Hook Form and Zod are available for structured form behavior.
+
+A recommended form flow is:
+
+```text
+Contact / inquiry UI
+   ↓
+React Hook Form
+   ↓
+Zod validation
+   ↓
+Server action / integration utility
+   ↓
+Result feedback
+```
+
+Client validation improves usability; any server-side submission or external integration should independently validate untrusted input.
+
+---
+
+## Media and Cloudinary
+
+The website uses Cloudinary tooling for media workflows and centralized asset delivery.
+
+### Media responsibilities
+
+- Product photography
+- Company/brand imagery
+- Optimized remote delivery
+- Reusable image references
+- Server-side Cloudinary behavior where required
+
+The project includes a dedicated server action related to Cloudinary behavior.
+
+### Media rules
+
+- Keep Cloudinary secrets server-side.
+- Do not hard-code sensitive provider credentials into client components.
+- Use optimized image sizing/responsive behavior.
+- Keep product imagery consistent with actual product/company content.
+
+---
+
+## Motion and Interaction
+
+The site uses GSAP, Motion, and Lenis to create a polished B2B presentation.
+
+### Motion principles
+
+- Motion should reinforce hierarchy, not compete with content.
+- Product information must remain understandable without animation.
+- Avoid blocking primary CTAs behind unnecessary transitions.
+- Respect responsive/mobile performance.
+- Keep reusable animation behavior centralized where possible.
+
+### Technology roles
+
+- **GSAP** — timeline/advanced motion where required
+- **Motion** — component/page interaction animation
+- **Lenis** — smooth scrolling behavior where used
+
+---
+
+## Responsive Design
+
+The website is designed for modern responsive usage across desktop and mobile.
+
+Important responsive areas include:
+
+- Navigation
+- Hero/editorial sections
+- Product grids
+- Product details
+- Contact sections
+- Legal/support pages
+- Image-heavy content
+
+### Verification priorities
+
+- No horizontal overflow
+- Readable typography at smaller widths
+- Product images maintain useful cropping/aspect behavior
+- CTAs remain reachable
+- Motion does not create mobile performance issues
+
+---
+
+## Engineering Tooling
+
+In addition to normal Next.js scripts, the repository includes Graphify-oriented helpers:
+
+```bash
+npm run graphify:install
+npm run graphify:build
+npm run graphify:update
+npm run graphify:query
+```
+
+These commands support code-graph/project inspection workflows and are not part of the production runtime.
+
+---
+
+## Local Development
 
 ### Requirements
 
-- Node.js compatible with the current Next.js toolchain
-- npm, pnpm, yarn or Bun
-- Required environment configuration for any Cloudinary-backed features
+- Node.js compatible with Next.js 16
+- npm or another compatible package manager
+- Required Cloudinary/environment configuration for media features being tested
 
 ### Install
 
@@ -164,19 +416,45 @@ cd baraka_client
 npm install
 ```
 
-### Start development
+### Development
 
 ```bash
 npm run dev
 ```
 
-### Build
+---
+
+## Environment Configuration
+
+Environment requirements depend on the integrations currently enabled.
+
+Cloudinary-related configuration may require values such as:
+
+```env
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+```
+
+Exact variable names should be verified against the current source before setup.
+
+### Environment rules
+
+- Never commit real provider secrets.
+- Keep server-only credentials out of client-visible variables.
+- Use separate values for local/staging/production environments where applicable.
+
+---
+
+## Build and Verification
+
+### Production build
 
 ```bash
 npm run build
 ```
 
-### Start production build locally
+### Production start
 
 ```bash
 npm run start
@@ -188,30 +466,80 @@ npm run start
 npm run lint
 ```
 
-## Engineering Approach
+### Recommended verification
 
-The project follows a component-oriented frontend structure with explicit separation between:
+```bash
+npm run lint
+npm run build
+```
 
-- Route-level pages
-- Page-specific UI
-- Reusable components
-- Constants/content
-- Hooks
-- Shared libraries
-- Utilities
-- TypeScript contracts
+Before handoff/deployment verify:
 
-Complex visual behavior is centralized through reusable animation helpers where possible, while product/company content remains separated from low-level UI implementation.
+- Homepage renders correctly.
+- About content is accurate.
+- Product listing/details work.
+- Product imagery loads correctly.
+- Contact form/inquiry flow behaves correctly.
+- Privacy and Terms routes are reachable.
+- Mobile layouts are stable.
+- Motion remains performant.
+- No Cloudinary/server secrets are exposed client-side.
 
-## Related Organization Work
+---
 
-The Al Baraka GitHub organization also contains a documentation repository used for company-site research, legacy-site analysis, partner reference material and implementation planning.
+## Engineering Conventions
 
-The organization is also being expanded to support the company's broader internal digital systems; those systems are intentionally treated as separate products from this public corporate website.
+1. Keep route files focused on page composition.
+2. Keep reusable visual behavior in components/hooks/lib.
+3. Keep business/product copy separated from low-level UI when practical.
+4. Keep Cloudinary secrets server-side.
+5. Use form schemas instead of ad-hoc validation chains.
+6. Treat motion as progressive enhancement.
+7. Verify responsive product imagery carefully.
+8. Keep public business claims source-approved.
+9. Keep the public corporate site separate from internal business systems.
+10. Run lint/build checks before handoff.
+
+---
+
+## Documentation Relationship
+
+The organization also contains:
+
+`Al-Baraka-EG1/documentations`
+
+That repository preserves:
+
+- Legacy Al Baraka website reference material
+- Partner/reference-site analysis
+- Historical design/implementation specifications
+- Migration/context documentation
+
+The current `baraka_client` source is the technical source of truth when older planning documents differ from the implemented application.
+
+---
+
+## Scope Boundary
+
+This repository covers only the **public corporate website**.
+
+The broader Al Baraka internal business-management system is a separate product initiative and should keep separate:
+
+- Repositories
+- Architecture
+- Authentication/roles
+- Internal business workflows
+- Documentation
+
+Do not merge internal-system claims or unfinished functionality into this public website README.
+
+---
 
 ## Project Status
 
-The corporate website is an active company product and may continue to receive content, SEO, performance, accessibility and business-facing improvements over time.
+The corporate website is an active company product and may continue to receive content, SEO, accessibility, performance, media, and business-facing improvements.
+
+---
 
 ## License
 
